@@ -114,6 +114,16 @@ apt autoremove
 
 apt clean
 
+# Create local HTML
+
+mkdir /opt/ioi/html/fonts
+wget -O /tmp/fira-sans.zip "https://google-webfonts-helper.herokuapp.com/api/fonts/fira-sans?download=zip&subsets=latin&variants=regular"
+wget -O /tmp/share.zip "https://google-webfonts-helper.herokuapp.com/api/fonts/share?download=zip&subsets=latin&variants=regular?"
+unzip /tmp/fira-sans.zip -d /opt/ioi/html/fonts
+unzip /tmp/share.zip -d /opt/ioi/html/fonts
+rm /tmp/fira-sans.zip
+rm /tmp/share.zip
+
 truncate -s0 /var/log/wtmp
 truncate -s0 /var/log/lastlog
 rm -rf /tmp/*
