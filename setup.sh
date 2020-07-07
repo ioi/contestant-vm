@@ -18,7 +18,7 @@ tasksel install ubuntu-desktop-minimal ubuntu-desktop-minimal-default-languages
 
 # Install tools needed for management and monitoring
 
-apt -y install net-tools openssh-server ansible xvfb
+apt -y install net-tools openssh-server ansible xvfb tinc
 
 # Install packages needed by contestants
 
@@ -89,14 +89,6 @@ cp misc/id_ansible.pub ~/.ssh/authorized_keys
 apt -y install `dpkg-query -Wf '${Package}\n' | grep linux-image-`
 apt -y install `dpkg-query -Wf '${Package}\n' | grep linux-modules-`
 
-# Remove unneeded packages
-
-apt -y remove gnome-power-manager
-apt -y llvm-9-dev
-apt -y remove linux-firmware
-apt -y remove memtest86+
-apt autoremove
-
 # Documentation
 
 apt -y install stl-manual openjdk-8-doc python3-doc
@@ -107,6 +99,20 @@ wget -O /tmp/html_book_20190607.zip http://upload.cppreference.com/mwiki/images/
 mkdir /opt/cppref
 unzip /tmp/html_book_20190607.zip -d /opt/cppref
 rm -f /tmp/html_book_20190607.zip
+
+# Remove unneeded packages
+
+apt -y remove gnome-power-manager
+apt -y llvm-9-dev
+apt -y remove linux-firmware
+apt -y remove memtest86+
+apt -y remove network-manager-openvpn network-manager-openvpn-gnome openvpn
+apt -y remove gnome-getting-started-docs-it gnome-getting-started-docs-ru \
+	gnome-getting-started-docs-es gnome-getting-started-docs-fr gnome-getting-started-docs-de
+apt -y remove manpages-dev
+apt autoremove
+
+apt clean
 
 # Force cloud-init to rerun
 
