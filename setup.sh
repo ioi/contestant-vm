@@ -84,11 +84,6 @@ sudo -Hu ioi bash -c 'echo yes > ~/.config/gnome-initial-setup-done'
 mkdir ~/.ssh
 cp misc/id_ansible.pub ~/.ssh/authorized_keys
 
-# Mark some packages as needed so they wont' get auto-removed
-
-apt -y install `dpkg-query -Wf '${Package}\n' | grep linux-image-`
-apt -y install `dpkg-query -Wf '${Package}\n' | grep linux-modules-`
-
 # Documentation
 
 apt -y install stl-manual openjdk-8-doc python3-doc
@@ -99,6 +94,11 @@ wget -O /tmp/html_book_20190607.zip http://upload.cppreference.com/mwiki/images/
 mkdir /opt/cppref
 unzip /tmp/html_book_20190607.zip -d /opt/cppref
 rm -f /tmp/html_book_20190607.zip
+
+# Mark some packages as needed so they wont' get auto-removed
+
+apt -y install `dpkg-query -Wf '${Package}\n' | grep linux-image-`
+apt -y install `dpkg-query -Wf '${Package}\n' | grep linux-modules-`
 
 # Remove unneeded packages
 
