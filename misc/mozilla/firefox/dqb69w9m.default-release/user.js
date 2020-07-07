@@ -1,1 +1,1 @@
-user_pref("browser.startup.homepage", "https://ioi2020.sg/");
+user_pref("browser.startup.homepage", "file:///opt/ioi/html/index.html");
