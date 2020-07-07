@@ -16,10 +16,6 @@ apt -y upgrade
 apt -y install tasksel
 tasksel install ubuntu-desktop-minimal ubuntu-desktop-minimal-default-languages
 
-# Remove unneeded packages
-
-apt -y remove gnome-power-manager
-
 # Install tools needed for management and monitoring
 
 apt -y install net-tools openssh-server ansible xvfb
@@ -88,6 +84,39 @@ sudo -Hu ioi bash -c 'echo yes > ~/.config/gnome-initial-setup-done'
 mkdir ~/.ssh
 cp misc/id_ansible.pub ~/.ssh/authorized_keys
 
+# Mark some packages as needed so they wont' get auto-removed
+
+apt -y install `dpkg-query -Wf '${Package}\n' | grep linux-image-`
+apt -y install `dpkg-query -Wf '${Package}\n' | grep linux-modules-`
+
+# Remove unneeded packages
+
+apt -y remove gnome-power-manager
+apt -y llvm-9-dev
+apt -y remove linux-firmware
+apt -y remove memtest86+
+apt autoremove
+
+# Documentation
+
+apt -y install stl-manual openjdk-8-doc python3-doc
+
+# CPP Reference
+
+wget -O /tmp/html_book_20190607.zip http://upload.cppreference.com/mwiki/images/b/b2/html_book_20190607.zip
+mkdir /opt/cppref
+unzip /tmp/html_book_20190607.zip -d /opt/cppref
+rm -f /tmp/html_book_20190607.zip
+
+# Force cloud-init to rerun
+
+rm -rf /var/lib/cloud/*
+
+# Recreate swap file
+
 swapoff -a
+rm /swap.img
+dd if=/dev/zero of=/swap.img bs=1048576 count=3908
 mkswap /swap.img
+
 
