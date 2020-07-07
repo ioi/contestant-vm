@@ -114,9 +114,13 @@ apt autoremove
 
 apt clean
 
-# Force cloud-init to rerun
-
-rm -rf /var/lib/cloud/*
+truncate -s0 /var/log/wtmp
+truncate -s0 /var/log/lastlog
+rm -rf /tmp/*
+rm -rf /var/tmp/*
+cloud-init clean --logs
+cat /dev/null ~/.bash_history && history -c
+history -w
 
 # Recreate swap file
 
