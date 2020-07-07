@@ -2,7 +2,7 @@
 
 # Fix up date/time
 
-timedatectl set-timezone Asia/Singaopre
+timedatectl set-timezone Asia/Singapore
 vmware-toolbox-cmd timesync enable
 hwclock -w
 
