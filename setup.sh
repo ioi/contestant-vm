@@ -53,6 +53,9 @@ sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.background picture-options
 sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.background picture-uri \
 	'file:///opt/ioi/misc/ioi2020-wallpaper.png'
 
+# Update path
+
+echo 'PATH=/opt/ioi/bin:$PATH' >> ~ioi/.bashrc
 # Autostart ioisetup
 
 cp misc/ioisetup.desktop /usr/share/gnome/autostart
@@ -163,4 +166,4 @@ rm /swap.img
 dd if=/dev/zero of=/swap.img bs=1048576 count=3908
 mkswap /swap.img
 
-
+# vim: ts=4

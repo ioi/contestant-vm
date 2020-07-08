@@ -102,6 +102,11 @@ check_vpn()
 	return 1
 }
 
+stop_vpn()
+{
+	sudo /opt/ioi/bin/tinc.sh stop
+}
+
 main "$@"; exit
 
 # vim: ft=sh ts=4 sw=4 noet

@@ -3,7 +3,6 @@
 CONF=$1
 
 
-
 check_ip()
 {
 	local IP=$1
@@ -14,6 +13,14 @@ check_ip()
 		return 1
 	fi
 }
+
+if [ "$CONF" = "--clear" ]; then
+	rm /etc/tinc/vpn/tinc.conf
+	rm /etc/tinc/vpn/ip.conf
+	rm /etc/tinc/vpn/mask.conf
+	rm /etc/tinc/vpn/hosts/*
+	exit 0
+fi
 
 if ! test -f $CONF; then
 	echo "Can't read $CONF"
