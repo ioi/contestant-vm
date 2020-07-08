@@ -42,6 +42,9 @@ cp $WORKDIR/vpn/rsa_key.priv /etc/tinc/vpn/
 cp $WORKDIR/vpn/tinc.conf /etc/tinc/vpn
 
 rm -r $WORKDIR
+
+systemctl restart tinc@vpn
+
 exit 0
 
 # vim: ft=sh ts=4 sw=4 noet
