@@ -53,10 +53,14 @@ sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.background picture-options
 sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.background picture-uri \
 	'file:///opt/ioi/misc/ioi2020-wallpaper.png'
 
+# Autostart ioisetup
+
+cp misc/ioisetup.desktop /usr/share/gnome/autostart
+
 # Setup default Mozilla Firefox configuration
 
 cp -a misc/mozilla ~ioi/.mozilla
-chown -R ioi.ioi ~ioi.mozilla
+chown -R ioi.ioi ~ioi/.mozilla
 
 # Don't list ansible user at login screen
 
@@ -74,15 +78,18 @@ chmod 644 /var/lib/AccountsService/users/ansible
 sed -i '/^GRUB_CMDLINE_LINUX_DEFAULT/ s/"$/ quiet splash"/' /etc/default/grub
 update-grub2
 
-sed -i '/^SHELL/ s/\/sh$/\/bash/' /etc/default/useradd
-
-sudo -Hu ioi bash -c 'mkdir ~/.config'
+# Mark Gnome's initial setup as complete
 sudo -Hu ioi bash -c 'echo yes > ~/.config/gnome-initial-setup-done'
 
-# Setup SSH authorized keys for ansible
+# Setup SSH authorized keys and passwordless sudo for ansible
 
-mkdir ~/.ssh
-cp misc/id_ansible.pub ~/.ssh/authorized_keys
+mkdir ~ansible/.ssh
+cp misc/id_ansible.pub ~ansible/.ssh/authorized_keys
+chown -R ansible.ansible ~ansible/.ssh
+
+sed -i '/%sudo/ s/ALL$/NOPASSWD:ALL/' /etc/sudoers
+echo "ioi ALL=NOPASSWD: /opt/ioi/bin/tinc.sh, /opt/ioi/bin/vpn.sh" >> /etc/sudoers.d/01-ioi.conf
+chmod 440 /etc/sudoers.d/01-ioi
 
 # Documentation
 
@@ -110,27 +117,44 @@ apt -y remove network-manager-openvpn network-manager-openvpn-gnome openvpn
 apt -y remove gnome-getting-started-docs-it gnome-getting-started-docs-ru \
 	gnome-getting-started-docs-es gnome-getting-started-docs-fr gnome-getting-started-docs-de
 apt -y remove manpages-dev
-apt autoremove
+apt -y autoremove
 
 apt clean
 
 # Create local HTML
 
-mkdir /opt/ioi/html/fonts
+cp -a html /opt/ioi/html
+mkdir -p /opt/ioi/html/fonts
 wget -O /tmp/fira-sans.zip "https://google-webfonts-helper.herokuapp.com/api/fonts/fira-sans?download=zip&subsets=latin&variants=regular"
-wget -O /tmp/share.zip "https://google-webfonts-helper.herokuapp.com/api/fonts/share?download=zip&subsets=latin&variants=regular?"
+wget -O /tmp/share.zip "https://google-webfonts-helper.herokuapp.com/api/fonts/share?download=zip&subsets=latin&variants=regular"
 unzip /tmp/fira-sans.zip -d /opt/ioi/html/fonts
 unzip /tmp/share.zip -d /opt/ioi/html/fonts
 rm /tmp/fira-sans.zip
 rm /tmp/share.zip
+
+# Tinc Setup and Configuration
+
+# Setup tinc skeleton config
+
+mkdir /etc/tinc/vpn
+mkdir /etc/tinc/vpn/hosts
+cat - <<'EOM' > /etc/tinc/vpn/tinc-up
+#!/bin/sh
+
+ifconfig $INTERFACE "$(cat /etc/tinc/vpn/ip.conf)" netmask "$(cat /etc/tinc/vpn/mask.conf)"
+EOM
+
+# Configure systemd for tinc
+systemctl enable tinc@vpn
 
 truncate -s0 /var/log/wtmp
 truncate -s0 /var/log/lastlog
 rm -rf /tmp/*
 rm -rf /var/tmp/*
 cloud-init clean --logs
-cat /dev/null ~/.bash_history && history -c
-history -w
+rm ~ioi/.bash_history
+cat /dev/null > ~ansible/.bash_history
+cat /dev/null > ~/.bash_history
 
 # Recreate swap file
 
