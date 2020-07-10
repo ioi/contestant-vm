@@ -18,7 +18,7 @@ if [ "$CONF" = "--clear" ]; then
 	rm /etc/tinc/vpn/tinc.conf
 	rm /etc/tinc/vpn/ip.conf
 	rm /etc/tinc/vpn/mask.conf
-	rm /etc/tinc/vpn/hosts/*
+	rm /etc/tinc/vpn/hosts/* > /dev/null 2>&1
 	exit 0
 fi
 

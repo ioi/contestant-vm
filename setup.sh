@@ -91,7 +91,7 @@ cp misc/id_ansible.pub ~ansible/.ssh/authorized_keys
 chown -R ansible.ansible ~ansible/.ssh
 
 sed -i '/%sudo/ s/ALL$/NOPASSWD:ALL/' /etc/sudoers
-echo "ioi ALL=NOPASSWD: /opt/ioi/bin/tinc.sh, /opt/ioi/bin/vpn.sh" >> /etc/sudoers.d/01-ioi.conf
+echo "ioi ALL=NOPASSWD: /opt/ioi/bin/tinc.sh, /opt/ioi/bin/vpn.sh" >> /etc/sudoers.d/01-ioi
 chmod 440 /etc/sudoers.d/01-ioi
 
 # Documentation
@@ -145,6 +145,7 @@ cat - <<'EOM' > /etc/tinc/vpn/tinc-up
 #!/bin/sh
 
 ifconfig $INTERFACE "$(cat /etc/tinc/vpn/ip.conf)" netmask "$(cat /etc/tinc/vpn/mask.conf)"
+route add -net 172.31.32.0/20 gw "$(cat /etc/tinc/vpn/ip.conf)"
 EOM
 
 # Configure systemd for tinc
