@@ -151,20 +151,4 @@ EOM
 # Configure systemd for tinc
 systemctl enable tinc@vpn
 
-truncate -s0 /var/log/wtmp
-truncate -s0 /var/log/lastlog
-rm -rf /tmp/*
-rm -rf /var/tmp/*
-cloud-init clean --logs
-rm ~ioi/.bash_history
-cat /dev/null > ~ansible/.bash_history
-cat /dev/null > ~/.bash_history
-
-# Recreate swap file
-
-swapoff -a
-rm /swap.img
-dd if=/dev/zero of=/swap.img bs=1048576 count=3908
-mkswap /swap.img
-
 # vim: ts=4
