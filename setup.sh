@@ -145,7 +145,7 @@ cat - <<'EOM' > /etc/tinc/vpn/tinc-up
 #!/bin/sh
 
 ifconfig $INTERFACE "$(cat /etc/tinc/vpn/ip.conf)" netmask "$(cat /etc/tinc/vpn/mask.conf)"
-route add -net 172.31.32.0/20 gw "$(cat /etc/tinc/vpn/ip.conf)"
+route add -net 172.31.0.0/16 gw "$(cat /etc/tinc/vpn/ip.conf)"
 EOM
 
 # Configure systemd for tinc
