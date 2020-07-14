@@ -37,33 +37,18 @@ snap install --classic code
 
 pip3 install matplotlib
 
+# Copy IOI stuffs into /opt
+
 mkdir /opt/ioi
 cp -a bin misc /opt/ioi/
 
 sed -i '/^SHELL/ s/\/sh$/\/bash/' /etc/default/useradd
 
 # Create IOI account
+/opt/ioi/sbin/mkioiuser.sh
 
-useradd -m ioi
+# Set IOI user's initial password
 echo "ioi:ioi" | chpasswd
-
-# Setup desktop background
-
-sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.background picture-options 'wallpaper'
-sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.background picture-uri \
-	'file:///opt/ioi/misc/ioi2020-wallpaper.png'
-
-# Update path
-
-echo 'PATH=/opt/ioi/bin:$PATH' >> ~ioi/.bashrc
-# Autostart ioisetup
-
-cp misc/ioisetup.desktop /usr/share/gnome/autostart
-
-# Setup default Mozilla Firefox configuration
-
-cp -a misc/mozilla ~ioi/.mozilla
-chown -R ioi.ioi ~ioi/.mozilla
 
 # Don't list ansible user at login screen
 
@@ -80,9 +65,6 @@ chmod 644 /var/lib/AccountsService/users/ansible
 
 sed -i '/^GRUB_CMDLINE_LINUX_DEFAULT/ s/"$/ quiet splash"/' /etc/default/grub
 update-grub2
-
-# Mark Gnome's initial setup as complete
-sudo -Hu ioi bash -c 'echo yes > ~/.config/gnome-initial-setup-done'
 
 # Setup SSH authorized keys and passwordless sudo for ansible
 

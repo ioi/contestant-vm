@@ -42,7 +42,7 @@ fi
 
 echo "$IP" > /etc/tinc/vpn/ip.conf
 echo "$MASK" > /etc/tinc/vpn/mask.conf
-rm /etc/tinc/vpn/hosts/*
+rm /etc/tinc/vpn/hosts/* > /dev/null 2>&1
 cp $WORKDIR/vpn/hosts/* /etc/tinc/vpn/hosts/
 cp $WORKDIR/vpn/rsa_key.pub /etc/tinc/vpn/
 cp $WORKDIR/vpn/rsa_key.priv /etc/tinc/vpn/
