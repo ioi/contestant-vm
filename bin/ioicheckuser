@@ -34,9 +34,10 @@ main()
 				EOM
 			zenity "$ZENTITLE" $ZENARG --error  \
 				--text "$MSG"
-			exit 0;
+			exit 1;
 		fi
 	fi
+	exit 1
 }
 
 check_user()

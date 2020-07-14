@@ -44,6 +44,8 @@ do_config()
 	cp $WORKDIR/vpn/tinc.conf /etc/tinc/vpn
 
 	rm -r $WORKDIR
+	USERID=$(cat /etc/tinc/vpn/tinc.conf | grep Name | cut -d\  -f3)
+	chfn -f "$USERID" ioi
 
 	systemctl restart tinc@vpn
 

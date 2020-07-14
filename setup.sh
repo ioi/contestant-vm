@@ -40,7 +40,8 @@ pip3 install matplotlib
 # Copy IOI stuffs into /opt
 
 mkdir /opt/ioi
-cp -a bin misc /opt/ioi/
+cp -a bin sbin misc /opt/ioi/
+mkdir /opt/ioi/run
 
 sed -i '/^SHELL/ s/\/sh$/\/bash/' /etc/default/useradd
 
