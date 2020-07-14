@@ -14,8 +14,8 @@ echo 'PATH=/opt/ioi/bin:$PATH' >> ~ioi/.bashrc
 # Mark Gnome's initial setup as complete
 sudo -Hu ioi bash -c 'echo yes > ~/.config/gnome-initial-setup-done'
 
-# Autostart ioisetup
-cp /opt/ioi/misc/ioisetup.desktop /usr/share/gnome/autostart
+# IOI startup
+cp /opt/ioi/misc/ioistart.desktop /usr/share/gnome/autostart/
 
 # Setup default Mozilla Firefox configuration
 cp -a /opt/ioi/misc/mozilla ~ioi/.mozilla

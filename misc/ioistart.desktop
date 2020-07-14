@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
-Name=IOI Setup
-Comment=IOI Setup
-Exec=/opt/ioi/bin/ioisetup
+Name=IOI Start
+Comment=IOI Start
+Exec=/opt/ioi/bin/gnome-autostart.sh
 OnlyShowIn=GNOME;Unity;
 X-GNOME-Autostart-Phase=Application
 X-GNOME-Autostart-enabled=true

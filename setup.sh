@@ -18,7 +18,7 @@ tasksel install ubuntu-desktop-minimal ubuntu-desktop-minimal-default-languages
 
 # Install tools needed for management and monitoring
 
-apt -y install net-tools openssh-server ansible xvfb tinc
+apt -y install net-tools openssh-server ansible xvfb tinc i3lock
 
 # Install packages needed by contestants
 
@@ -73,7 +73,7 @@ cp misc/id_ansible.pub ~ansible/.ssh/authorized_keys
 chown -R ansible.ansible ~ansible/.ssh
 
 sed -i '/%sudo/ s/ALL$/NOPASSWD:ALL/' /etc/sudoers
-echo "ioi ALL=NOPASSWD: /opt/ioi/bin/tinc.sh, /opt/ioi/bin/vpn.sh" >> /etc/sudoers.d/01-ioi
+echo "ioi ALL=NOPASSWD: /opt/ioi/bin/vpn, /opt/ioi/bin/lockscreen.sh" >> /etc/sudoers.d/01-ioi
 chmod 440 /etc/sudoers.d/01-ioi
 
 # Documentation
@@ -133,5 +133,19 @@ chmod 755 /etc/tinc/vpn/tinc-up
 
 # Configure systemd for tinc
 systemctl enable tinc@vpn
+
+# Configure systemd for i3lock
+cat - <<EOM > /etc/systemd/system/i3lock.service
+[Unit]
+Description=Lock screen
+
+[Service]
+User=ansible
+Type=simple
+Restart=always
+RestartSec60
+Environment=DISPLAY=':0.0'
+ExecStart=/opt/ioi/sbin/i3lock.sh
+EOM
 
 # vim: ts=4
