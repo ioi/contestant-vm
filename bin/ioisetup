@@ -10,23 +10,19 @@ USERID=
 main()
 {
 	if check_user; then
-		if check_vpn; then
+		read -d '' -r MSG<<-EOM
+			This system is already configured for: <b>$USERID</b>\n
+			Do you want to reconfigure to another IOI user?
+			EOM
+		zenity "$ZENTITLE" $ZENARG --question \
+			--text "$MSG"
+		if [ $? -eq 1 ]; then
 			read -d '' -r MSG<<-EOM
-				This system is configured for: <b>$USERID</b>\n
-				If this is incorrect, please run 'ioisetup' from Terminal.
+				Keeping cnofiguration for: <b>$USERID</b>\n
 				EOM
-			zenity --title="IOI Confirm User" $ZENARG --info \
+			zenity "$ZENTITLE" $ZENARG --info \
 				--text "$MSG"
-			exit 0;
-		else
-			read -d '' -r MSG<<-EOM
-				This system is configured for: <b>$USERID</b>\n
-				VPN connection is not working.
-				Please refer to troubleshooting instructions (launch Firefox and go to the homepage).
-				EOM
-			zenity "$ZENTITLE" $ZENARG --error  \
-				--text "$MSG"
-			exit 0;
+			exit 1
 		fi
 	fi
 
@@ -65,8 +61,8 @@ do_setup()
 		return 2
 	fi
 
-	sudo /opt/ioi/bin/vpn.sh /tmp/vpn.tar.bz2
-	sudo /opt/ioi/bin/tinc.sh restart
+	sudo /opt/ioi/bin/vpn config /tmp/vpn.tar.bz2
+	sudo /opt/ioi/bin/vpn restart
 
 	return 1
 
@@ -74,15 +70,8 @@ do_setup()
 
 check_user()
 {
-	USERID=
-	if ! test -f /etc/tinc/vpn/tinc.conf; then
-		return 1
-	fi
-	USERID=$(cat /etc/tinc/vpn/tinc.conf | grep Name | cut -d\  -f3)
-	if [ -z "$USERID" ]; then
-		return 1;
-	fi
-	return 0
+	USERID=$(/opt/ioi/bin/ioicheckuser -q)
+	return $?
 }
 
 
