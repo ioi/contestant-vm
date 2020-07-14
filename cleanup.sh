@@ -1,5 +1,7 @@
 #!/bin/sh
 
+apt clean
+
 # Do this at runlevel 3 (init 3)
 
 systemctl stop rsyslog
