@@ -1,0 +1,6 @@
+/* Add your custom extension styling here */
+.username-label {
+	margin: 0 6px;
+	vertical-align: middle;
+	font-weight: bold;
+}

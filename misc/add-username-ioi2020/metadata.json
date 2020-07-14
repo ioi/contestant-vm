@@ -1,0 +1,6 @@
+{
+"name": "Add Username",
+"description": "Add username to top bar",
+"uuid": "add-username-ioi2020",
+"shell-version": ["3.36"]
+}
