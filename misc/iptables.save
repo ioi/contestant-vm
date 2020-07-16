@@ -1,0 +1,15 @@
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT DROP [0:0]
+-A INPUT -m state –state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -p tcp -m tcp –dport 22 -j ACCEPT
+-A OUTPUT -m state –state RELATED,ESTABLISHED -j ACCEPT
+-A OUTPUT -p icmp -j ACCEPT
+-A OUTPUT -p tcp -m tcp –dport 655 -j ACCEPT
+-A OUTPUT -p tcp -m tcp –dport 53 -j ACCEPT
+-A OUTPUT -p udp -m udp –dport 53 -j ACCEPT
+-A OUTPUT -p udp -m udp –dport 123 -j ACCEPT
+-A OUTPUT -p tcp -m tcp –match multiport –dports 80,443 -j ACCEPT
+COMMIT
