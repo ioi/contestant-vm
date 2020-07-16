@@ -1,5 +1,7 @@
 #!/bin/sh
 
+VERSION=
+
 # Fix up date/time
 
 timedatectl set-timezone Asia/Singapore
@@ -150,5 +152,10 @@ RestartSec60
 Environment=DISPLAY=':0.0'
 ExecStart=/opt/ioi/sbin/i3lock.sh
 EOM
+
+# Embed version number
+if [ -n "$VERSION" ] ; then
+	echo "$VERSION" > /opt/ioi/misc/VERSION
+fi
 
 # vim: ts=4
