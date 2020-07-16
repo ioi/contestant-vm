@@ -135,6 +135,8 @@ chmod 755 /etc/tinc/vpn/tinc-up
 # Configure systemd for tinc
 systemctl enable tinc@vpn
 
+systemctl disable multipathd
+
 # Configure systemd for i3lock
 cat - <<EOM > /etc/systemd/system/i3lock.service
 [Unit]
