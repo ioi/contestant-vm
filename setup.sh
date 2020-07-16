@@ -18,7 +18,7 @@ tasksel install ubuntu-desktop-minimal ubuntu-desktop-minimal-default-languages
 
 # Install tools needed for management and monitoring
 
-apt -y install net-tools openssh-server ansible xvfb tinc i3lock
+apt -y install net-tools openssh-server ansible xvfb tinc i3lock oathtool
 
 # Install packages needed by contestants
 

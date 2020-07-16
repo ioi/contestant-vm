@@ -21,7 +21,7 @@ echo "alias vpn='sudo /opt/ioi/bin/ioiexec.sh'" >> ~ioi/.bashrc
 sudo -Hu ioi bash -c 'echo yes > ~/.config/gnome-initial-setup-done'
 
 sudo -Hu ioi bash -c 'mkdir -p ~ioi/.local/share/gnome-shell/extensions'
-cp -a misc/add-username-ioi2020 ~ioi/.local/share/gnome-shell/extensions/
+cp -a /opt/ioi/misc/add-username-ioi2020 ~ioi/.local/share/gnome-shell/extensions/
 chown -R ioi.ioi ~ioi/.local/share/gnome-shell/extensions/add-username-ioi2020
 
 # IOI startup
