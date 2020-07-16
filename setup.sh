@@ -98,7 +98,6 @@ apt -y install `dpkg-query -Wf '${Package}\n' | grep linux-modules-`
 # Remove unneeded packages
 
 apt -y remove gnome-power-manager
-apt -y llvm-9-dev
 apt -y remove linux-firmware
 apt -y remove memtest86+
 apt -y remove network-manager-openvpn network-manager-openvpn-gnome openvpn
