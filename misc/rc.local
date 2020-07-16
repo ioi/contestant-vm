@@ -1,0 +1,29 @@
+#!/bin/sh
+
+check_user()
+{
+    USERID=
+    if ! test -f /etc/tinc/vpn/tinc.conf; then
+        return 1
+    fi
+    USERID=$(cat /etc/tinc/vpn/tinc.conf | grep Name | cut -d\  -f3)
+    if [ -z "$USERID" ]; then
+        return 1;
+    fi
+    return 0
+}
+
+case "$1" in
+	start)
+		# If VPN is configured, then turn on firewall
+		if check_user; then
+			/opt/ioi/sbin/firewall.sh start
+		fi
+		;;
+	*)
+		echo Must specify start
+		exit 1
+		;;
+esac
+
+# vim: ft=sh ts=4 noet
