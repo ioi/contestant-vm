@@ -42,4 +42,7 @@ rm /swap.img
 dd if=/dev/zero of=/swap.img bs=1048576 count=3908
 mkswap /swap.img
 
+PARTKEY=$(/opt/ioi/sbin/genkey.sh)
+echo $PARTKEY
+
 # vim: ts=4
