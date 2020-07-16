@@ -14,6 +14,8 @@ chfn -f "$FULLNAME" ioi
 
 # Update path
 echo 'PATH=/opt/ioi/bin:$PATH' >> ~ioi/.bashrc
+echo "alias vpn='sudo /opt/ioi/bin/vpn.sh'" >> ~ioi/.bashrc
+echo "alias vpn='sudo /opt/ioi/bin/ioiexec.sh'" >> ~ioi/.bashrc
 
 # Mark Gnome's initial setup as complete
 sudo -Hu ioi bash -c 'echo yes > ~/.config/gnome-initial-setup-done'

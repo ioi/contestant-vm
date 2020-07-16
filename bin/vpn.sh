@@ -57,21 +57,11 @@ case "$1" in
 	start)
 		systemctl start tinc@vpn
 		;;
-	stop)
-		systemctl stop tinc@vpn
-		;;
 	restart)
 		systemctl restart tinc@vpn
 		;;
 	status)
 		systemctl status tinc@vpn
-		;;
-	clear)
-		rm /etc/tinc/vpn/tinc.conf
-		rm /etc/tinc/vpn/ip.conf
-		rm /etc/tinc/vpn/mask.conf
-		rm /etc/tinc/vpn/rsa_key.*
-		rm /etc/tinc/vpn/hosts/* > /dev/null 2>&1
 		;;
 	config)
 		do_config $2

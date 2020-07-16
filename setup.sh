@@ -74,7 +74,7 @@ cp misc/id_ansible.pub ~ansible/.ssh/authorized_keys
 chown -R ansible.ansible ~ansible/.ssh
 
 sed -i '/%sudo/ s/ALL$/NOPASSWD:ALL/' /etc/sudoers
-echo "ioi ALL=NOPASSWD: /opt/ioi/bin/vpn, /opt/ioi/bin/lockscreen.sh" >> /etc/sudoers.d/01-ioi
+echo "ioi ALL=NOPASSWD: /opt/ioi/bin/vpn.sh, /opt/ioi/bin/ioiexec.sh, /opt/ioi/bin/lockscreen.sh" >> /etc/sudoers.d/01-ioi
 chmod 440 /etc/sudoers.d/01-ioi
 
 # Documentation
