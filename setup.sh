@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 VERSION=
 
 # Fix up date/time

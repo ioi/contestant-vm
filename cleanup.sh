@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 apt clean
 
 # Do this at runlevel 3 (init 3)
