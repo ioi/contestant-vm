@@ -61,8 +61,8 @@ do_setup()
 		return 2
 	fi
 
-	sudo /opt/ioi/bin/vpn config /tmp/vpn.tar.bz2
-	sudo /opt/ioi/bin/vpn restart
+	sudo /opt/ioi/bin/vpn.sh config /tmp/vpn.tar.bz2
+	sudo /opt/ioi/bin/vpn.sh restart
 
 	return 1
 
