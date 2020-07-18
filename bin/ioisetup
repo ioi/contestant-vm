@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DISTSERVER="https://app.zitseng.com/lzs/ioivpn-dist/"
+DISTSERVER="https://vpn.ioi2020.sg/ioivpn-dist/"
 
 ZENARG='--width=300'
 ZENTITLE='--title=IOI Setup'
