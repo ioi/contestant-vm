@@ -19,21 +19,21 @@ rm -rf /tmp/*
 rm -rf /var/tmp/*
 
 # Clean up home directories
-rm ~ioi/.bash_history
-rm ~ansible/.bash_history
-rm ~root/.bash_history
+rm ~ioi/.bash_history || true
+rm ~ansible/.bash_history || true
+rm ~root/.bash_history || true
 
 # Empty kernel logs
 cat /dev/null > /var/log/kern.log
 cat /dev/null > /var/log/dmesg
 
 # Remove various logs
-rm /var/log/vmware*log
-rm /var/log/Xorg*log
-rm /var/log/unattended-upgrades/*
-rm /var/log/apt/term.log
-rm -rf /var/log/journal/*
-rm -rf /var/log/installer
+rm /var/log/vmware*log || true
+rm /var/log/Xorg*log || true
+rm /var/log/unattended-upgrades/* || true
+rm /var/log/apt/term.log || true
+rm -rf /var/log/journal/* || true
+rm -rf /var/log/installer || true
 
 # Clear cloud-init, forces regeneration of SSH host keys among other things next boot up
 cloud-init clean --logs

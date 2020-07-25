@@ -2,7 +2,7 @@
 
 set -e
 
-VERSION=
+VERSION="beta1"
 
 # Fix up date/time
 

@@ -30,7 +30,7 @@ main()
 			read -d '' -r MSG<<-EOM
 				This system is configured for: <b>$USERID</b>\n
 				VPN connection is not working.
-				Please refer to troubleshooting instructions (launch Firefox and go to the homepage).
+				Contact HTC for help.
 				EOM
 			zenity "$ZENTITLE" $ZENARG --error  \
 				--text "$MSG"
