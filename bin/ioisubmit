@@ -1,0 +1,49 @@
+#!/bin/bash
+
+help()
+{
+cat - <<EOM
+Run: $0 <taskname> <files...>
+EOM
+}
+
+if [ $# -lt 2 ]; then
+	help
+	exit 1
+fi
+
+TASKNAME=$1
+FILENAME=${@:2}
+
+for i in $FILENAME; do
+	if [ ! -r "$i" ]; then
+		echo Cannot read $i.
+		help
+		exit 1
+	fi
+done
+
+TASKNAME=$(echo "$TASKNAME" | tr '[:upper:]' '[:lower:]')
+USERID=$(cat /opt/ioi/run/userid.txt)
+
+TMPDIR=`mktemp -d`
+
+mkdir $TMPDIR/$USERID-$TASKNAME
+
+cp $FILENAME $TMPDIR/$USERID-$TASKNAME/
+
+TS=$(date +%Y%m%d%H%M%S)
+
+tar jcf /opt/ioi/store/submissions/$USERID-$TASKNAME-$TS.tar.bz2 -C $TMPDIR $USERID-$TASKNAME
+
+SUM=$(sha256sum /opt/ioi/store/submissions/$USERID-$TASKNAME-$TS.tar.bz2 | cut -d\  -f1)
+
+echo ==========================================================================
+echo SUBMISSION STORED
+echo --------------------------------------------------------------------------
+echo Datetime: $TS
+echo Taskname: $TASKNAME
+echo Filename: $FILENAME
+echo Checksum: $SUM
+echo Pathname: /opt/ioi/store/submissions/$USERID-$TASKNAME-$TS.tar.bz2
+echo ==========================================================================
