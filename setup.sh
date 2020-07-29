@@ -41,12 +41,7 @@ snap install --classic code
 
 pip3 install matplotlib
 
-# Copy IOI stuffs into /opt
-
-mkdir /opt/ioi
-cp -a bin sbin misc /opt/ioi/
-mkdir /opt/ioi/run
-
+# Change default shell for useradd
 sed -i '/^SHELL/ s/\/sh$/\/bash/' /etc/default/useradd
 
 # Create IOI account
@@ -54,6 +49,31 @@ sed -i '/^SHELL/ s/\/sh$/\/bash/' /etc/default/useradd
 
 # Set IOI user's initial password
 echo "ioi:ioi" | chpasswd
+
+# Copy IOI stuffs into /opt
+
+mkdir /opt/ioi
+cp -a bin sbin misc /opt/ioi/
+mkdir /opt/ioi/run
+mkdir /opt/ioi/store
+mkdir /opt/ioi/store/log
+mkdir /opt/ioi/store/screenshots
+mkdir /opt/ioi/store/submissions
+
+chown ioi.ioi /opt/ioi/store/submissions
+chown ansible.syslog /opt/ioi/store/log
+chmod 770 /opt/ioi/store log
+
+# Add our own syslog facility
+
+echo "local0.* /opt/ioi/store/log/local.log" >> /etc/rsyslog.d/10-ioi.conf
+
+# Add custom NTP to timesyncd config
+
+cat - <<EOM > /etc/systemd/timesyncd.conf
+[Time]
+NTP=pop.ioi2020.sg ntp.ubuntu.com
+EOM
 
 # Don't list ansible user at login screen
 
