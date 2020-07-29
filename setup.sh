@@ -36,6 +36,7 @@ snap install --classic atom
 snap install --classic eclipse
 snap install --classic intellij-idea-community
 snap install --classic code
+snap install --classic sublime-text
 
 # Install python3 libraries
 
