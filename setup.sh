@@ -22,7 +22,7 @@ tasksel install ubuntu-desktop-minimal ubuntu-desktop-minimal-default-languages
 
 # Install tools needed for management and monitoring
 
-apt -y install net-tools openssh-server ansible xvfb tinc i3lock oathtool
+apt -y install net-tools openssh-server ansible xvfb tinc i3lock oathtool imagemagick
 
 # Install packages needed by contestants
 
@@ -45,12 +45,6 @@ pip3 install matplotlib
 # Change default shell for useradd
 sed -i '/^SHELL/ s/\/sh$/\/bash/' /etc/default/useradd
 
-# Create IOI account
-/opt/ioi/sbin/mkioiuser.sh
-
-# Set IOI user's initial password
-echo "ioi:ioi" | chpasswd
-
 # Copy IOI stuffs into /opt
 
 mkdir /opt/ioi
@@ -61,9 +55,16 @@ mkdir /opt/ioi/store/log
 mkdir /opt/ioi/store/screenshots
 mkdir /opt/ioi/store/submissions
 
+# Create IOI account
+/opt/ioi/sbin/mkioiuser.sh
+
+# Set IOI user's initial password
+echo "ioi:ioi" | chpasswd
+
+# Fix permission and ownership
 chown ioi.ioi /opt/ioi/store/submissions
 chown ansible.syslog /opt/ioi/store/log
-chmod 770 /opt/ioi/store log
+chmod 770 /opt/ioi/store/log
 
 # Add our own syslog facility
 
@@ -127,6 +128,7 @@ apt -y remove network-manager-openvpn network-manager-openvpn-gnome openvpn
 apt -y remove gnome-getting-started-docs-it gnome-getting-started-docs-ru \
 	gnome-getting-started-docs-es gnome-getting-started-docs-fr gnome-getting-started-docs-de
 apt -y remove manpages-dev
+#apt -y linux-headers
 apt -y autoremove
 
 apt clean
