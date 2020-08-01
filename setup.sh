@@ -2,7 +2,7 @@
 
 set -e
 
-VERSION="beta1"
+VERSION="beta2"
 
 # Fix up date/time
 
@@ -128,7 +128,7 @@ apt -y remove network-manager-openvpn network-manager-openvpn-gnome openvpn
 apt -y remove gnome-getting-started-docs-it gnome-getting-started-docs-ru \
 	gnome-getting-started-docs-es gnome-getting-started-docs-fr gnome-getting-started-docs-de
 apt -y remove manpages-dev
-#apt -y linux-headers
+apt -y remove `dpkg-query -Wf '${Package}\n' | grep linux-header`
 apt -y autoremove
 
 apt clean
