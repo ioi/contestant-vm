@@ -177,6 +177,9 @@ Environment=DISPLAY=':0.0'
 ExecStart=/opt/ioi/sbin/i3lock.sh
 EOM
 
+# Add contest schedule
+/opt/ioi/sbin/contest.sh schedule
+
 # Embed version number
 if [ -n "$VERSION" ] ; then
 	echo "$VERSION" > /opt/ioi/misc/VERSION
