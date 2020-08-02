@@ -63,6 +63,12 @@ case "$1" in
 	status)
 		systemctl status tinc@vpn
 		;;
+	settcp)
+		sed -i '/^TCPOnly/ s/= no$/= yes/' /etc/tinc/vpn/tinc.conf
+		;;
+	setudp)
+		sed -i '/^TCPOnly/ s/= yes$/= no/' /etc/tinc/vpn/tinc.conf
+		;;
 	config)
 		do_config $2
 		;;
