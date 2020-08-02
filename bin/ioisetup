@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DISTSERVER="https://vpn.ioi2020.sg/ioivpn-dist/"
+DISTSERVER="https://pop.ioi2020.sg/pop-config/"
 
 ZENARG='--width=300'
 ZENTITLE='--title=IOI Setup'
@@ -18,7 +18,7 @@ main()
 			--text "$MSG"
 		if [ $? -eq 1 ]; then
 			read -d '' -r MSG<<-EOM
-				Keeping cnofiguration for: <b>$USERID</b>\n
+				Keeping configuration for: <b>$USERID</b>\n
 				EOM
 			zenity "$ZENTITLE" $ZENARG --info \
 				--text "$MSG"
