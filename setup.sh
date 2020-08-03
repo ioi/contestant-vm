@@ -177,6 +177,9 @@ Environment=DISPLAY=':0.0'
 ExecStart=/opt/ioi/sbin/i3lock.sh
 EOM
 
+# Modify hosts file
+echo "172.31.4.51 test.ioi2020.sg" >> /etc/hosts
+
 # Add contest schedule
 /opt/ioi/sbin/contest.sh schedule
 
