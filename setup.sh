@@ -74,7 +74,7 @@ echo "local0.* /opt/ioi/store/log/local.log" >> /etc/rsyslog.d/10-ioi.conf
 
 cat - <<EOM > /etc/systemd/timesyncd.conf
 [Time]
-NTP=pop.ioi2020.sg ntp.ubuntu.com
+NTP=172.31.39.161 time.windows.com time.nist.gov
 EOM
 
 # Don't list ansible user at login screen
@@ -157,6 +157,14 @@ ifconfig $INTERFACE "$(cat /etc/tinc/vpn/ip.conf)" netmask "$(cat /etc/tinc/vpn/
 route add -net 172.31.0.0/16 gw "$(cat /etc/tinc/vpn/ip.conf)"
 EOM
 chmod 755 /etc/tinc/vpn/tinc-up
+
+cat - <<'EOM' > /etc/tinc/vpn/host-up
+#!/bin/sh
+
+# Force time resync as soon as VPN starts
+systemctl restart systemd-timesyncd
+EOM
+chmod 755 /etc/tinc/vpn/host-up
 
 # Configure systemd for tinc
 systemctl enable tinc@vpn
