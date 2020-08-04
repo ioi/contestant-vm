@@ -47,7 +47,6 @@ do_setup()
 		return 1
 	fi
 
-	echo wget -O /tmp/vpn.tar.bz2 "${DISTSERVER}$CRED" > /dev/null 2>&1
 	wget -O /tmp/vpn.tar.bz2 "${DISTSERVER}$CRED" > /dev/null 2>&1
 	RC=$?
 	if [ $RC -eq 8 ]; then
