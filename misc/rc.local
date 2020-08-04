@@ -1,5 +1,7 @@
 #!/bin/sh
 
+SERVER=https://pop.ioi2020.sg/config
+
 check_user()
 {
     USERID=
@@ -18,6 +20,16 @@ case "$1" in
 		# If VPN is configured, then turn on firewall
 		if check_user; then
 			/opt/ioi/sbin/firewall.sh start
+		fi
+
+		wget -O /opt/ioi/misc/schedule.$$ "${SERVER}/schedule.txt" > /dev/null 2>&1
+		if [ $? -eq 0 && -f /opt/ioi/misc/schedule.$$ ]; then
+			diff -q /opt/ioi/misc/schedule /opt/ioi/misc/schedule.$$ > /dev/null
+			if [ $? -ne 0 ]; then
+				cp /opt/ioi/misc/schedule.$$ /opt/ioi/misc/schedule
+				/opt/ioi/sbin/contest.sh schedule
+			fi
+			rm /opt/ioi/misc/schedule.$$
 		fi
 		;;
 	*)
