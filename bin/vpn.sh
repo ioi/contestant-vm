@@ -17,14 +17,14 @@ do_config()
 
 	CONF=$1
 
-	if ! test -f $CONF; then
+	if ! test -f "$CONF"; then
 		echo "Can't read $CONF"
 		exit 1
 	fi
 
 	WORKDIR=`mktemp -d`
 
-	tar jxf $CONF -C $WORKDIR
+	tar jxf $CONF -C $WORKDIR || ( echo "Failed to unpack $CONF"; rm -rf $WORKDIR; exit 1 )
 
 	IP=$(cat $WORKDIR/vpn/ip.conf)
 	MASK=$(cat $WORKDIR/vpn/mask.conf)
