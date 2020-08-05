@@ -10,6 +10,7 @@ sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.background picture-uri \
 sudo -Hu ioi xvfb-run gsettings set org.gnome.shell enabled-extensions "['add-username-ioi2020']"
 sudo -Hu ioi xvfb-run gsettings set org.gnome.shell disable-user-extensions false
 sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.session idle-delay 900
+sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.screensaver lock-delay 30
 chfn -f "$FULLNAME" ioi
 
 # Update path
