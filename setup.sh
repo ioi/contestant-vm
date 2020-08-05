@@ -1,6 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
-set -e
+error() {
+	local lineno="$1"
+	local message="$2"
+	local code="${3:-1}"
+	if [[ -n "$message" ]] ; then
+		echo "Error at or near line ${lineno}: ${message}; exiting with status ${code}"
+	else
+		echo "Error at or near line ${lineno}; exiting with status ${code}"
+	fi
+	exit "${code}"
+}
+trap 'error ${LINENO}' ERR
 
 VERSION="beta2"
 
