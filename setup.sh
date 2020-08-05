@@ -33,10 +33,30 @@ apt -y install openjdk-8-jdk-headless codeblocks emacs \
 # Install snap packages needed by contestants
 
 snap install --classic atom
-snap install --classic eclipse
 snap install --classic intellij-idea-community
 snap install --classic code
 snap install --classic sublime-text
+
+# Fix Atom application menu bug
+sudo sed -i 's/Exec=env BAMF_DESKTOP_FILE_HINT=\/var\/lib\/snapd\/desktop\/applications\/atom_atom.desktop \/snap\/bin\/atom ATOM_DISABLE_SHELLING_OUT_FOR_ENVIRONMENT=false \/usr\/bin\/atom %F/Exec=env BAMF_DESKTOP_FILE_HINT=\/var\/lib\/snapd\/desktop\/applications\/atom_atom.desktop ATOM_DISABLE_SHELLING_OUT_FOR_ENVIRONMENT=false \/snap\/bin\/atom %F/' /var/lib/snapd/desktop/applications/atom_atom.desktop
+
+# Install Eclipse
+wget -O /tmp/eclipse.tar.gz "http://mirrors.neusoft.edu.cn/eclipse/technology/epp/downloads/release/2020-06/R/eclipse-java-2020-06-R-linux-gtk-x86_64.tar.gz"
+tar zxf /tmp/eclipse.tar.gz -C /opt
+rm /tmp/eclipse.tar.gz
+/opt/eclipse/eclipse -nosplash \
+        -application org.eclipse.equinox.p2.director \
+        -repository http://download.eclipse.org/releases/indigo/,http://download.eclipse.org/tools/cdt/releases/helios/ \
+        -destination /opt/eclipse \
+        -installIU org.eclipse.cdt.feature.group
+wget -O /usr/share/pixmaps/eclipse.png "https://icon-icons.com/downloadimage.php?id=94656&root=1381/PNG/64/&file=eclipse_94656.png"
+cat - <<EOM > /usr/share/applications/eclipse.desktop
+[Desktop Entry]
+Name=Eclipse
+Exec=/opt/eclipse/eclipse
+Type=Application
+Icon=eclipse
+EOM
 
 # Install python3 libraries
 
@@ -184,6 +204,10 @@ RestartSec60
 Environment=DISPLAY=':0.0'
 ExecStart=/opt/ioi/sbin/i3lock.sh
 EOM
+
+# Create rc.local file
+cp misc/rc.local /etc/rc.local
+chmod 755 /etc/rc.local
 
 # Modify hosts file
 echo "172.31.4.51 test.ioi2020.sg" >> /etc/hosts
