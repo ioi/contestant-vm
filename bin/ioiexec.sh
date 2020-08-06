@@ -15,7 +15,7 @@ CMDSTRING=$*
 
 FULLKEY=$(echo $PARTKEY $CMDSTRING | sha256sum | cut -d\  -f1)
 
-if ! oathtool -s 600 --totp $FULLKEY -d 8 -w 1 | grep -q -w $TOTP; then
+if ! oathtool -s 600 --totp $FULLKEY -d 8 -w 1 -- "$TOTP" > /dev/null 2>&1; then
 	echo "TOTP failed" >&2
 	exit;
 fi
