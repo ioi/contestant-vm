@@ -15,8 +15,10 @@ chfn -f "$FULLNAME" ioi
 
 # Update path
 echo 'PATH=/opt/ioi/bin:$PATH' >> ~ioi/.bashrc
-echo "alias vpn='sudo /opt/ioi/bin/vpn.sh'" >> ~ioi/.bashrc
+echo "alias ioiconf='sudo /opt/ioi/bin/ioiconf.sh'" >> ~ioi/.bashrc
 echo "alias ioiexec='sudo /opt/ioi/bin/ioiexec.sh'" >> ~ioi/.bashrc
+echo 'TZ=$(cat /opt/ioi/store/timezone)' >> ~ioi/.profile
+echo 'export TZ' >> ~ioi/.profile
 
 # Mark Gnome's initial setup as complete
 sudo -Hu ioi bash -c 'echo yes > ~/.config/gnome-initial-setup-done'

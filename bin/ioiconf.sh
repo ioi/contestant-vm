@@ -54,13 +54,13 @@ do_config()
 
 
 case "$1" in
-	start)
+	vpnstart)
 		systemctl start tinc@vpn
 		;;
-	restart)
+	vpnrestart)
 		systemctl restart tinc@vpn
 		;;
-	status)
+	vpnstatus)
 		systemctl status tinc@vpn
 		;;
 	settcp)
@@ -69,8 +69,33 @@ case "$1" in
 	setudp)
 		sed -i '/^TCPOnly/ s/= yes$/= no/' /etc/tinc/vpn/tinc.conf
 		;;
-	config)
+	vpnconfig)
 		do_config $2
+		;;
+	settz)
+		tz=$2
+		if [ -z "$2" ]; then
+			cat - <<EOM
+No timezone specified. Run tzselect to learn about the valid timezones
+available on this system.
+EOM
+			exit 1
+		fi
+		if [ -f "/usr/share/zoneinfo/$2" ]; then
+			cat - <<EOM
+Your timezone will be set to $2 at your next login.
+*** Please take note that all dates and times communicated by the IOI 2020 ***
+*** organisers will be in Asia/Singapore timezone (GMT+08), unless it is   ***
+*** otherwise specified.                                                   ***
+EOM
+			echo "$2" > /opt/ioi/store/timezone
+		else
+			cat - <<EOM
+Timezone $2 is not valid. Run tzselect to learn about the valid timezones
+available on this system.
+EOM
+			exit 1
+		fi
 		;;
 	*)
 		echo Not allowed
