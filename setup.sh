@@ -141,7 +141,7 @@ cp misc/id_ansible.pub ~ansible/.ssh/authorized_keys
 chown -R ansible.ansible ~ansible/.ssh
 
 sed -i '/%sudo/ s/ALL$/NOPASSWD:ALL/' /etc/sudoers
-echo "ioi ALL=NOPASSWD: /opt/ioi/bin/vpn.sh, /opt/ioi/bin/ioiexec.sh, /opt/ioi/bin/lockscreen.sh" >> /etc/sudoers.d/01-ioi
+echo "ioi ALL=NOPASSWD: /opt/ioi/bin/ioiconf.sh, /opt/ioi/bin/ioiexec.sh, /opt/ioi/bin/lockscreen.sh" >> /etc/sudoers.d/01-ioi
 chmod 440 /etc/sudoers.d/01-ioi
 
 # Documentation
@@ -240,6 +240,9 @@ echo "172.31.4.51 test.ioi2020.sg" >> /etc/hosts
 
 # Add contest schedule
 /opt/ioi/sbin/contest.sh schedule
+
+# Add default timezone
+echo "Asia/Singapore" > /opt/ioi/store/timezone
 
 # Embed version number
 if [ -n "$VERSION" ] ; then
