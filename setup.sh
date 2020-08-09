@@ -88,13 +88,13 @@ mkdir /opt/ioi/store/submissions
 
 wget -O /tmp/cpptools-linux.vsix "https://github.com/microsoft/vscode-cpptools/releases/download/0.29.0/cpptools-linux.vsix"
 wget -O /tmp/vscode-java-pack.vsix.gz "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/vscjava/vsextensions/vscode-java-pack/0.9.1/vspackage"
-wget -O /tmp/ms-python.vsix.gz "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/2020.7.96456/vspackage"
+#wget -O /tmp/ms-python.vsix.gz "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/2020.7.96456/vspackage"
 gunzip /tmp/vscode-java-pack.vsix.gz
-gunzip /tmp/ms-python.vsix.gz
+#gunzip /tmp/ms-python.vsix.gz
 mkdir /tmp/vscode
 code --install-extension /tmp/cpptools-linux.vsix --extensions-dir /opt/ioi/misc/vscode-extensions --user-data-dir /tmp/vscode
 code --install-extension /tmp/vscode-java-pack.vsix --extensions-dir /opt/ioi/misc/vscode-extensions --user-data-dir /tmp/vscode
-code --install-extension /tmp/ms-python.vsix --extensions-dir /opt/ioi/misc/vscode-extensions --user-data-dir /tmp/vscode
+#code --install-extension /tmp/ms-python.vsix --extensions-dir /opt/ioi/misc/vscode-extensions --user-data-dir /tmp/vscode
 
 # Create IOI account
 /opt/ioi/sbin/mkioiuser.sh
