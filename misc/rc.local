@@ -23,7 +23,7 @@ case "$1" in
 		fi
 
 		wget -O /opt/ioi/misc/schedule.$$ "${SERVER}/schedule.txt" > /dev/null 2>&1
-		if [ $? -eq 0 && -f /opt/ioi/misc/schedule.$$ ]; then
+		if [ $? -eq 0 -a -f /opt/ioi/misc/schedule.$$ ]; then
 			diff -q /opt/ioi/misc/schedule /opt/ioi/misc/schedule.$$ > /dev/null
 			if [ $? -ne 0 ]; then
 				cp /opt/ioi/misc/schedule.$$ /opt/ioi/misc/schedule
