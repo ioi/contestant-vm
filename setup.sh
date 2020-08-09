@@ -204,6 +204,11 @@ cat - <<'EOM' > /etc/tinc/vpn/host-up
 
 # Force time resync as soon as VPN starts
 systemctl restart systemd-timesyncd
+
+# Fix up DNS resolution
+resolvectl dns vpn 172.31.0.2
+resolvectl domain vpn ioi2020.sg
+systemd-resolve --flush-cache
 EOM
 chmod 755 /etc/tinc/vpn/host-up
 
