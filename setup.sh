@@ -39,7 +39,7 @@ apt -y install net-tools openssh-server ansible xvfb tinc i3lock oathtool imagem
 
 apt -y install openjdk-8-jdk-headless codeblocks emacs \
 	geany gedit joe kate kdevelop nano vim vim-gtk3 \
-	ddd valgrind visualvm ruby python3-pip
+	ddd valgrind visualvm ruby python3-pip konsole
 
 # Install snap packages needed by contestants
 
