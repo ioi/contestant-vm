@@ -23,7 +23,7 @@ contestprep()
 	# Recreate submissions directory
 	rm -rf /opt/ioi/store/submissions
 	mkdir /opt/ioi/store/submissions
-	chown ioi.ioi /opt/ioi/store/submissions
+	chown $UID.$UID /opt/ioi/store/submissions
 
 	/opt/ioi/sbin/mkioiuser.sh
 	echo "ioi:$EPASSWD" | chpasswd -e
