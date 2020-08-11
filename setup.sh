@@ -37,7 +37,7 @@ apt -y install net-tools openssh-server ansible xvfb tinc i3lock oathtool imagem
 
 # Install packages needed by contestants
 
-apt -y install openjdk-8-jdk-headless codeblocks emacs \
+apt -y install openjdk-11-jdk-headless codeblocks emacs \
 	geany gedit joe kate kdevelop nano vim vim-gtk3 \
 	ddd valgrind visualvm ruby python3-pip konsole
 
@@ -146,7 +146,7 @@ chmod 440 /etc/sudoers.d/01-ioi
 
 # Documentation
 
-apt -y install stl-manual openjdk-8-doc python3-doc
+apt -y install stl-manual openjdk-11-doc python3-doc
 
 # CPP Reference
 
