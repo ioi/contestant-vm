@@ -231,6 +231,14 @@ Environment=DISPLAY=':0.0'
 ExecStart=/opt/ioi/sbin/i3lock.sh
 EOM
 
+# Remove/clean up unneeded snaps
+
+snap list --all | awk '/disabled/{print $1, $3}' | while read snapname revision; do
+	snap remove "$snapname" --revision="$revision"
+done
+
+rm /var/lib/snapd/cache/*
+
 # Create rc.local file
 cp misc/rc.local /etc/rc.local
 chmod 755 /etc/rc.local
