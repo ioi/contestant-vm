@@ -92,10 +92,10 @@ wget -O /tmp/vscode-java-pack.vsix.gz "https://marketplace.visualstudio.com/_api
 gunzip /tmp/vscode-java-pack.vsix.gz
 #gunzip /tmp/ms-python.vsix.gz
 mkdir /tmp/vscode
-mkdir /tmp/vscode-extensinos
+mkdir /tmp/vscode-extensions
 code --install-extension /tmp/cpptools-linux.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
 code --install-extension /tmp/vscode-java-pack.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
-tar jcf /opt/ioi/misc/vscode-extensions.tar.bz2 -C /tmp/vscode-extensinos .
+tar jcf /opt/ioi/misc/vscode-extensions.tar.bz2 -C /tmp/vscode-extensions .
 rm -rf /tmp/vscode-extensions
 
 # Create IOI account

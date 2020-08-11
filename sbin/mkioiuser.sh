@@ -30,6 +30,7 @@ chown -R ioi.ioi ~ioi/.local/share/gnome-shell/extensions/add-username-ioi2020
 # Copy VSCode extensions
 mkdir -p ~ioi/.vscode/extensions
 tar jxf /opt/ioi/misc/vscode-extensions.tar.bz2 -C ~ioi/.vscode/extensions
+chown -R ioi.ioi ~/ioi/.vscode
 
 # IOI startup
 cp /opt/ioi/misc/ioistart.desktop /usr/share/gnome/autostart/
