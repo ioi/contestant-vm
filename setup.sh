@@ -92,9 +92,11 @@ wget -O /tmp/vscode-java-pack.vsix.gz "https://marketplace.visualstudio.com/_api
 gunzip /tmp/vscode-java-pack.vsix.gz
 #gunzip /tmp/ms-python.vsix.gz
 mkdir /tmp/vscode
-code --install-extension /tmp/cpptools-linux.vsix --extensions-dir /opt/ioi/misc/vscode-extensions --user-data-dir /tmp/vscode
-code --install-extension /tmp/vscode-java-pack.vsix --extensions-dir /opt/ioi/misc/vscode-extensions --user-data-dir /tmp/vscode
-#code --install-extension /tmp/ms-python.vsix --extensions-dir /opt/ioi/misc/vscode-extensions --user-data-dir /tmp/vscode
+mkdir /tmp/vscode-extensinos
+code --install-extension /tmp/cpptools-linux.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
+code --install-extension /tmp/vscode-java-pack.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
+tar jcf /opt/ioi/misc/vscode-extensions.tar.bz2 -C /tmp/vscode-extensinos .
+rm -rf /tmp/vscode-extensions
 
 # Create IOI account
 /opt/ioi/sbin/mkioiuser.sh
@@ -170,6 +172,7 @@ apt -y remove gnome-getting-started-docs-it gnome-getting-started-docs-ru \
 	gnome-getting-started-docs-es gnome-getting-started-docs-fr gnome-getting-started-docs-de
 apt -y remove manpages-dev
 apt -y remove `dpkg-query -Wf '${Package}\n' | grep linux-header`
+apt -y remove `dpkg-query -Wf '${Package}\n' | grep linux-modules-extra-`
 apt -y autoremove
 
 apt clean
