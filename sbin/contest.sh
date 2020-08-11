@@ -92,7 +92,7 @@ case "$1" in
 	start)
 		rm /opt/ioi/run/lockscreen
 		systemctl stop i3lock
-		USER=$(/opt/ioi/bin/ioicheckuser)
+		USER=$(/opt/ioi/bin/ioicheckuser -q)
 		echo "$USER" > /opt/ioi/run/userid.txt
 		echo "$2" >> /opt/ioi/run/contestid.txt
 		echo "* * * * * root /opt/ioi/sbin/contest.sh monitor" > /etc/cron.d/contest
