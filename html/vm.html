@@ -101,9 +101,9 @@ required, and thereafter, the Contestant VM may be shutdown.</p>
 
 <p>The <code>ioi</code> user account will be removed and reprovisioned
 automatically 15 minutes before Contest or Practice starts. Users who are
-logged in at that time will be forcibly logged out. After the account is
-reprovisinoed, Contestants may relogin. The screen will be automatically locked
-after login, and unlocked at Contest or Practice start.</p>
+logged in at that time will be forcibly logged out. Contestants may relogin
+after the account has been reprovisioned. The screen will be locked
+automatically after login, and unlocked at Contest or Practice start.</p>
 
 <p>Note that the account reprovisioning does <em>not</em> revert the
 <code>ioi</code> password to the default. I.e., if you have changed the
@@ -146,6 +146,20 @@ Asia/Singapore timezone unless otherwise specified.</p>
 the <code>ioi</code> account.</p>
 
 <p>E.g.: <code>ioiconf settz UTC</code> to use GMT time.</p>
+
+<h2>VPN Protocol Mode</h2>
+
+<p>By default, the VPN is configured to use TCP on port 655 only. The VPN
+software, Tinc, can also use UDP on port 655 for data packets, in addition to
+using TCP on port 655 for metadata. This may improve performance, provided your
+network permits UDP port 655 traffic outbound and inbound. This mode can be
+enabled by running <code>ioiconf setvpnproto auto</code>, then <code>ioiconf
+vpnrestart</code> (or restart the Contestant VM).</p>
+
+<p>In auto mode, both TCP/UDP will be used, with automatic fallback to
+TCP-only. To revert to the default TCP-only setting, run <code>ioiconf
+setvpnproto tcp</code>, then <code>ioiconf vpnrestart</code> (or restart the
+Contestant VM).</p>
 
 </body>
 </html>
