@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>IOI2020</title>
+<style type="text/css">
+/* share-regular - latin */
+@font-face {
+  font-family: 'Share';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/share-v10-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Share Regular'), local('Share-Regular'),
+       url('fonts/share-v10-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/share-v10-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('fonts/share-v10-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('fonts/share-v10-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('fonts/share-v10-latin-regular.svg#Share') format('svg'); /* Legacy iOS */
+}
+/* fira-sans-regular - latin */
+@font-face {
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/fira-sans-v10-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Fira Sans Regular'), local('FiraSans-Regular'),
+       url('fonts/fira-sans-v10-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/fira-sans-v10-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('fonts/fira-sans-v10-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('fonts/fira-sans-v10-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('fonts/fira-sans-v10-latin-regular.svg#FiraSans') format('svg'); /* Legacy iOS */
+}
+body{font:normal 93.75%/1.4 "Fira Sans",sans-serif;-webkit-text-size-adjust:100%;}
+h1,h2,h3,h4,h5,h6,.ll{font-family:'Share';font-weight:bold;padding:0;line-height:1.2;clear:left;}
+.ml{font-size:150%; text-align: center;}
+.ll{font-size:150%; text-align: center;}
+.container{display:flex;flex-wrap:wrap;}
+.container>div{margin:1em 2em;}
+.button{
+  text-decoration: none;
+  background-color: #EEEEEE;
+  padding: 0.5em 0;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  width: 100%;
+  display: block;
+}
+</style>
+</head>
+<body>
+<h1>Contestant VM Manual</h1>
+
+<p>This page contains information about using the Contestant VM.</p>
+
+<p>There is only one normal user account in the Contestant VM for the
+Contestant to use. The username is <code>ioi</code> with default password
+<code>ioi</code>.</p>
+
+<h2>Setup</h2>
+
+<p>At your first login to the Contestant VM, and every subsequent login as long
+as you do not complete this step, you will be prompted to run the IOI Setup
+script. You can also re-run IOI Setup by running <code>ioisetup</code> from the
+Terminal</p>
+
+<p>The IOI Setup script will request your Contestant credentials, then download
+and install a VPN configuration. The UNIX "gecos real name" is also updated
+with your Contestant ID, e.g.  XXX1, which will be displayed in the top right
+corner on subsequent logins.</p>
+
+<p>The VPN connection identifies this VM instance to the IOI 2020 Online
+Contest Environment as being associated to the configured Contestant. If
+another Contestant takes over the use of this VM instance, you must re-run IOI
+Setup with the other Contestant's credentials.</p>
+
+<p><strong>IMPORTANT:</strong> There must be only <em>one</em> VM instance running and
+connected to the IOI 2020 Online Contest Environment per Contestant. If the
+same Contestant is logged in more than once, the VPN connection will flap
+between the two instance and will <em>not</em> be usable.</p>
+
+<p>You <em>may</em> change the <code>ioi</code> local user account password in
+the Contestant VM. This does <em>not</em> change the official Contestant
+Credentials given the Contestants.</p>
+
+<h2>Online Connection</h2>
+
+<p>The Contestant VM must be running and connected to the IOI 2020 Online
+Contest Environment no later than 4 hours before Contest starts, or no later
+than 1 hour before Practice starts. The HTC will access the Contestant VM
+remotely to perform verification checks and to apply any necessary updates.
+Delays caused to the HTC will mean a late start for the Contestant.</p>
+
+<p>The Contestant VM must remain connected after end of Contest and Practice
+for the HTC's continued access to download logs and other data. Instructions
+will be conveyed through the Proctors once the online connection is no longer
+required, and thereafter, the Contestant VM may be shutdown.</p>
+
+<h2>Account Reprovisining</h2>
+
+<p>The <code>ioi</code> user account will be removed and reprovisioned
+automatically 15 minutes before Contest or Practice starts. Users who are
+logged in at that time will be forcibly logged out. After the account is
+reprovisinoed, Contestants may relogin. The screen will be automatically locked
+after login, and unlocked at Contest or Practice start.</p>
+
+<p>Note that the account reprovisioning does <em>not</em> revert the
+<code>ioi</code> password to the default. I.e., if you have changed the
+<code>ioi</code> account password, your new password is still effective.</p>
+
+<h2>Home Directory Backup</h2>
+
+<p>The Contestant VM provides a backup/replication mechanism that uses rsync to
+replicate the home directory to a backup server in the IOI 2020 Online
+Contest Environment. This is <em>not</em> enabled by default. Contestants can
+either:</p>
+
+<ol>
+	<li>Run the <code>ioibackup</code> script at any time to perform the rsync.</li>
+	<li>Run <code>ioiconf setautobackup on</code> to enable automatic backup at a
+	5-minute interval. A random delay up to 30 seconds in inserted before automatic
+	backup. Run <code>ioiconf setautobackup off</code> to disable automatic backup.</li>
+</ol>
+
+<p>Backups are available only during Contest and Practice time.</p>
+
+<p>This backup is more accurately described as replication. It uses rsync with the --delete
+option, which means the remote contents are a mirror of the local home directory. In
+particular, files deleted locally will also be removed at the remote. This replication only
+includes non-hidden files up to a maximum size of 1 MB.</p>
+
+<p>To restore or retrieve files from remote, run <code>ioibackup -r</code>. The files will
+be restored in <code>/tmp/restore</code>.</p>
+
+<h2>Timezone</h2>
+
+<p>The Contestant VM is configured to show time in the Asia/Singapore timezone.
+All dates and times communicated by the IOI 2020 organisers will be in
+Asia/Singapore timezone unless otherwise specified.</p>
+
+<p>If you strongly prefer to see the time in your local timezone, you can run
+<code>ioiconf settz &lt;timezone&gt;</code>, where
+<code>&lt;timezone&gt;</code> is an apporiate TZ specification (according to
+<code>tzselect</code>). The changes will be effected the next time you login to
+the <code>ioi</code> account.</p>
+
+<p>E.g.: <code>ioiconf settz UTC</code> to use GMT time.</p>
+
+</body>
+</html>
