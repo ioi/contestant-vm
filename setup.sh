@@ -262,6 +262,13 @@ cat - <<EOM >> /etc/hosts
 13.212.15.90 pop4.ioi2020.sg
 EOM
 
+# Populate root's known_hosts
+if [ ! -e ~/.ssh ]; then
+	mkdir ~/.ssh
+fi
+ssh-keyscan -H ioibackup1.ioi2020.sg >> ~/.ssh/known_hosts
+chmod 600 ~/.ssh/known_hosts
+
 # Add contest schedule
 /opt/ioi/sbin/contest.sh schedule
 
