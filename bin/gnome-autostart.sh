@@ -6,6 +6,8 @@ if [ -f /opt/ioi/run/lockscreen ]; then
 	sudo /opt/ioi/bin/lockscreen.sh
 else
 	if [ "$DOSETUP" = "1" ]; then
-		/opt/ioi/bin/ioisetup
+		if ! /opt/ioi/bin/ioicheckuser -q; then
+			/opt/ioi/bin/ioisetup
+		fi
 	fi
 fi
