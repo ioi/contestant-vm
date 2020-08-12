@@ -4,6 +4,8 @@ set -e
 
 apt clean
 
+rm -rf /var/lib/apt/lists/*
+
 # Do this at runlevel 3 (init 3)
 
 systemctl stop rsyslog
