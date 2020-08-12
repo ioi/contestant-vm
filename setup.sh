@@ -175,8 +175,8 @@ apt -y remove manpages-dev
 apt -y remove `dpkg-query -Wf '${Package}\n' | grep linux-header`
 
 # Remove most extra modules but preserve those for sound
-kernelver=$(cut -d\  -f 3)
-tar jcf /tmp/sound-modules.tar.bz2 /lib/modules/$kernelver/kernel/sound/{ac97_bus.ko,pci}
+kernelver=$(uname -a | cut -d\  -f 3)
+tar jcf /tmp/sound-modules.tar.bz2 -C / lib/modules/$kernelver/kernel/sound/{ac97_bus.ko,pci}
 apt -y remove `dpkg-query -Wf '${Package}\n' | grep linux-modules-extra-`
 tar jxf /tmp/sound-modules.tar.bz2 -C /
 depmod -a
