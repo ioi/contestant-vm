@@ -85,6 +85,7 @@ mkdir /opt/ioi/store
 mkdir /opt/ioi/store/log
 mkdir /opt/ioi/store/screenshots
 mkdir /opt/ioi/store/submissions
+mkdir /opt/ioi/store/ssh
 
 wget -O /tmp/cpptools-linux.vsix "https://github.com/microsoft/vscode-cpptools/releases/download/0.29.0/cpptools-linux.vsix"
 wget -O /tmp/vscode-java-pack.vsix.gz "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/vscjava/vsextensions/vscode-java-pack/0.9.1/vspackage"
@@ -143,7 +144,7 @@ cp misc/id_ansible.pub ~ansible/.ssh/authorized_keys
 chown -R ansible.ansible ~ansible/.ssh
 
 sed -i '/%sudo/ s/ALL$/NOPASSWD:ALL/' /etc/sudoers
-echo "ioi ALL=NOPASSWD: /opt/ioi/bin/ioiconf.sh, /opt/ioi/bin/ioiexec.sh, /opt/ioi/bin/lockscreen.sh" >> /etc/sudoers.d/01-ioi
+echo "ioi ALL=NOPASSWD: /opt/ioi/bin/ioiconf.sh, /opt/ioi/bin/ioiexec.sh, /opt/ioi/bin/lockscreen.sh, /opt/ioi/bin/ioibackup.sh" >> /etc/sudoers.d/01-ioi
 chmod 440 /etc/sudoers.d/01-ioi
 
 # Documentation

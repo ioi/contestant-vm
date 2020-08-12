@@ -57,13 +57,15 @@ EOM
 monitor()
 {
 	DATE=$(date +%Y%m%d%H%M%S)
-	DISPLAY=:0.0 sudo -u ioi xhost +local:root
+	DISPLAY=:0.0 sudo -u ioi xhost +local:root > /dev/null
 	echo "$DATE monitor run" >> /opt/ioi/store/contest.log
+
 	if [ $(seq 5 | shuf | head -1) -eq 5 ]; then
 		USER=$(cat /opt/ioi/run/userid.txt)
 		DISPLAY=:0.0 xwd -root -silent | convert xwd:- png:- | bzip2 -c - \
 			> /opt/ioi/store/screenshots/$USER-$DATE.png.bz2
 	fi
+
 	RESOLUTION=$(DISPLAY=:0.0 xdpyinfo | grep dimensions | awk '{print $2}')
 	if [ -f /opt/ioi/run/resolution ]; then
 		if [ "$RESOLUTION" != "$(cat /opt/ioi/run/resolution)" ]; then
@@ -73,6 +75,16 @@ monitor()
 	else
 		echo "$RESOLUTION" > /opt/ioi/run/resolution
 		logger -p local0.info "Display resolution is $RESOLUTION"
+	fi
+
+	# Check if auto backups are requested
+	if [ -f /opt/ioi/store/autobackup ]; then
+		# This script runs every minute, but we want to only do backups every 5 mins
+		if [ $(( $(date +%s) / 60 % 5)) -eq 0 ]; then
+			# Insert a random delay up to 30 seconds so backups don't all start at the same time
+			sleep $(seq 30 | shuf | head -1)
+			/opt/ioi/bin/ioibackup.sh > /dev/null
+		fi
 	fi
 }
 

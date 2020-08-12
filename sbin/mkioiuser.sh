@@ -17,6 +17,7 @@ chfn -f "$FULLNAME" ioi
 echo 'PATH=/opt/ioi/bin:$PATH' >> ~ioi/.bashrc
 echo "alias ioiconf='sudo /opt/ioi/bin/ioiconf.sh'" >> ~ioi/.bashrc
 echo "alias ioiexec='sudo /opt/ioi/bin/ioiexec.sh'" >> ~ioi/.bashrc
+echo "alias ioibackup='sudo /opt/ioi/bin/ioibackup.sh'" >> ~ioi/.bashrc
 echo 'TZ=$(cat /opt/ioi/store/timezone)' >> ~ioi/.profile
 echo 'export TZ' >> ~ioi/.profile
 

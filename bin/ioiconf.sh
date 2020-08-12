@@ -39,9 +39,9 @@ do_config()
 	echo "$MASK" > /etc/tinc/vpn/mask.conf
 	rm /etc/tinc/vpn/hosts/* 2> /dev/null
 	cp $WORKDIR/vpn/hosts/* /etc/tinc/vpn/hosts/
-	cp $WORKDIR/vpn/rsa_key.pub /etc/tinc/vpn/
-	cp $WORKDIR/vpn/rsa_key.priv /etc/tinc/vpn/
+	cp $WORKDIR/vpn/rsa_key.* /etc/tinc/vpn/
 	cp $WORKDIR/vpn/tinc.conf /etc/tinc/vpn
+	cp $WORKDIR/vpn/ioibackup* /opt/ioi/store/ssh/
 
 	rm -r $WORKDIR
 	USERID=$(cat /etc/tinc/vpn/tinc.conf | grep Name | cut -d\  -f3)
@@ -63,11 +63,20 @@ case "$1" in
 	vpnstatus)
 		systemctl status tinc@vpn
 		;;
-	settcp)
-		sed -i '/^TCPOnly/ s/= no$/= yes/' /etc/tinc/vpn/tinc.conf
-		;;
-	setudp)
-		sed -i '/^TCPOnly/ s/= yes$/= no/' /etc/tinc/vpn/tinc.conf
+	setvpnproto)
+		if [ "$2" = "tcp" ]; then
+			sed -i '/^TCPOnly/ s/= no$/= yes/' /etc/tinc/vpn/tinc.conf
+			echo VPN protocol set to TCP only.
+		elif [ "$2" = "auto" ]; then
+			sed -i '/^TCPOnly/ s/= yes$/= no/' /etc/tinc/vpn/tinc.conf
+			echo VPN procotol set to auto TCP/UDP with fallback to TCP only.
+		else
+			cat - <<EOM
+Invalid argument to setvpnproto. Specify "yes" to use TCP only, or "auto"
+to allow TCP/UDP with fallback to TCP only.
+EOM
+			exit 1	
+		fi
 		;;
 	vpnconfig)
 		do_config $2
@@ -95,6 +104,24 @@ Timezone $2 is not valid. Run tzselect to learn about the valid timezones
 available on this system.
 EOM
 			exit 1
+		fi
+		;;
+	setautobackup)
+		if [ "$2" = "on" ]; then
+			touch /opt/ioi/store/autobackup
+			echo Auto backup enabled
+		elif [ "$2" = "off" ]; then
+			if [ -f /opt/ioi/store/autobackup ]; then
+				rm /opt/ioi/store/autobackup
+			fi
+			echo Auto backup disabled
+		else
+			cat - <<EOM
+Invalid argument to setautobackup. Specify "on" to enable automatic backup
+of home directory, or "off" to disable automatic backup. You can always run
+"ioibackup" manually to backup at any time. Backups will only include
+non-hidden files less than 1MB in size.
+EOM
 		fi
 		;;
 	*)
