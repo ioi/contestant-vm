@@ -26,7 +26,7 @@ if [ "$MODE" = "backup" ]; then
 Backing up home directory. Only non-hidden files up to a maximum of 1 MB
 in size will be backed up.
 EOM
-	rsync -e "ssh -i /opt/ioi/store/ssh/ioibackup" \
+	rsync -e "ssh -i /opt/ioi/store/ssh/ioibackup -o StrictHostKeyChecking=no" \
 		-avz --delete \
 		--max-size=1M --bwlimit=1000 --exclude='.*' ~ioi/ ioibackup@ioibackup1.ioi2020.sg:
 elif [ "$MODE" = "restore" ]; then
@@ -37,7 +37,7 @@ Error: Unable to restore because /tmp/restore already exist. Remove or move
 away the existing file or directory before running again.
 EOM
 	else
-		rsync -e "ssh -i /opt/ioi/store/ssh/ioibackup" \
+		rsync -e "ssh -i /opt/ioi/store/ssh/ioibackup -o StrictHostKeyChecking=no" \
     		    -avz --max-size=1M --bwlimit=1000 --exclude='.*' \
 				ioibackup@ioibackup1.ioi2020.sg: /tmp/restore
 	fi
