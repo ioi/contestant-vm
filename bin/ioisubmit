@@ -26,6 +26,11 @@ done
 TASKNAME=$(echo "$TASKNAME" | tr '[:upper:]' '[:lower:]')
 USERID=$(cat /opt/ioi/run/userid.txt)
 
+if [ -z "$USERID" ]; then
+	echo NOTICE: There is no contest currently running
+	USERID="INVALID"
+fi
+
 TMPDIR=`mktemp -d`
 
 mkdir $TMPDIR/$USERID-$TASKNAME
