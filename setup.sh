@@ -215,6 +215,8 @@ chmod 755 /etc/tinc/vpn/tinc-up
 cat - <<'EOM' > /etc/tinc/vpn/host-up
 #!/bin/sh
 
+logger -p local0.info VPN connection to $NODE $REMOTEADDRESS:$REMOTEPORT is up
+
 # Force time resync as soon as VPN starts
 systemctl restart systemd-timesyncd
 
@@ -222,6 +224,13 @@ systemctl restart systemd-timesyncd
 resolvectl dns vpn 172.31.0.2
 resolvectl domain vpn ioi2020.sg
 systemd-resolve --flush-cache
+EOM
+chmod 755 /etc/tinc/vpn/host-up
+
+cat - <<'EOM' > /etc/tinc/vpn/host-down
+#!/bin/sh
+
+logger -p local0.info VPN connection to $NODE $REMOTEADDRESS:$REMOTEPORT is down
 EOM
 chmod 755 /etc/tinc/vpn/host-up
 
@@ -252,6 +261,30 @@ done
 
 rm /var/lib/snapd/cache/*
 
+# Remove desktop backgrounds
+rm /usr/share/backgrounds/*.jpg
+rm /usr/share/backgrounds/*.png
+
+# Remove unwanted documentation
+rm -rf /usr/share/doc/HTML
+rm -rf /usr/share/doc/adwaita-icon-theme
+rm -rf /usr/share/doc/fonts-*
+rm -rf /usr/share/doc/libgtk*
+rm -rf /usr/share/doc/libqt5*
+rm -rf /usr/share/doc/man-db
+rm -rf /usr/share/doc/manpages
+rm -rf /usr/share/doc/openssh-*
+rm -rf /usr/share/doc/printer-*
+rm -rf /usr/share/doc/qml-*
+rm -rf /usr/share/doc/libqt5*
+rm -rf /usr/share/doc/libqtbase5*
+rm -rf /usr/share/doc/ubuntu-*
+rm -rf /usr/share/doc/x11*
+rm -rf /usr/share/doc/xorg*
+rm -rf /usr/share/doc/xproto
+rm -rf /usr/share/doc/xserver*
+rm -rf /usr/share/doc/xterm
+
 # Create rc.local file
 cp misc/rc.local /etc/rc.local
 chmod 755 /etc/rc.local
@@ -281,5 +314,7 @@ echo "Asia/Singapore" > /opt/ioi/store/timezone
 if [ -n "$VERSION" ] ; then
 	echo "$VERSION" > /opt/ioi/misc/VERSION
 fi
+
+echo *** DONE ***
 
 # vim: ts=4
