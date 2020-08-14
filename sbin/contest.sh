@@ -100,16 +100,20 @@ case "$1" in
 		;;
 	prep)
 		contestprep
+		/opt/ioi/sbin/firewall.sh start
+		echo "$2" > /opt/ioi/run/lockdown
+		echo "$USER" > /opt/ioi/run/userid.txt
 		;;
 	start)
 		rm /opt/ioi/run/lockscreen
 		systemctl stop i3lock
 		USER=$(/opt/ioi/bin/ioicheckuser -q)
-		echo "$USER" > /opt/ioi/run/userid.txt
-		echo "$2" >> /opt/ioi/run/contestid.txt
+		echo "$2" > /opt/ioi/run/contestid.txt
 		echo "* * * * * root /opt/ioi/sbin/contest.sh monitor" > /etc/cron.d/contest
 		;;
 	stop)
+		/opt/ioi/sbin/firewall.sh stop
+		rm /opt/ioi/run/lockdown
 		rm /opt/ioi/run/contestid.txt
 		rm /etc/cron.d/contest
 		;;
