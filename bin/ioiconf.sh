@@ -54,6 +54,20 @@ do_config()
 
 
 case "$1" in
+	fwstart)
+		if [ -e /opt/ioi/run/lockdown ]; then
+			echo Not allowed to control firewall during lockdown mode
+		else
+			/opt/ioi/sbin/firewall.sh start
+		fi
+		;;
+	fwstop)
+		if [ -e /opt/ioi/run/lockdown ]; then
+			echo Not allowed to control firewall during lockdown mode
+		else
+			/opt/ioi/sbin/firewall.sh stop
+		fi
+		;;
 	vpnstart)
 		systemctl start tinc@vpn
 		;;
