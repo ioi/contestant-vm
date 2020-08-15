@@ -19,7 +19,4 @@
 -A OUTPUT -p tcp -m tcp -m multiport -d ioibackup1.ioi2020.sg --dports 22,80,443 -j ACCEPT
 -A OUTPUT -p tcp -m tcp -m multiport -d ioibackup2.ioi2020.sg --dports 22,80,443 -j ACCEPT
 -A OUTPUT -p tcp -m tcp -m multiport -d pop.ioi2020.sg --dports 80,443 -j ACCEPT
--A OUTPUT -p tcp -m tcp -m multiport -d ioi2020.sg --dports 80,443 -j ACCEPT
--A OUTPUT -p tcp -m tcp -m multiport -d fonts.googleapis.com --dports 80,443 -j ACCEPT
--A OUTPUT -p tcp -m tcp -m multiport -d fonts.gstatic.com --dports 80,443 -j ACCEPT
 COMMIT
