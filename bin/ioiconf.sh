@@ -47,6 +47,7 @@ do_config()
 	USERID=$(cat /etc/tinc/vpn/tinc.conf | grep Name | cut -d\  -f3)
 	chfn -f "$USERID" ioi
 
+	systemctl enable tinc@vpn 2> /dev/null
 	systemctl restart tinc@vpn
 
 	return
@@ -66,6 +67,21 @@ case "$1" in
 			echo Not allowed to control firewall during lockdown mode
 		else
 			/opt/ioi/sbin/firewall.sh stop
+		fi
+		;;
+	vpnclear)
+		if [ -e /opt/ioi/run/lockdown ]; then
+			echo Not allowed to control firewall during lockdown mode
+		else
+			systemctl stop tinc@vpn
+			systemctl disable tinc@vpn 2> /dev/null
+			/opt/ioi/sbin/firewall.sh stop
+			rm /etc/tinc/vpn/ip.conf 2> /dev/null
+			rm /etc/tinc/vpn/mask.conf 2> /dev/null
+			rm /etc/tinc/vpn/hosts/* 2> /dev/null
+			rm /etc/tinc/vpn/rsa_key.* 2> /dev/null
+			rm /etc/tinc/vpn/tinc.conf 2> /dev/null
+			rm /opt/ioi/store/ssh/ioibackup* 2> /dev/null
 		fi
 		;;
 	vpnstart)
