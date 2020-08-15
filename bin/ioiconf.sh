@@ -41,7 +41,7 @@ do_config()
 	cp $WORKDIR/vpn/hosts/* /etc/tinc/vpn/hosts/
 	cp $WORKDIR/vpn/rsa_key.* /etc/tinc/vpn/
 	cp $WORKDIR/vpn/tinc.conf /etc/tinc/vpn
-	cp $WORKDIR/vpn/ioibackup* /opt/ioi/store/ssh/
+	cp $WORKDIR/vpn/ioibackup* /opt/ioi/config/ssh/
 
 	rm -r $WORKDIR
 	USERID=$(cat /etc/tinc/vpn/tinc.conf | grep Name | cut -d\  -f3)
@@ -81,7 +81,7 @@ case "$1" in
 			rm /etc/tinc/vpn/hosts/* 2> /dev/null
 			rm /etc/tinc/vpn/rsa_key.* 2> /dev/null
 			rm /etc/tinc/vpn/tinc.conf 2> /dev/null
-			rm /opt/ioi/store/ssh/ioibackup* 2> /dev/null
+			rm /opt/ioi/config/ssh/ioibackup* 2> /dev/null
 		fi
 		;;
 	vpnstart)
@@ -127,7 +127,7 @@ Your timezone will be set to $2 at your next login.
 *** organisers will be in Asia/Singapore timezone (GMT+08), unless it is   ***
 *** otherwise specified.                                                   ***
 EOM
-			echo "$2" > /opt/ioi/store/timezone
+			echo "$2" > /opt/ioi/config/timezone
 		else
 			cat - <<EOM
 Timezone $2 is not valid. Run tzselect to learn about the valid timezones

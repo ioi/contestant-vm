@@ -82,10 +82,11 @@ mkdir /opt/ioi
 cp -a bin sbin misc /opt/ioi/
 mkdir /opt/ioi/run
 mkdir /opt/ioi/store
+mkdir /opt/ioi/config
 mkdir /opt/ioi/store/log
 mkdir /opt/ioi/store/screenshots
 mkdir /opt/ioi/store/submissions
-mkdir /opt/ioi/store/ssh
+mkdir /opt/ioi/config/ssh
 
 wget -O /tmp/cpptools-linux.vsix "https://github.com/microsoft/vscode-cpptools/releases/download/0.29.0/cpptools-linux.vsix"
 wget -O /tmp/vscode-java-pack.vsix.gz "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/vscjava/vsextensions/vscode-java-pack/0.9.1/vspackage"
@@ -308,7 +309,7 @@ chmod 600 ~/.ssh/known_hosts
 /opt/ioi/sbin/contest.sh schedule
 
 # Add default timezone
-echo "Asia/Singapore" > /opt/ioi/store/timezone
+echo "Asia/Singapore" > /opt/ioi/config/timezone
 
 # Embed version number
 if [ -n "$VERSION" ] ; then
