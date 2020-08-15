@@ -301,7 +301,7 @@ EOM
 if [ ! -e ~/.ssh ]; then
 	mkdir ~/.ssh
 fi
-ssh-keyscan -H ioibackup1.ioi2020.sg >> ~/.ssh/known_hosts
+ssh-keyscan -H ioibackup1.ioi2020.sg >> ~/.ssh/known_hosts 2> /dev/null
 chmod 600 ~/.ssh/known_hosts
 
 # Add contest schedule
@@ -315,6 +315,6 @@ if [ -n "$VERSION" ] ; then
 	echo "$VERSION" > /opt/ioi/misc/VERSION
 fi
 
-echo *** DONE ***
+echo "### DONE ###"
 
 # vim: ts=4
