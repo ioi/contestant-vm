@@ -13,7 +13,12 @@ error() {
 }
 trap 'error ${LINENO}' ERR
 
-VERSION="beta2"
+VERSION="test$(date +%m%d)"
+ANSIBLE_PASSWD=""
+
+if [ -f "config.local.sh" ]; then
+	source config.local.sh
+fi
 
 # Fix up date/time
 
@@ -316,6 +321,15 @@ if [ -n "$VERSION" ] ; then
 	echo "$VERSION" > /opt/ioi/misc/VERSION
 fi
 
+if [ -n "ANSIBLE_PASSWD" ]; then
+	echo "Ansible user password set to: (from config)"
+else
+	ANSIBLE_PASSWD=$(openssl rand 8 | base32 | cut -c1-13)
+	echo "Ansible user password set to: $ANSIBLE_PASSWD"
+fi
+echo "ansible:$ANSIBLE_PASSWD" | chpasswd
+
 echo "### DONE ###"
+echo "- Remember to run cleanup script."
 
 # vim: ts=4
