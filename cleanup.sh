@@ -47,8 +47,8 @@ dd if=/dev/zero of=/swap.img bs=1048576 count=3908
 mkswap /swap.img
 
 # Clean out local config file
-if [ -f "local.config.sh" ]; then
-	rm local.config.sh
+if [ -f "config.local.sh" ]; then
+	rm config.local.sh
 fi
 
 PARTKEY=$(/opt/ioi/sbin/genkey.sh)
