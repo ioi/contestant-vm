@@ -22,15 +22,28 @@ case "$1" in
 			/opt/ioi/sbin/firewall.sh start
 		fi
 
-		wget -O /opt/ioi/misc/schedule.$$ "${SERVER}/schedule.txt" > /dev/null 2>&1
-		if [ $? -eq 0 -a -f /opt/ioi/misc/schedule.$$ ]; then
-			diff -q /opt/ioi/misc/schedule /opt/ioi/misc/schedule.$$ > /dev/null
+		# Check for new contest schedule
+		SCHEDFILE=$(mktemp)
+		wget -O $SCHEDFILE "${SERVER}/schedule.txt" > /dev/null 2>&1
+		if [ $? -eq 0 -a -f $SCHEDFILE ]; then
+			diff -q /opt/ioi/misc/schedule $SCHEDFILE > /dev/null
 			if [ $? -ne 0 ]; then
-				cp /opt/ioi/misc/schedule.$$ /opt/ioi/misc/schedule
+				cp $SCHEDFILE /opt/ioi/misc/schedule
 				/opt/ioi/sbin/contest.sh schedule
 			fi
-			rm /opt/ioi/misc/schedule.$$
 		fi
+		rm $SCHEDFILE
+
+		# Check for /etc/hosts file to update
+		HOSTSFILE=$(mktemp)
+		wget -O $HOSTSFILE "${SERVER}/hosts.txt" > /dev/null 2>&1
+		if [ $? -eq 0 -a -f $HOSTSFILE ]; then
+			diff -q /etc/hosts $HOSTSFILE > /dev/null
+			if [ $? -ne 0 ]; then
+				cp $HOSTSFILE /etc/hosts
+			fi
+		fi
+		rm $HOSTSFILE
 		;;
 	*)
 		echo Must specify start
