@@ -24,7 +24,12 @@ do_config()
 
 	WORKDIR=`mktemp -d`
 
-	tar jxf $CONF -C $WORKDIR || ( echo "Failed to unpack $CONF"; rm -rf $WORKDIR; exit 1 )
+	tar jxf $CONF -C $WORKDIR
+	if [ $? -ne 0 ]; then
+		echo "Failed to unpack $CONF"
+		rm -rf $WORKDIR
+		exit 1
+	fi
 
 	IP=$(cat $WORKDIR/vpn/ip.conf)
 	MASK=$(cat $WORKDIR/vpn/mask.conf)
