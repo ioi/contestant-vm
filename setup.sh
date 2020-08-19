@@ -62,7 +62,7 @@ tar zxf /tmp/eclipse.tar.gz -C /opt
 rm /tmp/eclipse.tar.gz
 /opt/eclipse/eclipse -nosplash \
         -application org.eclipse.equinox.p2.director \
-        -repository http://download.eclipse.org/releases/indigo/,http://download.eclipse.org/tools/cdt/releases/helios/ \
+        -repository http://download.eclipse.org/releases/latest/,http://download.eclipse.org/tools/cdt/releases/9.11/ \
         -destination /opt/eclipse \
         -installIU org.eclipse.cdt.feature.group
 wget -O /usr/share/pixmaps/eclipse.png "https://icon-icons.com/downloadimage.php?id=94656&root=1381/PNG/64/&file=eclipse_94656.png"
@@ -95,13 +95,19 @@ mkdir /opt/ioi/config/ssh
 
 wget -O /tmp/cpptools-linux.vsix "https://github.com/microsoft/vscode-cpptools/releases/download/0.29.0/cpptools-linux.vsix"
 wget -O /tmp/vscode-java-pack.vsix.gz "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/vscjava/vsextensions/vscode-java-pack/0.9.1/vspackage"
+wget -O /tmp/cpp-compile-run.vsix.gz "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/danielpinto8zz6/vsextensions/c-cpp-compile-run/1.0.11/vspackage"
+wget -O /tmp/vscodevim.vsix.gz "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/vscodevim/vsextensions/vim/1.16.0/vspackage"
 #wget -O /tmp/ms-python.vsix.gz "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/2020.7.96456/vspackage"
 gunzip /tmp/vscode-java-pack.vsix.gz
+gunzip /tmp/cpp-compile-run.vsix.gz
+gunzip /tmp/vscodevim.vsix.gz
 #gunzip /tmp/ms-python.vsix.gz
 mkdir /tmp/vscode
 mkdir /tmp/vscode-extensions
 code --install-extension /tmp/cpptools-linux.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
 code --install-extension /tmp/vscode-java-pack.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
+code --install-extension /tmp/cpp-compile-run.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
+code --install-extension /tmp/vscodevim.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
 tar jcf /opt/ioi/misc/vscode-extensions.tar.bz2 -C /tmp/vscode-extensions .
 rm -rf /tmp/vscode-extensions
 
