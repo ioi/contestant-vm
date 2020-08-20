@@ -87,6 +87,7 @@ case "$1" in
 			rm /etc/tinc/vpn/rsa_key.* 2> /dev/null
 			rm /etc/tinc/vpn/tinc.conf 2> /dev/null
 			rm /opt/ioi/config/ssh/ioibackup* 2> /dev/null
+			chfn -f "" ioi
 		fi
 		;;
 	vpnstart)
