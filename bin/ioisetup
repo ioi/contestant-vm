@@ -51,8 +51,17 @@ do_setup()
 	RC=$?
 	if [ $RC -eq 8 ]; then
 		read -d '' -r MSG<<-EOM
-			Contest Server returns an error.\n
+			IOI 2020 configuration server returns an error.\n
 			This is most likely due to an error in your credentials. Please try again.
+			EOM
+		zenity "$ZENTITLE" $ZENARG \
+			--error \
+			--text "$MSG"
+		return 2
+	elif [ $RC -ne 0 ]; then
+		read -d '' -r MSG<<-EOM
+			Failed to communicate with the IOI 2020 configuration server.\n
+			Please try again. If this persists, please contact the HTC.
 			EOM
 		zenity "$ZENTITLE" $ZENARG \
 			--error \
