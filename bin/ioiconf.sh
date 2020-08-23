@@ -163,6 +163,22 @@ non-hidden files less than 1MB in size.
 EOM
 		fi
 		;;
+	setscreenlock)
+		if [ "$2" = "on" ]; then
+			touch /opt/ioi/store/screenlock
+			echo Screensaver lock enabled
+		elif [ "$2" = "off" ]; then
+			if [ -f /opt/ioi/store/screenlock ]; then
+				rm /opt/ioi/store/screenlock
+			fi
+			echo Screensaver lock disabled
+		else
+			cat - <<EOM
+Invalid argument to setscreenlock. Specify "on" to enable screensaver lock,
+or "off" to disable screensaver lock.
+EOM
+		fi
+		;;
 	*)
 		echo Not allowed
 		;;
