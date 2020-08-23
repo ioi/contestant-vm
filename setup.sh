@@ -111,6 +111,12 @@ code --install-extension /tmp/vscodevim.vsix --extensions-dir /tmp/vscode-extens
 tar jcf /opt/ioi/misc/vscode-extensions.tar.bz2 -C /tmp/vscode-extensions .
 rm -rf /tmp/vscode-extensions
 
+# Add default timezone
+echo "Asia/Singapore" > /opt/ioi/config/timezone
+
+# Default to enable screensaver lock
+touch /opt/ioi/config/screenlock
+
 # Create IOI account
 /opt/ioi/sbin/mkioiuser.sh
 
@@ -318,12 +324,6 @@ chmod 600 ~/.ssh/known_hosts
 
 # Add contest schedule
 /opt/ioi/sbin/contest.sh schedule
-
-# Add default timezone
-echo "Asia/Singapore" > /opt/ioi/config/timezone
-
-# Default to enable screensaver lock
-touch /opt/ioi/config/screenlock
 
 # Embed version number
 if [ -n "$VERSION" ] ; then
