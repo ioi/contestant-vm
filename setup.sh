@@ -322,6 +322,9 @@ chmod 600 ~/.ssh/known_hosts
 # Add default timezone
 echo "Asia/Singapore" > /opt/ioi/config/timezone
 
+# Default to enable screensaver lock
+touch /opt/ioi/config/screenlock
+
 # Embed version number
 if [ -n "$VERSION" ] ; then
 	echo "$VERSION" > /opt/ioi/misc/VERSION

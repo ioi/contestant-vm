@@ -78,7 +78,7 @@ monitor()
 	fi
 
 	# Check if auto backups are requested
-	if [ -f /opt/ioi/store/autobackup ]; then
+	if [ -f /opt/ioi/config/autobackup ]; then
 		# This script runs every minute, but we want to only do backups every 5 mins
 		if [ $(( $(date +%s) / 60 % 5)) -eq 0 ]; then
 			# Insert a random delay up to 30 seconds so backups don't all start at the same time

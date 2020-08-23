@@ -11,7 +11,7 @@ sudo -Hu ioi xvfb-run gsettings set org.gnome.shell enabled-extensions "['add-us
 sudo -Hu ioi xvfb-run gsettings set org.gnome.shell disable-user-extensions false
 sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.session idle-delay 900
 sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.screensaver lock-delay 30
-if [ -f /opt/ioi/store/screenlock ]; then
+if [ -f /opt/ioi/config/screenlock ]; then
 	sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.screensaver lock-enabled true
 else
 	sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.screensaver lock-enabled false

@@ -147,11 +147,11 @@ EOM
 		;;
 	setautobackup)
 		if [ "$2" = "on" ]; then
-			touch /opt/ioi/store/autobackup
+			touch /opt/ioi/config/autobackup
 			echo Auto backup enabled
 		elif [ "$2" = "off" ]; then
-			if [ -f /opt/ioi/store/autobackup ]; then
-				rm /opt/ioi/store/autobackup
+			if [ -f /opt/ioi/config/autobackup ]; then
+				rm /opt/ioi/config/autobackup
 			fi
 			echo Auto backup disabled
 		else
@@ -165,11 +165,11 @@ EOM
 		;;
 	setscreenlock)
 		if [ "$2" = "on" ]; then
-			touch /opt/ioi/store/screenlock
+			touch /opt/ioi/config/screenlock
 			echo Screensaver lock enabled
 		elif [ "$2" = "off" ]; then
-			if [ -f /opt/ioi/store/screenlock ]; then
-				rm /opt/ioi/store/screenlock
+			if [ -f /opt/ioi/config/screenlock ]; then
+				rm /opt/ioi/config/screenlock
 			fi
 			echo Screensaver lock disabled
 		else
