@@ -54,6 +54,7 @@ do_config()
 
 	systemctl enable tinc@vpn 2> /dev/null
 	systemctl restart tinc@vpn
+	/opt/ioi/sbin/firewall.sh start
 
 	return
 }
@@ -92,9 +93,11 @@ case "$1" in
 		;;
 	vpnstart)
 		systemctl start tinc@vpn
+		/opt/ioi/sbin/firewall.sh start
 		;;
 	vpnrestart)
 		systemctl restart tinc@vpn
+		/opt/ioi/sbin/firewall.sh start
 		;;
 	vpnstatus)
 		systemctl status tinc@vpn
