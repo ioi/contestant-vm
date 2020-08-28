@@ -311,8 +311,8 @@ chmod 755 /etc/rc.local
 cat - <<EOM >> /etc/hosts
 122.248.231.250 pop1.ioi2020.sg
 18.140.222.106 pop2.ioi2020.sg
-13.212.22.12 pop3.ioi2020.sg
-13.212.15.90 pop4.ioi2020.sg
+54.151.202.163 pop3.ioi2020.sg
+13.251.151.46 pop4.ioi2020.sg
 EOM
 
 # Populate root's known_hosts
