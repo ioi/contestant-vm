@@ -30,23 +30,10 @@
        url('fonts/fira-sans-v10-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
        url('fonts/fira-sans-v10-latin-regular.svg#FiraSans') format('svg'); /* Legacy iOS */
 }
-body{font:normal 93.75%/1.4 "Fira Sans",sans-serif;-webkit-text-size-adjust:100%;}
+body{font:normal 100%/1.4 "Fira Sans",sans-serif;-webkit-text-size-adjust:100%;}
 h1,h2,h3,h4,h5,h6,.ll{font-family:'Share';font-weight:bold;padding:0;line-height:1.2;clear:left;}
-.ml{font-size:150%; text-align: center;}
-.ll{font-size:150%; text-align: center;}
-.container{display:flex;flex-wrap:wrap;}
-.container>div{margin:1em 2em;}
-.button{
-  text-decoration: none;
-  background-color: #EEEEEE;
-  padding: 0.5em 0;
-  border-top: 1px solid #CCCCCC;
-  border-right: 1px solid #333333;
-  border-bottom: 1px solid #333333;
-  border-left: 1px solid #CCCCCC;
-  width: 100%;
-  display: block;
-}
+h3{font-size:1.2em;}
+code{font-size:16px;background-color:#eee;}
 </style>
 </head>
 <body>
@@ -109,7 +96,12 @@ automatically after login, and unlocked at Contest or Practice start.</p>
 <code>ioi</code> password to the default. I.e., if you have changed the
 <code>ioi</code> account password, your new password is still effective.</p>
 
-<h2>Home Directory Backup</h2>
+<h2>Local Configuration</h2>
+
+<p>The following settings can be configured in the VM. These settings will persist through
+account re-provisioning.</p>
+
+<h3>Home Directory Backup</h3>
 
 <p>The Contestant VM provides a backup/replication mechanism that uses rsync to
 replicate the home directory to a backup server in the IOI 2020 Online
@@ -133,7 +125,14 @@ includes non-hidden files up to a maximum size of 1 MB.</p>
 <p>To restore or retrieve files from remote, run <code>ioibackup -r</code>. The files will
 be restored in <code>/tmp/restore</code>.</p>
 
-<h2>Timezone</h2>
+<h3>Automatic Screen Lock</h3>
+
+<p>Automatic screen lock is enabled by default, with a 30 second delay after 15 minutes of
+idle time. You can disable automatic screen lock by running
+<code>ioiconf setscreenlock off</code>. Run <code>ioiconf setscreenlock on</code> to
+renable automatic screen lock.</p>
+
+<h3>Timezone</h3>
 
 <p>The Contestant VM is configured to show time in the Asia/Singapore timezone.
 All dates and times communicated by the IOI 2020 organisers will be in
@@ -147,7 +146,7 @@ the <code>ioi</code> account.</p>
 
 <p>E.g.: <code>ioiconf settz UTC</code> to use GMT time.</p>
 
-<h2>VPN Protocol Mode</h2>
+<h3>VPN Protocol Mode</h3>
 
 <p>By default, the VPN is configured to use TCP on port 655 only. The VPN
 software, Tinc, can also use UDP on port 655 for data packets, in addition to
@@ -160,6 +159,9 @@ vpnrestart</code> (or restart the Contestant VM).</p>
 TCP-only. To revert to the default TCP-only setting, run <code>ioiconf
 setvpnproto tcp</code>, then <code>ioiconf vpnrestart</code> (or restart the
 Contestant VM).</p>
+
+<p>Note that the VPN protocol mode will return to default if the VPN is re-setup
+(i.e. by re-running <code>ioisetup</code>).</p>
 
 </body>
 </html>
