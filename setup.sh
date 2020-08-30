@@ -242,6 +242,11 @@ systemctl restart systemd-timesyncd
 resolvectl dns vpn 172.31.0.2
 resolvectl domain vpn ioi2020.sg
 systemd-resolve --flush-cache
+
+# Register something on our HTTP server to log connection
+INSTANCEID=$(cat /opt/ioi/run/instanceid.txt)
+wget -qO- https://test.ioi2020.sg/ping/$NODE-$NAME &> /dev/null
+wget -qO- https://pop.ioi2020.sg/ping/$NODE-$NAME &> /dev/null
 EOM
 chmod 755 /etc/tinc/vpn/host-up
 
