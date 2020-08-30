@@ -17,6 +17,11 @@ check_user()
 
 case "$1" in
 	start)
+		# Generate an instance ID to uniquely id this VM
+		if [ ! -f /opt/ioi/run/instanceid.txt ]; then
+			openssl rand 10 | base32 > /opt/ioi/run/instanceid.txt
+		fi
+
 		# If VPN is configured, then turn on firewall
 		if check_user; then
 			/opt/ioi/sbin/firewall.sh start
