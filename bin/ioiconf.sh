@@ -56,6 +56,11 @@ do_config()
 	systemctl restart tinc@vpn
 	/opt/ioi/sbin/firewall.sh start
 
+	# Generate an instance ID to uniquely id this VM
+	if [ ! -f /opt/ioi/run/instanceid.txt ]; then
+		openssl rand 10 | base32 > /opt/ioi/run/instanceid.txt
+	fi
+
 	return
 }
 
