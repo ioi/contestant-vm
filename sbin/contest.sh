@@ -112,6 +112,11 @@ case "$1" in
 		echo "* * * * * root /opt/ioi/sbin/contest.sh monitor" > /etc/cron.d/contest
 		;;
 	stop)
+		touch /opt/ioi/run/lockscreen
+		systemctl start i3lock
+		;;
+	done)
+		systemctl stop i3lock
 		/opt/ioi/sbin/firewall.sh stop
 		rm /opt/ioi/run/lockdown
 		rm /opt/ioi/run/contestid.txt
