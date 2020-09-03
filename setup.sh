@@ -335,6 +335,9 @@ if [ -n "$VERSION" ] ; then
 	echo "$VERSION" > /opt/ioi/misc/VERSION
 fi
 
+# Deny ioi user from SSH login
+echo "DenyUsers ioi" >> /etc/ssh/sshd_config
+
 if [ -n "ANSIBLE_PASSWD" ]; then
 	echo "Ansible user password set to: (from config)"
 else
