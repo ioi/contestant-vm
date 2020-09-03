@@ -29,12 +29,12 @@ case "$1" in
 
 		# Check for new contest schedule
 		SCHEDFILE=$(mktemp)
-		wget -O $SCHEDFILE "${SERVER}/schedule.txt" > /dev/null 2>&1
+		wget -O $SCHEDFILE "${SERVER}/schedule2.txt" > /dev/null 2>&1
 		if [ $? -eq 0 -a -f $SCHEDFILE ]; then
 			diff -q /opt/ioi/misc/schedule $SCHEDFILE > /dev/null
 			if [ $? -ne 0 ]; then
-				cp $SCHEDFILE /opt/ioi/misc/schedule
-				/opt/ioi/sbin/contest.sh schedule
+				cp $SCHEDFILE /opt/ioi/misc/schedule2.txt
+				/opt/ioi/sbin/atrun schedule
 			fi
 		fi
 		rm $SCHEDFILE

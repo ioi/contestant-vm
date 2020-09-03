@@ -1,0 +1,12 @@
+2020-09-13 18:45 2020-09-14 00:00 5 /opt/ioi/sbin/contest.sh prep 0
+2020-09-13 19:00 - - 0 /opt/ioi/sbin/contest.sh start 0
+2020-09-13 21:00 - - 0 /opt/ioi/sbin/contest.sh stop 0
+2020-09-13 21:15 - - 0 /opt/ioi/sbin/contest.sh done 0
+2020-09-16 18:45 2020-09-17 00:15 9 /opt/ioi/sbin/contest.sh prep 1
+2020-09-16 19:00 - - 0 /opt/ioi/sbin/contest.sh start 1
+2020-09-17 00:00 - - 0 /opt/ioi/sbin/contest.sh stop 1
+2020-09-17 00:15 - - 0 /opt/ioi/sbin/contest.sh done 1
+2020-09-19 18:45 2020-09-20 00:15 13 /opt/ioi/sbin/contest.sh prep 2
+2020-09-19 19:00 - - 0 /opt/ioi/sbin/contest.sh start 2
+2020-09-20 00:00 - - 0 /opt/ioi/sbin/contest.sh stop 2
+2020-09-20 00:15 - - 0 /opt/ioi/sbin/contest.sh done 2
