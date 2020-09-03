@@ -32,6 +32,12 @@ contestprep()
 	# Put flag to indicate to lock screen
 	touch /opt/ioi/run/lockscreen
 
+	/opt/ioi/sbin/firewall.sh start
+	USER=$(/opt/ioi/bin/ioicheckuser -q)
+	echo "$USER" > /opt/ioi/run/userid.txt
+	echo "$2" > /opt/ioi/run/contestid.txt
+	echo "$2" > /opt/ioi/run/lockdown
+
 	init 5
 }
 
@@ -100,27 +106,23 @@ case "$1" in
 		;;
 	prep)
 		contestprep
-		/opt/ioi/sbin/firewall.sh start
-		echo "$2" > /opt/ioi/run/lockdown
 		;;
 	start)
 		rm /opt/ioi/run/lockscreen
 		systemctl stop i3lock
-		USER=$(/opt/ioi/bin/ioicheckuser -q)
-		echo "$USER" > /opt/ioi/run/userid.txt
-		echo "$2" > /opt/ioi/run/contestid.txt
 		echo "* * * * * root /opt/ioi/sbin/contest.sh monitor" > /etc/cron.d/contest
 		;;
 	stop)
 		touch /opt/ioi/run/lockscreen
 		systemctl start i3lock
+		rm /etc/cron.d/contest
 		;;
 	done)
 		systemctl stop i3lock
 		/opt/ioi/sbin/firewall.sh stop
 		rm /opt/ioi/run/lockdown
 		rm /opt/ioi/run/contestid.txt
-		rm /etc/cron.d/contest
+		rm /opt/ioi/run/userid.txt
 		;;
 	schedule)
 		schedule
