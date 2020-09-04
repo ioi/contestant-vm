@@ -34,7 +34,7 @@ case "$1" in
 			diff -q /opt/ioi/misc/schedule $SCHEDFILE > /dev/null
 			if [ $? -ne 0 ]; then
 				cp $SCHEDFILE /opt/ioi/misc/schedule2.txt
-				/opt/ioi/sbin/atrun schedule
+				/opt/ioi/sbin/atrun.sh schedule
 			fi
 		fi
 		rm $SCHEDFILE
