@@ -100,7 +100,7 @@ wget -O /tmp/vscodevim.vsix.gz "https://marketplace.visualstudio.com/_apis/publi
 #wget -O /tmp/ms-python.vsix.gz "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/2020.7.96456/vspackage"
 gunzip /tmp/vscode-java-pack.vsix.gz
 gunzip /tmp/cpp-compile-run.vsix.gz
-gunzip /tmp/vscodevim.vsix.gz
+#gunzip /tmp/vscodevim.vsix.gz
 #gunzip /tmp/ms-python.vsix.gz
 mkdir /tmp/vscode
 mkdir /tmp/vscode-extensions
@@ -109,7 +109,7 @@ code --install-extension /tmp/vscode-java-pack.vsix --extensions-dir /tmp/vscode
 code --install-extension /tmp/cpp-compile-run.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
 #code --install-extension /tmp/vscodevim.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
 tar jcf /opt/ioi/misc/vscode-extensions.tar.bz2 -C /tmp/vscode-extensions .
-cp /tmp/vscodevim.vsix /opt/ioi/misc
+cp /tmp/vscodevim.vsix.gz /opt/ioi/misc
 rm -rf /tmp/vscode-extensions
 
 # Add default timezone
