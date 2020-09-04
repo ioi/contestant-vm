@@ -107,8 +107,9 @@ mkdir /tmp/vscode-extensions
 code --install-extension /tmp/cpptools-linux.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
 code --install-extension /tmp/vscode-java-pack.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
 code --install-extension /tmp/cpp-compile-run.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
-code --install-extension /tmp/vscodevim.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
+#code --install-extension /tmp/vscodevim.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
 tar jcf /opt/ioi/misc/vscode-extensions.tar.bz2 -C /tmp/vscode-extensions .
+cp /tmp/vscodevim.vsix /opt/ioi/misc
 rm -rf /tmp/vscode-extensions
 
 # Add default timezone
