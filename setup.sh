@@ -151,9 +151,16 @@ EOM
 
 chmod 644 /var/lib/AccountsService/users/ansible
 
-# ADD QUIET SPLASH
+# GRUB config: quiet, and password for edit
 
 sed -i '/^GRUB_CMDLINE_LINUX_DEFAULT/ s/"$/ quiet splash"/' /etc/default/grub
+
+sed -i '/\$(echo "\$os" | grub_quote)'\'' \${CLASS}/ s/'\'' \$/'\'' --unrestricted \$/' /etc/grub.d/10_linux
+cat - <<EOM > /etc/grub.d/40_cusom
+set superusers="root"
+password_pbkdf2 root $GRUB_PASSWD
+EOM
+
 update-grub2
 
 # Setup SSH authorized keys and passwordless sudo for ansible

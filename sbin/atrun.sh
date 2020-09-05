@@ -14,6 +14,20 @@ schedule()
 		echo DEBUG: No more jobs
 		return 1
 	fi
+
+	# Get details of job to schedule
+        JOB=$(cat $SCHEDULE | head -$JOBID | tail -1)
+	ATTIME=$(echo "$JOB" | awk '{print($2, $1)}')
+	NEXTTIME=$(echo "$JOB" | awk '{print($1, $2)}')
+	CMD=$(echo "$JOB" | cut -d\  -f6-)
+
+	# Check if the job is over
+	if [ "$TIMENOW" \> "$NEXTTIME" -o "$TIMENOW" = "$NEXTTIME" ]; then
+		logger -p local0.info "ATRUN: Scheduling job $JOBID at $NEXTTIME is in the past
+		execute $JOBID
+		return
+	fi
+
 	# Remove existing jobs that were created by this script
 	for i in `atq | cut -f1`; do
 		if at -c $i | grep -q '# AUTO-CONTEST-SCHEDULE'; then
@@ -21,10 +35,6 @@ schedule()
 		fi
 	done
 
-        JOB=$(cat $SCHEDULE | head -$JOBID | tail -1)
-	ATTIME=$(echo "$JOB" | awk '{print($2, $1)}')
-	NEXTTIME=$(echo "$JOB" | awk '{print($1, $2)}')
-	CMD=$(echo "$JOB" | cut -d\  -f6-)
 	cat - <<EOM | at "$ATTIME" 2> /dev/null
 # AUTO-CONTEST-SCHEDULE
 /opt/ioi/sbin/atrun.sh exec $JOBID
@@ -34,6 +44,26 @@ EOM
 	logger -p local0.info "ATRUN: Scheduling next job $JOBID at $NEXTTIME"
 }
 
+execute()
+{
+	JOBID=$1
+	JOB=$(cat $SCHEDULE | head -$JOBID | tail -1)
+	ENDTIME=$(echo "$JOB" | cut -d\  -f3,4)
+	if ! echo "$ENDTIME" | grep -q '[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}\s[0-9]\{2\}:[0-9]\{2\}'; then
+		ENDTIME="9999-12-31 23:59"
+	fi
+	if [ "$TIMENOW" \> "$ENDTIME" ]; then
+		NEWJOBID=$(echo "$JOB" | cut -d\  -f5)
+		logger -p local0.info "ATRUN: Job $JOBID is over, jumping to $NEWJOBID"
+		schedule $NEWJOBID
+	else
+		CMD=$(echo "$JOB" | cut -d\  -f6-)
+		logger -p local0.info "ATRUN: Run job $JOBID, $CMD"
+		$CMD
+		NEWJOBID=$((JOBID+1))
+		schedule $NEWJOBID
+	fi
+}
 
 case "$1" in
 	schedule)
@@ -43,23 +73,7 @@ case "$1" in
 	next)
 		;;
 	exec)
-		JOBID=$2
-		JOB=$(cat $SCHEDULE | head -$JOBID | tail -1)
-		ENDTIME=$(echo "$JOB" | cut -d\  -f3,4)
-		if ! echo "$ENDTIME" | grep -q '[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}\s[0-9]\{2\}:[0-9]\{2\}'; then
-			ENDTIME="9999-12-31 23:59"
-		fi
-		if [ "$TIMENOW" \> "$ENDTIME" ]; then
-			NEWJOBID=$(echo "$JOB" | cut -d\  -f5)
-			logger -p local0.info "ATRUN: Job $JOBID is over, jumping to $NEWJOBID"
-			schedule $NEWJOBID
-		else
-			CMD=$(echo "$JOB" | cut -d\  -f6-)
-			logger -p local0.info "ATRUN: Run $JOBID, $CMD"
-			$CMD
-			NEWJOBID=$((JOBID+1))
-			schedule $NEWJOBID
-		fi
+		execute $2
 		;;
 	*)
 esac
