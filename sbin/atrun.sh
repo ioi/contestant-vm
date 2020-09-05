@@ -23,7 +23,7 @@ schedule()
 
 	# Check if the job is over
 	if [ "$TIMENOW" \> "$NEXTTIME" -o "$TIMENOW" = "$NEXTTIME" ]; then
-		logger -p local0.info "ATRUN: Scheduling job $JOBID at $NEXTTIME is in the past
+		logger -p local0.info "ATRUN: Scheduling job $JOBID at $NEXTTIME is in the past"
 		execute $JOBID
 		return
 	fi
