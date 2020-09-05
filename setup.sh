@@ -156,7 +156,7 @@ chmod 644 /var/lib/AccountsService/users/ansible
 sed -i '/^GRUB_CMDLINE_LINUX_DEFAULT/ s/"$/ quiet splash"/' /etc/default/grub
 
 sed -i '/\$(echo "\$os" | grub_quote)'\'' \${CLASS}/ s/'\'' \$/'\'' --unrestricted \$/' /etc/grub.d/10_linux
-cat - <<EOM > /etc/grub.d/40_cusom
+cat - <<EOM > /etc/grub.d/40_custom
 set superusers="root"
 password_pbkdf2 root $GRUB_PASSWD
 EOM
