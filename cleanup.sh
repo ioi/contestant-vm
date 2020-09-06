@@ -54,4 +54,7 @@ fi
 PARTKEY=$(/opt/ioi/sbin/genkey.sh)
 echo $PARTKEY
 
+rm config.local.sh
+echo REMEMBER TO REMOVE SETUP DIRECTORY
+
 # vim: ts=4
