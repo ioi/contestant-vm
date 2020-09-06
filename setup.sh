@@ -284,6 +284,12 @@ Environment=DISPLAY=':0.0'
 ExecStart=/opt/ioi/sbin/i3lock.sh
 EOM
 
+# Install zabbix-agent
+wget -O /tmp/zabbix-release_5.0-1+focal_all.deb https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-1+focal_all.deb
+dpkg -i /tmp/zabbix-release_5.0-1+focal_all.deb
+apt -y update
+apt -y install zabbix-agent
+
 # Remove/clean up unneeded snaps
 
 snap list --all | awk '/disabled/{print $1, $3}' | while read snapname revision; do

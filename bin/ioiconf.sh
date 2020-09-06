@@ -52,6 +52,8 @@ do_config()
 	USERID=$(cat /etc/tinc/vpn/tinc.conf | grep Name | cut -d\  -f3)
 	chfn -f "$USERID" ioi
 
+	hostnamectl set-hostname "$USERID"
+
 	systemctl enable tinc@vpn 2> /dev/null
 	systemctl restart tinc@vpn
 	/opt/ioi/sbin/firewall.sh start
