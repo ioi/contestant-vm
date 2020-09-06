@@ -31,7 +31,7 @@ case "$1" in
 		SCHEDFILE=$(mktemp)
 		wget -O $SCHEDFILE "${SERVER}/schedule2.txt" > /dev/null 2>&1
 		if [ $? -eq 0 -a -f $SCHEDFILE ]; then
-			diff -q /opt/ioi/misc/schedule $SCHEDFILE > /dev/null
+			diff -q /opt/ioi/misc/schedule2.txt $SCHEDFILE > /dev/null
 			if [ $? -ne 0 ]; then
 				cp $SCHEDFILE /opt/ioi/misc/schedule2.txt
 				/opt/ioi/sbin/atrun.sh schedule
