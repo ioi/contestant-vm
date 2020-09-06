@@ -121,7 +121,6 @@ case "$1" in
 		systemctl stop i3lock
 		/opt/ioi/sbin/firewall.sh stop
 		rm /opt/ioi/run/lockscreen
-		systemctl start i3lock
 		rm /opt/ioi/run/lockdown
 		rm /opt/ioi/run/contestid.txt
 		rm /opt/ioi/run/userid.txt
