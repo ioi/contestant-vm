@@ -284,6 +284,13 @@ Environment=DISPLAY=':0.0'
 ExecStart=/opt/ioi/sbin/i3lock.sh
 EOM
 
+# Disable upates
+
+cat - <<EOM > /etc/apt/apt.conf.d/20auto-upgrades
+APT::Periodic::Update-Package-Lists "0";
+APT::Periodic::Unattended-Upgrade "0";
+EOM
+
 # Install zabbix-agent
 wget -O /tmp/zabbix-release_5.0-1+focal_all.deb https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-1+focal_all.deb
 dpkg -i /tmp/zabbix-release_5.0-1+focal_all.deb
