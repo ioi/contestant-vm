@@ -26,7 +26,14 @@ contestprep()
 	chown $UID.$UID /opt/ioi/store/submissions
 
 	/opt/ioi/sbin/mkioiuser.sh
-	echo "ioi:$EPASSWD" | chpasswd -e
+
+	# Detect cases where the crypt password is invalid, and if so set default passwd
+	if [ ${#EPASSWD} -gt 5 ]; then
+		echo "ioi:$EPASSWD" | chpasswd -e
+	else
+		echo "ioi:ioi" | chpasswd
+	fi
+
 	chfn -f "$FULLNAME" ioi
 
 	# Put flag to indicate to lock screen
