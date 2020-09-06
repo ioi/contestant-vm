@@ -96,7 +96,7 @@ monitor()
 		if [ $(( $(date +%s) / 60 % 5)) -eq 0 ]; then
 			# Insert a random delay up to 30 seconds so backups don't all start at the same time
 			sleep $(seq 30 | shuf | head -1)
-			/opt/ioi/bin/ioibackup.sh > /dev/null
+			/opt/ioi/bin/ioibackup.sh > /dev/null &
 		fi
 	fi
 }
