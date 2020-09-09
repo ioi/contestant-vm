@@ -54,6 +54,12 @@ do_config()
 
 	hostnamectl set-hostname "$USERID"
 
+	# Remove Zabbix configuration
+	system stop zabbix-agent
+	rm /etc/zabbix/zabbix_agentd.conf 2> /dev/null
+	rm /etc/zabbix/psk-autoregistration.txt 2> /dev/null
+
+	# Restart firewall and VPN
 	systemctl enable tinc@vpn 2> /dev/null
 	systemctl restart tinc@vpn
 	/opt/ioi/sbin/firewall.sh start
@@ -96,6 +102,9 @@ case "$1" in
 			rm /etc/tinc/vpn/tinc.conf 2> /dev/null
 			rm /opt/ioi/config/ssh/ioibackup* 2> /dev/null
 			chfn -f "" ioi
+			system stop zabbix-agent
+			rm /etc/zabbix/zabbix_agentd.conf 2> /dev/null
+			rm /etc/zabbix/psk-autoregistration.txt 2> /dev/null
 		fi
 		;;
 	vpnstart)
