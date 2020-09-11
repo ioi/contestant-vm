@@ -279,7 +279,7 @@ Description=Lock screen
 User=ansible
 Type=simple
 Restart=always
-RestartSec60
+RestartSec=60
 Environment=DISPLAY=':0.0'
 ExecStart=/opt/ioi/sbin/i3lock.sh
 EOM
