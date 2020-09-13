@@ -52,10 +52,12 @@ do_config()
 	USERID=$(cat /etc/tinc/vpn/tinc.conf | grep Name | cut -d\  -f3)
 	chfn -f "$USERID" ioi
 
-	hostnamectl set-hostname "$USERID"
+	#hostnamectl set-hostname "$USERID"
 
 	# Stop Zabbix agent
 	systemctl stop zabbix-agent
+	systemctl disable zabbix-agent 2> /dev/null
+	rm /etc/zabbix/* 2> /dev/null
 
 	# Restart firewall and VPN
 	systemctl enable tinc@vpn 2> /dev/null
@@ -95,6 +97,9 @@ case "$1" in
 		else
 			systemctl stop tinc@vpn
 			systemctl disable tinc@vpn 2> /dev/null
+			systemctl stop zabbix-agent
+			systemctl disable zabbix-agent 2> /dev/null
+			rm /etc/zabbix/* 2> /dev/null
 			/opt/ioi/sbin/firewall.sh stop
 			rm /etc/tinc/vpn/ip.conf 2> /dev/null
 			rm /etc/tinc/vpn/mask.conf 2> /dev/null
@@ -103,7 +108,7 @@ case "$1" in
 			rm /etc/tinc/vpn/tinc.conf 2> /dev/null
 			rm /opt/ioi/config/ssh/ioibackup* 2> /dev/null
 			chfn -f "" ioi
-			hostnamectl set-hostname "ioi"
+			#hostnamectl set-hostname "ioi"
 			system stop zabbix-agent
 		fi
 		;;
