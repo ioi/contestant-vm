@@ -297,7 +297,7 @@ dpkg -i /tmp/zabbix-release_5.0-1+focal_all.deb
 apt -y update
 apt -y install zabbix-agent
 # Use a different config
-sed -i '/^Environment=/ s/zabbix_agentd.conf/zabbix_agentd_ioi.conf/' /etc/systemd/system/multi-user.target.wants/zabbix-agent.service
+sed -i '/^Environment=/ s/zabbix_agentd.conf/zabbix_agentd_ioi.conf/' /lib/systemd/system/zabbix-agent.service
 
 # Remove/clean up unneeded snaps
 
