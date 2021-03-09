@@ -270,6 +270,9 @@ systemctl enable tinc@vpn
 
 systemctl disable multipathd
 
+# Don't stsart atd service 
+systemctl disable atd
+
 # Configure systemd for i3lock
 cat - <<EOM > /etc/systemd/system/i3lock.service
 [Unit]
