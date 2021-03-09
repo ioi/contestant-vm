@@ -1,4 +1,4 @@
-# ioi2020-image
+# ioi2021-image
 
 ## Install/Setup
 
@@ -9,11 +9,11 @@ Install Ubuntu 20.04 server. Defaults work fine. Create a user account called an
 When Ubuntu install completes, clone or copy this repo into a local directory. E.g.:
 
 ```
-git clone https://github.com/lzs/ioi2020-image.git
-cd ioi2020-image
+git clone https://github.com/lzs/ioi2021-image.git
+cd ioi2021-image
 ./setup.sh
 cd ..
-rm -rf ioi2020-image
+rm -rf ioi2021-image
 ```
 
 
