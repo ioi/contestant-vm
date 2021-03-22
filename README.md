@@ -1,4 +1,4 @@
-# ioi2021-image (for garytang only)
+# ioi2021-image
 
 ## Install/Setup
 
@@ -9,7 +9,7 @@ Install Ubuntu 20.04 server. Defaults work fine (but please uncheck the "Set up 
 When Ubuntu install completes, clone or copy this repo into a local directory. E.g.:
 
 ```
-git clone https://github.com/gary-tang/ioi2021-image.git
+git clone https://github.com/lzs/ioi2021-image.git
 sudo -s
 cd ioi2021-image
 ./setup.sh
