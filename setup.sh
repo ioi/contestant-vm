@@ -56,15 +56,10 @@ snap install --classic sublime-text
 # Fix Atom application menu bug
 sudo sed -i 's/Exec=env BAMF_DESKTOP_FILE_HINT=\/var\/lib\/snapd\/desktop\/applications\/atom_atom.desktop \/snap\/bin\/atom ATOM_DISABLE_SHELLING_OUT_FOR_ENVIRONMENT=false \/usr\/bin\/atom %F/Exec=env BAMF_DESKTOP_FILE_HINT=\/var\/lib\/snapd\/desktop\/applications\/atom_atom.desktop ATOM_DISABLE_SHELLING_OUT_FOR_ENVIRONMENT=false \/snap\/bin\/atom %F/' /var/lib/snapd/desktop/applications/atom_atom.desktop
 
-# Install Eclipse (still WIP)
+# Install Eclipse
 wget -O /tmp/eclipse.tar.gz "http://mirrors.neusoft.edu.cn/eclipse/technology/epp/downloads/release/2020-12/R/eclipse-cpp-2020-12-R-linux-gtk-x86_64.tar.gz"
 tar zxf /tmp/eclipse.tar.gz -C /opt
 rm /tmp/eclipse.tar.gz
-#/opt/eclipse/eclipse -nosplash \
-#        -application org.eclipse.equinox.p2.director \
-#        -repository http://download.eclipse.org/releases/latest/,http://download.eclipse.org/tools/cdt/releases/9.11/ \
-#        -destination /opt/eclipse \
-#        -installIU org.eclipse.cdt.feature.group
 wget -O /usr/share/pixmaps/eclipse.png "https://icon-icons.com/downloadimage.php?id=94656&root=1381/PNG/64/&file=eclipse_94656.png"
 cat - <<EOM > /usr/share/applications/eclipse.desktop
 [Desktop Entry]
@@ -95,16 +90,13 @@ mkdir /opt/ioi/config/ssh
 
 ## Lines with 2 hashtags are permanently commented out!
 wget -O /tmp/cpptools-linux.vsix "http://mirror.nus.edu.sg/ioi2021/vscode-items/cpptools-linux.vsix"
-#wget -O /tmp/vscode-java-pack.vsix "http://mirror.nus.edu.sg/ioi2021/vscode-items/vscjava.vscode-java-pack-0.9.1.vsix"
 wget -O /tmp/cpp-compile-run.vsix "http://mirror.nus.edu.sg/ioi2021/vscode-items/danielpinto8zz6.c-cpp-compile-run-1.0.11.vsix"
 wget -O /tmp/vscodevim.vsix "http://mirror.nus.edu.sg/ioi2021/vscode-items/vscodevim.vim-1.16.0.vsix"
 ##wget -O /tmp/ms-python.vsix "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/2020.7.96456/vspackage"
-##gunzip /tmp/vscode-java-pack.vsix.gz
 ##gunzip /tmp/ms-python.vsix.gz
 mkdir /tmp/vscode
 mkdir /tmp/vscode-extensions
 code --install-extension /tmp/cpptools-linux.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
-#code --install-extension /tmp/vscode-java-pack.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
 code --install-extension /tmp/cpp-compile-run.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
 ##code --install-extension /tmp/vscodevim.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
 tar jcf /opt/ioi/misc/vscode-extensions.tar.bz2 -C /tmp/vscode-extensions .
