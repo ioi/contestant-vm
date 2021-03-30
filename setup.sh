@@ -248,13 +248,13 @@ systemctl restart systemd-timesyncd
 
 # Fix up DNS resolution
 resolvectl dns vpn 172.31.0.2
-resolvectl domain vpn ioi2020.sg
+resolvectl domain vpn ioi2021.sg
 systemd-resolve --flush-cache
 
 # Register something on our HTTP server to log connection
 INSTANCEID=$(cat /opt/ioi/run/instanceid.txt)
-wget -qO- https://test.ioi2020.sg/ping/$NODE-$NAME-$INSTANCEID &> /dev/null
-wget -qO- https://pop.ioi2020.sg/ping/$NODE-$NAME-$INSTANCEID &> /dev/null
+wget -qO- https://test.ioi2021.sg/ping/$NODE-$NAME-$INSTANCEID &> /dev/null
+wget -qO- https://pop.ioi2021.sg/ping/$NODE-$NAME-$INSTANCEID &> /dev/null
 EOM
 chmod 755 /etc/tinc/vpn/host-up
 
@@ -340,17 +340,17 @@ chmod 755 /etc/rc.local
 
 # Modify hosts file
 cat - <<EOM >> /etc/hosts
-122.248.231.250 pop1.ioi2020.sg
-18.140.222.106 pop2.ioi2020.sg
-54.151.202.163 pop3.ioi2020.sg
-13.251.151.46 pop4.ioi2020.sg
+122.248.231.250 pop1.ioi2021.sg
+18.140.222.106 pop2.ioi2021.sg
+54.151.202.163 pop3.ioi2021.sg
+13.251.151.46 pop4.ioi2021.sg
 EOM
 
 # Populate root's known_hosts
 if [ ! -e ~/.ssh ]; then
 	mkdir ~/.ssh
 fi
-ssh-keyscan -H ioibackup1.ioi2020.sg >> ~/.ssh/known_hosts 2> /dev/null
+ssh-keyscan -H ioibackup1.ioi2021.sg >> ~/.ssh/known_hosts 2> /dev/null
 chmod 600 ~/.ssh/known_hosts
 
 # Add contest schedule
