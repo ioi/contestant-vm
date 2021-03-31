@@ -26,9 +26,13 @@ timedatectl set-timezone Asia/Singapore
 vmware-toolbox-cmd timesync enable
 hwclock -w
 
+# Install zabbix repo
+wget -O /tmp/zabbix-release_5.0-1+focal_all.deb https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-1+focal_all.deb
+dpkg -i /tmp/zabbix-release_5.0-1+focal_all.deb
+
 # Update packages
 
-apt update
+apt -y update
 apt -y upgrade
 
 # Convert server install into a minimuam desktop install
@@ -38,7 +42,7 @@ tasksel install ubuntu-desktop-minimal ubuntu-desktop-minimal-default-languages
 
 # Install tools needed for management and monitoring
 
-apt -y install net-tools openssh-server ansible xvfb tinc i3lock oathtool imagemagick
+apt -y install net-tools openssh-server ansible xvfb tinc i3lock oathtool imagemagick zabbix-agent
 
 # Install packages needed by contestants
 
@@ -285,12 +289,7 @@ APT::Periodic::Update-Package-Lists "0";
 APT::Periodic::Unattended-Upgrade "0";
 EOM
 
-# Install zabbix-agent
-wget -O /tmp/zabbix-release_5.0-1+focal_all.deb https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-1+focal_all.deb
-dpkg -i /tmp/zabbix-release_5.0-1+focal_all.deb
-apt -y update
-apt -y install zabbix-agent
-# Use a different config
+# Use a different config for Zabbix
 sed -i '/^Environment=/ s/zabbix_agentd.conf/zabbix_agentd_ioi.conf/' /lib/systemd/system/zabbix-agent.service
 
 # Remove/clean up unneeded snaps
