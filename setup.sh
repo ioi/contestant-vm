@@ -204,10 +204,6 @@ apt -y remove `dpkg-query -Wf '${Package}\n' | grep linux-modules-extra-`
 tar jxf /tmp/sound-modules.tar.bz2 -C /
 depmod -a
 
-apt -y autoremove
-
-apt clean
-
 # Create local HTML
 
 cp -a html /opt/ioi/html
@@ -304,6 +300,12 @@ snap list --all | awk '/disabled/{print $1, $3}' | while read snapname revision;
 done
 
 rm /var/lib/snapd/cache/*
+
+# Clean up apt
+
+apt -y autoremove
+
+apt clean
 
 # Remove desktop backgrounds
 rm /usr/share/backgrounds/*.jpg
