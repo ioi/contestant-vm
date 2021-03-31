@@ -186,7 +186,7 @@ apt -y remove llvm-9-dev
 apt -y remove zlib1g-dev
 apt -y remove libobjc-9-dev
 apt -y remove libx11-dev
-apt -u remove dpkg-dev
+apt -y remove dpkg-dev
 apt -y remove linux-firmware
 apt -y remove memtest86+
 apt -y remove network-manager-openvpn network-manager-openvpn-gnome openvpn
