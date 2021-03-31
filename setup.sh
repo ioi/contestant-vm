@@ -166,7 +166,6 @@ chmod 440 /etc/sudoers.d/01-ioi
 
 # Documentation
 
-#apt -y install openjdk-11-doc
 apt -y install stl-manual python3-doc
 
 # CPP Reference
@@ -314,6 +313,7 @@ rm -rf /usr/share/doc/libgtk*
 rm -rf /usr/share/doc/libqt5*
 rm -rf /usr/share/doc/man-db
 rm -rf /usr/share/doc/manpages
+rm -rf /usr/share/doc/openjdk-*
 rm -rf /usr/share/doc/openssh-*
 rm -rf /usr/share/doc/printer-*
 rm -rf /usr/share/doc/qml-*
