@@ -14,7 +14,7 @@ error() {
 trap 'error ${LINENO}' ERR
 
 VERSION="test$(date +%m%d)"
-ANSIBLE_PASSWD=""
+ANSIBLE_PASSWD="ansible"
 
 if [ -f "config.local.sh" ]; then
 	source config.local.sh
