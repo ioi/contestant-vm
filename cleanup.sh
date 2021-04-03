@@ -25,9 +25,12 @@ rm ~ioi/.bash_history || true
 rm ~ansible/.bash_history || true
 rm ~root/.bash_history || true
 
-# Empty kernel logs
+# Empty system and kernel logs
 cat /dev/null > /var/log/kern.log
 cat /dev/null > /var/log/dmesg
+cat /dev/null > /var/log/syslog
+cat /dev/null > /var/log/auth.log
+cat /dev/null > /var/log/cloud-init.log
 
 # Remove various logs
 rm /var/log/vmware*log || true

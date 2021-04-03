@@ -183,20 +183,12 @@ apt -y install `dpkg-query -Wf '${Package}\n' | grep linux-modules-`
 
 # Remove unneeded packages
 
-apt -y remove gnome-power-manager
-apt -y remove extra-cmake-modules
-apt -y remove brltty
-apt -y remove llvm-9-dev
-apt -y remove zlib1g-dev
-apt -y remove libobjc-9-dev
-apt -y remove libx11-dev
-apt -y remove dpkg-dev
-apt -y remove linux-firmware
-apt -y remove memtest86+
+apt -y remove gnome-power-manager brltty extra-cmake-modules
+apt -y remove llvm-9-dev zlib1g-dev libobjc-9-dev libx11-dev dpkg-dev manpages-dev
+apt -y remove linux-firmware memtest86+
 apt -y remove network-manager-openvpn network-manager-openvpn-gnome openvpn
 apt -y remove gnome-getting-started-docs-it gnome-getting-started-docs-ru \
 	gnome-getting-started-docs-es gnome-getting-started-docs-fr gnome-getting-started-docs-de
-apt -y remove manpages-dev
 apt -y remove `dpkg-query -Wf '${Package}\n' | grep linux-header`
 
 # Remove most extra modules but preserve those for sound
