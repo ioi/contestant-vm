@@ -44,6 +44,10 @@ tasksel install ubuntu-desktop-minimal ubuntu-desktop-minimal-default-languages
 
 apt -y install net-tools openssh-server ansible xvfb tinc i3lock oathtool imagemagick zabbix-agent
 
+# Install local build tools
+
+apt -y install build-essential autoconf autotools-dev
+
 # Install packages needed by contestants
 
 apt -y install openjdk-11-jdk-headless codeblocks emacs \
@@ -176,6 +180,20 @@ mkdir /opt/cppref
 unzip /tmp/html_book_20190607.zip -d /opt/cppref
 rm -f /tmp/html_book_20190607.zip
 
+# Build logkeys
+
+WORKDIR=`mktemp -d`
+pushd $WORKDIR
+git clone https://github.com/kernc/logkeys.git
+cd logkeys
+./autogen.sh
+cd build
+../configure
+make
+make install
+popd
+rm -rf $WORKDIR
+
 # Mark some packages as needed so they wont' get auto-removed
 
 apt -y install `dpkg-query -Wf '${Package}\n' | grep linux-image-`
@@ -189,6 +207,7 @@ apt -y remove linux-firmware memtest86+
 apt -y remove network-manager-openvpn network-manager-openvpn-gnome openvpn
 apt -y remove gnome-getting-started-docs-it gnome-getting-started-docs-ru \
 	gnome-getting-started-docs-es gnome-getting-started-docs-fr gnome-getting-started-docs-de
+apt -y remove build-essential autoconf autotools-dev
 apt -y remove `dpkg-query -Wf '${Package}\n' | grep linux-header`
 
 # Remove most extra modules but preserve those for sound
