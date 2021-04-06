@@ -28,7 +28,7 @@ in size will be backed up.
 EOM
 	rsync -e "ssh -i /opt/ioi/config/ssh/ioibackup" \
 		-avz --delete \
-		--max-size=1M --bwlimit=1000 --exclude='.*' ~ioi/ ioibackup@ioibackup1.ioi2020.sg:
+		--max-size=1M --bwlimit=1000 --exclude='.*' ~ioi/ ioibackup@ioibackup1.ioi2021.sg:
 elif [ "$MODE" = "restore" ]; then
 	echo Restoring into /tmp/restore.
 	if [ -e /tmp/restore ]; then
@@ -39,7 +39,7 @@ EOM
 	else
 		rsync -e "ssh -i /opt/ioi/config/ssh/ioibackup" \
     		    -avz --max-size=1M --bwlimit=1000 --exclude='.*' \
-				ioibackup@ioibackup1.ioi2020.sg: /tmp/restore
+				ioibackup@ioibackup1.ioi2021.sg: /tmp/restore
 	fi
 fi
 
