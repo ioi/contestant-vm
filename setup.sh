@@ -191,6 +191,7 @@ cd build
 ../configure
 make
 make install
+cp ../keymaps/en_US_ubuntu_1204.map /opt/ioi/misc/
 popd
 rm -rf $WORKDIR
 
