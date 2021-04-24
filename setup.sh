@@ -57,7 +57,6 @@ apt -y install openjdk-11-jdk-headless codeblocks emacs \
 # Install snap packages needed by contestants
 
 snap install --classic atom
-snap install --classic intellij-idea-community
 snap install --classic code
 snap install --classic sublime-text
 
