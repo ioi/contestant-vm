@@ -43,7 +43,7 @@ tasksel install ubuntu-desktop-minimal ubuntu-desktop-minimal-default-languages
 # Install tools needed for management and monitoring
 
 apt -y install net-tools openssh-server ansible xvfb tinc i3lock oathtool imagemagick \
-	zabbix-agent ntpdate
+	zabbix-agent
 
 # Install local build tools
 

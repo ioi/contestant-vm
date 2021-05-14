@@ -27,8 +27,9 @@ case "$1" in
 			/opt/ioi/sbin/firewall.sh start
 		fi
 
-		# Manually update time now
-		ntpdate -u pool.ntp.org
+		# Ensure that timesyncd is doing its work
+		rm /run/systemd/timesync/synchronized
+		systemctl restart systemd-timesyncd
 
 		# Check for new contest schedule
 		SCHEDFILE=$(mktemp)
