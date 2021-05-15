@@ -11,7 +11,7 @@ schedule()
 	JOBID=$1
 	
 	if [ $(wc -l $SCHEDULE | cut -d\  -f1) -lt "$JOBID" ]; then
-		echo DEBUG: No more jobs
+		logger -p local0.info "ATRUN: Scheduling job $JOBID does not exist"
 		return 1
 	fi
 
@@ -58,7 +58,7 @@ execute()
 		schedule $NEWJOBID
 	else
 		CMD=$(echo "$JOB" | cut -d\  -f6-)
-		logger -p local0.info "ATRUN: Run job $JOBID, $CMD"
+		logger -p local0.info "ATRUN: Run job $JOBID now: $CMD"
 		$CMD
 		NEWJOBID=$((JOBID+1))
 		schedule $NEWJOBID
