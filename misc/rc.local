@@ -27,6 +27,8 @@ case "$1" in
 			/opt/ioi/sbin/firewall.sh start
 		fi
 
+		logger -p local0.info "LOCAL: start time `date`"
+
 		# Ensure that timesyncd is doing its work
 		rm /run/systemd/timesync/synchronized
 		systemctl restart systemd-timesyncd
@@ -53,6 +55,13 @@ case "$1" in
 			fi
 		fi
 		rm $HOSTSFILE
+
+		# Start atd if timesyncd has synchronized
+		if [ -f /run/systemd/timesync/synchronized ] ; then
+			logger -p local0.info "LOCAL: time after timesyncd `date`"
+			/opt/ioi/sbin/startatd.sh &
+		fi
+
 		;;
 	*)
 		echo Must specify start
