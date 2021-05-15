@@ -56,11 +56,7 @@ case "$1" in
 		fi
 		rm $HOSTSFILE
 
-		# Start atd if timesyncd has synchronized
-		if [ -f /run/systemd/timesync/synchronized ] ; then
-			logger -p local0.info "LOCAL: time after timesyncd `date`"
-			/opt/ioi/sbin/startatd.sh &
-		fi
+		/opt/ioi/sbin/startatd.sh &
 
 		;;
 	*)
