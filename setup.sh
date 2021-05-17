@@ -357,14 +357,6 @@ rm -rf /usr/share/doc/xterm
 cp misc/rc.local /etc/rc.local
 chmod 755 /etc/rc.local
 
-# Modify hosts file
-cat - <<EOM >> /etc/hosts
-122.248.231.250 pop1.ioi2021.sg
-18.140.222.106 pop2.ioi2021.sg
-54.151.202.163 pop3.ioi2021.sg
-13.251.151.46 pop4.ioi2021.sg
-EOM
-
 # Populate root's known_hosts
 if [ ! -e ~/.ssh ]; then
 	mkdir ~/.ssh
