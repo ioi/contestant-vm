@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SERVER=https://pop.ioi2020.sg/config
+SERVER=https://pop.ioi2021.sg/config
 
 check_user()
 {

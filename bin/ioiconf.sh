@@ -153,7 +153,7 @@ EOM
 		if [ -f "/usr/share/zoneinfo/$2" ]; then
 			cat - <<EOM
 Your timezone will be set to $2 at your next login.
-*** Please take note that all dates and times communicated by the IOI 2020 ***
+*** Please take note that all dates and times communicated by the IOI 2021 ***
 *** organisers will be in Asia/Singapore timezone (GMT+08), unless it is   ***
 *** otherwise specified.                                                   ***
 EOM
