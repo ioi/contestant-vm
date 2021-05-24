@@ -278,6 +278,9 @@ systemctl enable tinc@vpn
 
 systemctl disable multipathd
 
+# Disable cloud-init
+touch /etc/cloud/cloud-init.disabled
+
 # Don't stsart atd service 
 systemctl disable atd
 
