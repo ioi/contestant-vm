@@ -1,5 +1,7 @@
 #!/bin/sh
 
+SERVER=https://pop.ioi2021.sg/config
+
 COUNT=1
 while [ ! -f /run/systemd/timesync/synchronized ]
 do
