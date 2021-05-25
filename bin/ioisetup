@@ -47,7 +47,7 @@ do_setup()
 		return 1
 	fi
 
-	curl -s -f -o /tmp/vpn.tar.bz2 "${DISTSERVER}$CRED" > /dev/null 2>&1
+	curl -m 5 -s -f -o /tmp/vpn.tar.bz2 "${DISTSERVER}$CRED" > /dev/null 2>&1
 	RC=$?
 	if [ $RC -eq 22  ]; then
 		read -d '' -r MSG<<-EOM

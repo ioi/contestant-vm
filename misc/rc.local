@@ -35,7 +35,7 @@ case "$1" in
 
 		# Check for new contest schedule
 		SCHEDFILE=$(mktemp)
-		wget -O $SCHEDFILE "${SERVER}/schedule2.txt" > /dev/null 2>&1
+		wget --timeout=3 --tries=3 -O $SCHEDFILE "${SERVER}/schedule2.txt" > /dev/null 2>&1
 		if [ $? -eq 0 -a -f $SCHEDFILE ]; then
 			diff -q /opt/ioi/misc/schedule2.txt $SCHEDFILE > /dev/null
 			if [ $? -ne 0 ]; then
@@ -47,7 +47,7 @@ case "$1" in
 
 		# Check for /etc/hosts file to update
 		HOSTSFILE=$(mktemp)
-		wget -O $HOSTSFILE "${SERVER}/hosts.txt" > /dev/null 2>&1
+		wget --timeout=3 --tries=3 -O $HOSTSFILE "${SERVER}/hosts.txt" > /dev/null 2>&1
 		if [ $? -eq 0 -a -f $HOSTSFILE ]; then
 			diff -q /etc/hosts $HOSTSFILE > /dev/null
 			if [ $? -ne 0 ]; then
