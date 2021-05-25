@@ -35,7 +35,7 @@ schedule()
 		fi
 	done
 
-	cat - <<EOM | at "$ATTIME" 2> /dev/null
+	cat - <<EOM | at -M "$ATTIME" 2> /dev/null
 # AUTO-CONTEST-SCHEDULE
 /opt/ioi/sbin/atrun.sh exec $JOBID
 EOM

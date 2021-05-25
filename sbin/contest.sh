@@ -6,7 +6,7 @@ contestprep()
 {
 	# Prepare system for contest. This is run BEFORE start of contest.
 
-	init 3
+	# init 3
 	pkill -u ioi
 
 	UID=$(id -u ioi)
@@ -45,7 +45,7 @@ contestprep()
 	echo "$2" > /opt/ioi/run/contestid.txt
 	echo "$2" > /opt/ioi/run/lockdown
 
-	init 5
+	# init 5
 }
 
 schedule()
