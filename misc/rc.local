@@ -33,18 +33,6 @@ case "$1" in
 		rm /run/systemd/timesync/synchronized
 		systemctl restart systemd-timesyncd
 
-		# Check for new contest schedule
-		SCHEDFILE=$(mktemp)
-		wget --timeout=3 --tries=3 -O $SCHEDFILE "${SERVER}/schedule2.txt" > /dev/null 2>&1
-		if [ $? -eq 0 -a -f $SCHEDFILE ]; then
-			diff -q /opt/ioi/misc/schedule2.txt $SCHEDFILE > /dev/null
-			if [ $? -ne 0 ]; then
-				cp $SCHEDFILE /opt/ioi/misc/schedule2.txt
-				/opt/ioi/sbin/atrun.sh schedule
-			fi
-		fi
-		rm $SCHEDFILE
-
 		# Check for /etc/hosts file to update
 		HOSTSFILE=$(mktemp)
 		wget --timeout=3 --tries=3 -O $HOSTSFILE "${SERVER}/hosts.txt" > /dev/null 2>&1
