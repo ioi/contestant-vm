@@ -298,7 +298,14 @@ Environment=DISPLAY=':0.0'
 ExecStart=/opt/ioi/sbin/i3lock.sh
 EOM
 
-# Disable upates
+# Disable virtual consoles
+
+cat - <<EOM >> /etc/systemd/logind.conf
+NAutoVTs=0
+ReserveVT=0
+EOM
+
+# Disable updates
 
 cat - <<EOM > /etc/apt/apt.conf.d/20auto-upgrades
 APT::Periodic::Update-Package-Lists "0";
