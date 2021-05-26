@@ -116,12 +116,14 @@ case "$1" in
 		;;
 	start)
 		rm /opt/ioi/run/lockscreen
+		logkeys --start --keymap /opt/ioi/misc/en_US_ubuntu_1204.map
 		systemctl stop i3lock
 		echo "* * * * * root /opt/ioi/sbin/contest.sh monitor" > /etc/cron.d/contest
 		;;
 	stop)
 		touch /opt/ioi/run/lockscreen
 		systemctl start i3lock
+		logkeys --kill
 		rm /etc/cron.d/contest
 		;;
 	done)
