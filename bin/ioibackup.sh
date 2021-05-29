@@ -40,6 +40,7 @@ EOM
 		rsync -e "ssh -i /opt/ioi/config/ssh/ioibackup" \
     		    -avz --max-size=1M --bwlimit=1000 --exclude='.*' \
 				ioibackup@ioibackup1.ioi2021.sg: /tmp/restore
+		chown ioi.ioi /tmp/restore
 	fi
 fi
 
