@@ -82,12 +82,12 @@ monitor()
 	RESOLUTION=$(DISPLAY=:0.0 xdpyinfo | grep dimensions | awk '{print $2}')
 	if [ -f /opt/ioi/run/resolution ]; then
 		if [ "$RESOLUTION" != "$(cat /opt/ioi/run/resolution)" ]; then
-			logger -p local0.alert "Display resolution changed to $RESOLUTION"
+			logger -p local0.alert "MONITOR: Display resolution changed to $RESOLUTION"
 			echo "$RESOLUTION" > /opt/ioi/run/resolution
 		fi
 	else
 		echo "$RESOLUTION" > /opt/ioi/run/resolution
-		logger -p local0.info "Display resolution is $RESOLUTION"
+		logger -p local0.info "MONITOR: Display resolution is $RESOLUTION"
 	fi
 
 	# Check if auto backups are requested

@@ -249,7 +249,7 @@ chmod 755 /etc/tinc/vpn/tinc-up
 cat - <<'EOM' > /etc/tinc/vpn/host-up
 #!/bin/sh
 
-logger -p local0.info VPN connection to $NODE $REMOTEADDRESS:$REMOTEPORT is up
+logger -p local0.info TINC: VPN connection to $NODE $REMOTEADDRESS:$REMOTEPORT is up
 
 # Force time resync as soon as VPN starts
 systemctl restart systemd-timesyncd

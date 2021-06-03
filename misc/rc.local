@@ -27,7 +27,7 @@ case "$1" in
 			/opt/ioi/sbin/firewall.sh start
 		fi
 
-		logger -p local0.info "LOCAL: start time `date`"
+		logger -p local0.info "RCLOCAL: start time `date`"
 
 		# Ensure that timesyncd is doing its work
 		rm /run/systemd/timesync/synchronized
