@@ -1,7 +1,5 @@
 #!/bin/sh
 
-SERVER=https://pop.ioi2021.sg/config
-
 COUNT=1
 while [ ! -f /run/systemd/timesync/synchronized ]
 do
@@ -20,17 +18,7 @@ fi
 logger -p local0.info "STARTATD: time now is `date`"
 
 # Check for new contest schedule
-SCHEDFILE=$(mktemp)
-wget --timeout=3 --tries=3 -O $SCHEDFILE "${SERVER}/schedule2.txt" > /dev/null 2>&1
-if [ $? -eq 0 -a -f $SCHEDFILE ]; then
-	diff -q /opt/ioi/misc/schedule2.txt $SCHEDFILE > /dev/null
-	if [ $? -ne 0 ]; then
-		logger -p local0.info "STARTATD: Setting up new contest schedule"
-		cp $SCHEDFILE /opt/ioi/misc/schedule2.txt
-		/opt/ioi/sbin/atrun.sh schedule
-	fi
-fi
-rm $SCHEDFILE
+/opt/ioi/sbin/checkschedule.sh
 
 logger -p local0.info "STARTATD: Starting atd"
 
