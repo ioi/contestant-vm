@@ -11,7 +11,7 @@ contestprep()
 
 	UID=$(id -u ioi)
 	EPASSWD=$(grep ioi /etc/shadow | cut -d: -f2)
-	FULLNAME=$(grep ioi /etc/passwd | cut -d: -f5 | cut -d, -f1)
+	FULLNAME=$(grep ^ioi: /etc/passwd | cut -d: -f5 | cut -d, -f1)
 
 	# Forces removal of home directory and mail spool
 	userdel -rf ioi > /dev/null 2>&1
