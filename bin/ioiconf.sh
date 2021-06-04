@@ -55,7 +55,7 @@ do_config()
 	#hostnamectl set-hostname "$USERID"
 
 	# Stop Zabbix agent
-	systemctl stop zabbix-agent
+	systemctl stop zabbix-agent 2> /dev/null
 	systemctl disable zabbix-agent 2> /dev/null
 	rm /etc/zabbix/* 2> /dev/null
 
@@ -65,7 +65,7 @@ do_config()
 	/opt/ioi/sbin/firewall.sh start
 
 	# Start Zabbix configuration
-	systemctl start zabbix-agent
+	systemctl start zabbix-agent 2> /dev/null
 
 	# Generate an instance ID to uniquely id this VM
 	if [ ! -f /opt/ioi/run/instanceid.txt ]; then
