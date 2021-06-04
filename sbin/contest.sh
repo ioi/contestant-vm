@@ -11,7 +11,7 @@ contestprep()
 
 	UID=$(id -u ioi)
 	EPASSWD=$(grep ioi /etc/shadow | cut -d: -f2)
-	FULLNAME=$(grep ioi /etc/passwd | cut -d: -f5 | cut -d, -f1)
+	FULLNAME=$(grep ^ioi: /etc/passwd | cut -d: -f5 | cut -d, -f1)
 
 	# Forces removal of home directory and mail spool
 	userdel -rf ioi > /dev/null 2>&1
@@ -82,12 +82,12 @@ monitor()
 	RESOLUTION=$(DISPLAY=:0.0 xdpyinfo | grep dimensions | awk '{print $2}')
 	if [ -f /opt/ioi/run/resolution ]; then
 		if [ "$RESOLUTION" != "$(cat /opt/ioi/run/resolution)" ]; then
-			logger -p local0.alert "Display resolution changed to $RESOLUTION"
+			logger -p local0.alert "MONITOR: Display resolution changed to $RESOLUTION"
 			echo "$RESOLUTION" > /opt/ioi/run/resolution
 		fi
 	else
 		echo "$RESOLUTION" > /opt/ioi/run/resolution
-		logger -p local0.info "Display resolution is $RESOLUTION"
+		logger -p local0.info "MONITOR: Display resolution is $RESOLUTION"
 	fi
 
 	# Check if auto backups are requested
