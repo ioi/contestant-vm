@@ -187,11 +187,13 @@ EOM
 	setscreenlock)
 		if [ "$2" = "on" ]; then
 			touch /opt/ioi/config/screenlock
+			sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.screensaver lock-enabled true
 			echo Screensaver lock enabled
 		elif [ "$2" = "off" ]; then
 			if [ -f /opt/ioi/config/screenlock ]; then
 				rm /opt/ioi/config/screenlock
 			fi
+			sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.screensaver lock-enabled false
 			echo Screensaver lock disabled
 		else
 			cat - <<EOM
