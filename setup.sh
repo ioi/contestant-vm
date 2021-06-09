@@ -133,7 +133,7 @@ echo "local0.* /opt/ioi/store/log/local.log" >> /etc/rsyslog.d/10-ioi.conf
 
 cat - <<EOM > /etc/systemd/timesyncd.conf
 [Time]
-NTP=172.31.39.161 time.windows.com time.nist.gov
+NTP=172.31.24.218 time.windows.com time.nist.gov
 EOM
 
 # Don't list ansible user at login screen
