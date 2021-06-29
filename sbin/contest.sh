@@ -1,13 +1,14 @@
 #!/bin/sh
 
-# This needs to run as root.
+# This needs to run as root!
 
 contestprep()
 {
+	CONTESTID=$1
 	# Prepare system for contest. This is run BEFORE start of contest.
 
 	# init 3
-	pkill -u ioi
+	pkill -9 -u ioi
 
 	UID=$(id -u ioi)
 	EPASSWD=$(grep ioi /etc/shadow | cut -d: -f2)
@@ -42,8 +43,8 @@ contestprep()
 	/opt/ioi/sbin/firewall.sh start
 	USER=$(/opt/ioi/bin/ioicheckuser -q)
 	echo "$USER" > /opt/ioi/run/userid.txt
-	echo "$2" > /opt/ioi/run/contestid.txt
-	echo "$2" > /opt/ioi/run/lockdown
+	echo "$CONTESTID" > /opt/ioi/run/contestid.txt
+	echo "$CONTESTID" > /opt/ioi/run/lockdown
 
 	# init 5
 }
@@ -73,7 +74,7 @@ monitor()
 	DISPLAY=:0.0 sudo -u ioi xhost +local:root > /dev/null
 	echo "$DATE monitor run" >> /opt/ioi/store/contest.log
 
-	if [ $(seq 5 | shuf | head -1) -eq 5 ]; then
+	if [ $(seq 2 | shuf | head -1) -eq 2 ]; then
 		USER=$(cat /opt/ioi/run/userid.txt)
 		DISPLAY=:0.0 xwd -root -silent | convert xwd:- png:- | bzip2 -c - \
 			> /opt/ioi/store/screenshots/$USER-$DATE.png.bz2
@@ -112,7 +113,7 @@ case "$1" in
 		systemctl stop i3lock
 		;;
 	prep)
-		contestprep
+		contestprep $2
 		;;
 	start)
 		rm /opt/ioi/run/lockscreen
@@ -121,8 +122,8 @@ case "$1" in
 		echo "* * * * * root /opt/ioi/sbin/contest.sh monitor" > /etc/cron.d/contest
 		;;
 	stop)
-		touch /opt/ioi/run/lockscreen
-		systemctl start i3lock
+		#touch /opt/ioi/run/lockscreen
+		#systemctl start i3lock
 		logkeys --kill
 		rm /etc/cron.d/contest
 		;;
