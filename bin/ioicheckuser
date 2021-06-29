@@ -58,12 +58,12 @@ check_vpn()
 {
 
 	# Try one ping
-	if ping -W 1 -c 1 10.10.0.1 -q > /dev/null; then
+	if ping -W 1 -c 1 pop.ioi2021.sg -q > /dev/null; then
 		return 0
 	fi
 
 	# Then try 3 pings before we declare fail
-	if ping -W 1 -c 3 10.10.0.1 -q > /dev/null; then
+	if ping -W 1 -c 3 pop.ioi2021.sg -q > /dev/null; then
 		return 0
 	fi
 
