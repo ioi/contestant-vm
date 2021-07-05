@@ -395,8 +395,8 @@ fi
 ssh-keyscan -H ioibackup1.ioi2021.sg >> ~/.ssh/known_hosts 2> /dev/null
 chmod 600 ~/.ssh/known_hosts
 
-# Add contest schedule
-#/opt/ioi/sbin/atrun.sh schedule
+# Set flag to run atrun.sh at first boot
+touch /opt/ioi/misc/schedule2.txt.firstrun
 
 # Embed version number
 if [ -n "$VERSION" ] ; then
@@ -406,12 +406,6 @@ fi
 # Deny ioi user from SSH login
 echo "DenyUsers ioi" >> /etc/ssh/sshd_config
 
-if [ -n "ANSIBLE_PASSWD" ]; then
-	echo "Ansible user password set to: (from config)"
-else
-	ANSIBLE_PASSWD=$(openssl rand 8 | base32 | cut -c1-13)
-	echo "Ansible user password set to: $ANSIBLE_PASSWD"
-fi
 echo "ansible:$ANSIBLE_PASSWD" | chpasswd
 
 echo "### DONE ###"
