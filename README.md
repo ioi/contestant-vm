@@ -12,6 +12,7 @@ When Ubuntu install completes, clone or copy this repo into a local directory. E
 git clone https://github.com/lzs/ioi2021-image.git
 sudo -s
 cd ioi2021-image
+# Create config.local.sh if needed; see config.local.sh.sample
 ./setup.sh
 ./cleanup.sh
 cd ..
