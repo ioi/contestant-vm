@@ -32,7 +32,8 @@ Shutdown the VM.
 In the VM settings:
 
 - Remove all CDROM and floppy drives.
-- In the Hard Disk device, click Defragment, then click Compact.
+- In the Hard Disk device, click Compact.
 
-Go to File, Export to OVF, then enter a filename with .ova extension.
-- 
+Go to File, Export to OVF, then enter a filename with .ova extension (i.e. to
+use an archive format).
+
