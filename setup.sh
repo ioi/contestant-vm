@@ -180,7 +180,7 @@ apt -y install stl-manual python3-doc
 
 wget -O /tmp/html_book_20190607.zip http://upload.cppreference.com/mwiki/images/b/b2/html_book_20190607.zip
 mkdir -p /opt/cppref
-unzip /tmp/html_book_20190607.zip -d /opt/cppref
+unzip -o /tmp/html_book_20190607.zip -d /opt/cppref
 rm -f /tmp/html_book_20190607.zip
 
 # Build logkeys
