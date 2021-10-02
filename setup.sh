@@ -83,15 +83,15 @@ sed -i '/^SHELL/ s/\/sh$/\/bash/' /etc/default/useradd
 
 # Copy IOI stuffs into /opt
 
-mkdir /opt/ioi
+mkdir -p /opt/ioi
 cp -a bin sbin misc /opt/ioi/
-mkdir /opt/ioi/run
-mkdir /opt/ioi/store
-mkdir /opt/ioi/config
-mkdir /opt/ioi/store/log
-mkdir /opt/ioi/store/screenshots
-mkdir /opt/ioi/store/submissions
-mkdir /opt/ioi/config/ssh
+mkdir -p /opt/ioi/run
+mkdir -p /opt/ioi/store
+mkdir -p /opt/ioi/config
+mkdir -p /opt/ioi/store/log
+mkdir -p /opt/ioi/store/screenshots
+mkdir -p /opt/ioi/store/submissions
+mkdir -p /opt/ioi/config/ssh
 
 ## Lines with 2 hashtags are permanently commented out!
 aria2c -x 4 -d /tmp/ -o cpptools-linux.vsix "http://mirror.nus.edu.sg/ioi2021/vscode-items/cpptools-linux.vsix"
@@ -99,6 +99,7 @@ aria2c -x 4 -d /tmp -o cpp-compile-run.vsix "http://mirror.nus.edu.sg/ioi2021/vs
 wget -O /tmp/vscodevim.vsix "http://mirror.nus.edu.sg/ioi2021/vscode-items/vscodevim.vim-1.16.0.vsix"
 ##wget -O /tmp/ms-python.vsix "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/2020.7.96456/vspackage"
 ##gunzip /tmp/ms-python.vsix.gz
+rm -rf /tmp/vscode
 mkdir /tmp/vscode
 mkdir /tmp/vscode-extensions
 code --install-extension /tmp/cpptools-linux.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
@@ -162,7 +163,7 @@ update-grub2
 
 # Setup SSH authorized keys and passwordless sudo for ansible
 
-mkdir ~ansible/.ssh
+mkdir -p ~ansible/.ssh
 cp misc/id_ansible.pub ~ansible/.ssh/authorized_keys
 chown -R ansible.ansible ~ansible/.ssh
 
@@ -178,7 +179,7 @@ apt -y install stl-manual python3-doc
 # CPP Reference
 
 wget -O /tmp/html_book_20190607.zip http://upload.cppreference.com/mwiki/images/b/b2/html_book_20190607.zip
-mkdir /opt/cppref
+mkdir -p /opt/cppref
 unzip /tmp/html_book_20190607.zip -d /opt/cppref
 rm -f /tmp/html_book_20190607.zip
 
@@ -237,8 +238,8 @@ rm /tmp/share.zip
 
 # Setup tinc skeleton config
 
-mkdir /etc/tinc/vpn
-mkdir /etc/tinc/vpn/hosts
+mkdir -p /etc/tinc/vpn
+mkdir -p /etc/tinc/vpn/hosts
 cat - <<'EOM' > /etc/tinc/vpn/tinc-up
 #!/bin/sh
 
@@ -342,7 +343,7 @@ snap list --all | awk '/disabled/{print $1, $3}' | while read snapname revision;
 	snap remove "$snapname" --revision="$revision"
 done
 
-rm /var/lib/snapd/cache/*
+rm -rf /var/lib/snapd/cache/*
 
 # Clean up apt
 
@@ -351,8 +352,8 @@ apt -y autoremove
 apt clean
 
 # Remove desktop backgrounds
-rm /usr/share/backgrounds/*.jpg
-rm /usr/share/backgrounds/*.png
+rm -rf /usr/share/backgrounds/*.jpg
+rm -rf /usr/share/backgrounds/*.png
 
 # Remove unwanted documentation
 rm -rf /usr/share/doc/HTML
