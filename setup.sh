@@ -247,6 +247,7 @@ ifconfig $INTERFACE "$(cat /etc/tinc/vpn/ip.conf)" netmask "$(cat /etc/tinc/vpn/
 route add -net 172.31.0.0/16 gw "$(cat /etc/tinc/vpn/ip.conf)"
 EOM
 chmod 755 /etc/tinc/vpn/tinc-up
+cp /etc/tinc/vpn/tinc-up /opt/ioi/misc/
 
 cat - <<'EOM' > /etc/tinc/vpn/host-up
 #!/bin/sh
@@ -267,6 +268,7 @@ wget -qO- https://test.ioi2021.sg/ping/$NODE-$NAME-$INSTANCEID &> /dev/null
 wget -qO- https://pop.ioi2021.sg/ping/$NODE-$NAME-$INSTANCEID &> /dev/null
 EOM
 chmod 755 /etc/tinc/vpn/host-up
+cp /etc/tinc/vpn/host-up /opt/ioi/misc/
 
 cat - <<'EOM' > /etc/tinc/vpn/host-down
 #!/bin/sh
