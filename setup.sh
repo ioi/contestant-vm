@@ -43,7 +43,7 @@ tasksel install ubuntu-desktop-minimal ubuntu-desktop-minimal-default-languages
 # Install tools needed for management and monitoring
 
 apt -y install net-tools openssh-server ansible xvfb tinc i3lock oathtool imagemagick \
-	zabbix-agent
+	zabbix-agent aria2
 
 # Install local build tools
 
@@ -62,7 +62,7 @@ snap install --classic code
 snap install --classic sublime-text
 
 # Install Eclipse
-wget -O /tmp/eclipse.tar.gz "http://mirrors.neusoft.edu.cn/eclipse/technology/epp/downloads/release/2020-12/R/eclipse-cpp-2020-12-R-linux-gtk-x86_64.tar.gz"
+aria2c -x4 -d /tmp -o eclipse.tar.gz "https://ftp.yz.yamagata-u.ac.jp/pub/eclipse/technology/epp/downloads/release/2020-12/R/eclipse-cpp-2020-12-R-linux-gtk-x86_64.tar.gz"
 tar zxf /tmp/eclipse.tar.gz -C /opt
 rm /tmp/eclipse.tar.gz
 wget -O /usr/share/pixmaps/eclipse.png "https://icon-icons.com/downloadimage.php?id=94656&root=1381/PNG/64/&file=eclipse_94656.png"
@@ -94,8 +94,8 @@ mkdir /opt/ioi/store/submissions
 mkdir /opt/ioi/config/ssh
 
 ## Lines with 2 hashtags are permanently commented out!
-wget -O /tmp/cpptools-linux.vsix "http://mirror.nus.edu.sg/ioi2021/vscode-items/cpptools-linux.vsix"
-wget -O /tmp/cpp-compile-run.vsix "http://mirror.nus.edu.sg/ioi2021/vscode-items/danielpinto8zz6.c-cpp-compile-run-1.0.11.vsix"
+aria2c -x 4 -d /tmp/ -o cpptools-linux.vsix "http://mirror.nus.edu.sg/ioi2021/vscode-items/cpptools-linux.vsix"
+aria2c -x 4 -d /tmp -o cpp-compile-run.vsix "http://mirror.nus.edu.sg/ioi2021/vscode-items/danielpinto8zz6.c-cpp-compile-run-1.0.11.vsix"
 wget -O /tmp/vscodevim.vsix "http://mirror.nus.edu.sg/ioi2021/vscode-items/vscodevim.vim-1.16.0.vsix"
 ##wget -O /tmp/ms-python.vsix "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/2020.7.96456/vspackage"
 ##gunzip /tmp/ms-python.vsix.gz
