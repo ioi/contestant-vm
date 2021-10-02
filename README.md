@@ -1,4 +1,4 @@
-# ioi2021-image
+# contestant-vm
 
 ## Install/Setup
 
@@ -9,14 +9,14 @@ Install Ubuntu 20.04 server. Defaults work fine (but please uncheck the "Set up 
 When Ubuntu install completes, clone or copy this repo into a local directory. E.g.:
 
 ```
-git clone https://github.com/lzs/ioi2021-image.git
+git clone https://github.com/ioi-2022/contestant-vm
 sudo -s
-cd ioi2021-image
+cd contestant-vm
 # Create config.local.sh if needed; see config.local.sh.sample
 ./setup.sh
 ./cleanup.sh
 cd ..
-rm -rf ioi2021-image
+rm -rf contestant-vm
 ```
 
 Turn off the VM when you complete the installation.

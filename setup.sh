@@ -22,7 +22,7 @@ fi
 
 # Fix up date/time
 
-timedatectl set-timezone Asia/Singapore
+timedatectl set-timezone Asia/Jakarta
 vmware-toolbox-cmd timesync enable
 hwclock -w
 
@@ -109,7 +109,7 @@ cp /tmp/vscodevim.vsix /opt/ioi/misc
 rm -rf /tmp/vscode-extensions
 
 # Add default timezone
-echo "Asia/Singapore" > /opt/ioi/config/timezone
+echo "Asia/Jakarta" > /opt/ioi/config/timezone
 
 # Default to enable screensaver lock
 touch /opt/ioi/config/screenlock
