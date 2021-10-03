@@ -85,6 +85,7 @@ sed -i '/^SHELL/ s/\/sh$/\/bash/' /etc/default/useradd
 
 mkdir -p /opt/ioi
 cp -a bin sbin misc /opt/ioi/
+cp config.sh /opt/ioi/
 mkdir -p /opt/ioi/run
 mkdir -p /opt/ioi/store
 mkdir -p /opt/ioi/config
@@ -250,16 +251,17 @@ chmod 755 /etc/tinc/vpn/tinc-up
 cp /etc/tinc/vpn/tinc-up /opt/ioi/misc/
 
 cat - <<'EOM' > /etc/tinc/vpn/host-up
-#!/bin/sh
+#!/bin/bash
 
+source /opt/ioi/config.sh
 logger -p local0.info TINC: VPN connection to $NODE $REMOTEADDRESS:$REMOTEPORT is up
 
 # Force time resync as soon as VPN starts
 systemctl restart systemd-timesyncd
 
 # Fix up DNS resolution
-resolvectl dns vpn 172.31.0.2
-resolvectl domain vpn ioi2021.sg
+resolvectl dns $INTERFACE $DNS_SERVER
+resolvectl domain $INTERFACE $DNS_DOMAIN
 systemd-resolve --flush-cache
 
 # Register something on our HTTP server to log connection
