@@ -398,7 +398,7 @@ chmod 755 /etc/rc.local
 if [ ! -e ~/.ssh ]; then
 	mkdir ~/.ssh
 fi
-ssh-keyscan -H ioibackup1.ioi2021.sg >> ~/.ssh/known_hosts 2> /dev/null
+ssh-keyscan -H ${BACKUP_SERVER} >> ~/.ssh/known_hosts 2> /dev/null
 chmod 600 ~/.ssh/known_hosts
 
 # Set flag to run atrun.sh at first boot

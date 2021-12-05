@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source /opt/ioi/config.sh
 
 QUIET=0
 MODE=backup
@@ -28,7 +29,7 @@ in size will be backed up.
 EOM
 	rsync -e "ssh -i /opt/ioi/config/ssh/ioibackup" \
 		-avz --delete \
-		--max-size=1M --bwlimit=1000 --exclude='.*' --exclude='*.pdf' ~ioi/ ioibackup@ioibackup1.ioi2021.sg:
+		--max-size=1M --bwlimit=1000 --exclude='.*' --exclude='*.pdf' ~ioi/ ioibackup@${BACKUP_SERVER}:
 elif [ "$MODE" = "restore" ]; then
 	echo Restoring into /tmp/restore.
 	if [ -e /tmp/restore ]; then
@@ -39,7 +40,7 @@ EOM
 	else
 		rsync -e "ssh -i /opt/ioi/config/ssh/ioibackup" \
     		    -avz --max-size=1M --bwlimit=1000 --exclude='.*' \
-				ioibackup@ioibackup1.ioi2021.sg: /tmp/restore
+				ioibackup@${BACKUP_SERVER}: /tmp/restore
 		chown ioi.ioi /tmp/restore
 	fi
 fi
