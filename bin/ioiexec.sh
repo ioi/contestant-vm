@@ -33,6 +33,7 @@ case $1 in
 		/opt/ioi/sbin/firewall.sh stop
 		rm /etc/tinc/vpn/ip.conf 2> /dev/null
 		rm /etc/tinc/vpn/mask.conf 2> /dev/null
+		rm /etc/tinc/vpn/dns.conf 2> /dev/null
 		rm /etc/tinc/vpn/hosts/* 2> /dev/null
 		rm /etc/tinc/vpn/rsa_key.* 2> /dev/null
 		rm /etc/tinc/vpn/tinc.conf 2> /dev/null

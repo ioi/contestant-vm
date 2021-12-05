@@ -33,6 +33,7 @@ do_config()
 
 	IP=$(cat $WORKDIR/vpn/ip.conf)
 	MASK=$(cat $WORKDIR/vpn/mask.conf)
+	DNS=$(cat $WORKDIR/vpn/dns.conf)
 
 	if ! check_ip "$IP" || ! check_ip "$MASK"; then
 		echo Bad IP numbers
@@ -42,6 +43,7 @@ do_config()
 
 	echo "$IP" > /etc/tinc/vpn/ip.conf
 	echo "$MASK" > /etc/tinc/vpn/mask.conf
+	echo "$DNS" > /etc/tinc/vpn/dns.conf
 	rm /etc/tinc/vpn/hosts/* 2> /dev/null
 	cp $WORKDIR/vpn/hosts/* /etc/tinc/vpn/hosts/
 	cp $WORKDIR/vpn/rsa_key.* /etc/tinc/vpn/
