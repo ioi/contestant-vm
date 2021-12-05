@@ -1,8 +1,11 @@
-#!/bin/sh
+#!/bin/bash
+
+source /opt/ioi/config.sh
 
 case "$1" in
 	start)
-		iptables-restore < /opt/ioi/misc/iptables.save
+		cat /opt/ioi/misc/iptables.save | \
+			sed -e 's#{SUBNET}#'${SUBNET}'#g' | tee|iptables-restore
 		;;
 	stop)
 		iptables -P INPUT ACCEPT
