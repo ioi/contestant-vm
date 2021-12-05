@@ -81,28 +81,6 @@ check_user()
 	return $?
 }
 
-
-check_vpn()
-{
-
-	# Try one ping
-	if ping -c 1 10.10.0.1 -q > /dev/null; then
-		return 0
-	fi
-
-	# Then try 3 pings before we declare fail
-	if ping -c 3 10.10.0.1 -q > /dev/null; then
-		return 0
-	fi
-
-	return 1
-}
-
-stop_vpn()
-{
-	sudo /opt/ioi/bin/tinc.sh stop
-}
-
 main "$@"; exit
 
 # vim: ft=sh ts=4 sw=4 noet
