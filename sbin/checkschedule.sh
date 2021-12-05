@@ -1,6 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
-SERVER=https://pop.ioi2021.sg/config
+source /opt/ioi/config.sh
+
 
 if [ -f /opt/ioi/misc/schedule2.txt.firstrun ]; then
 	/opt/ioi/sbin/atrun.sh schedule
@@ -9,7 +10,7 @@ fi
 
 # Check for new contest schedule
 SCHEDFILE=$(mktemp)
-wget --timeout=3 --tries=3 -O $SCHEDFILE "${SERVER}/schedule2.txt" > /dev/null 2>&1
+wget --timeout=3 --tries=3 -O $SCHEDFILE "https://${POP_SERVER}/config/schedule2.txt" > /dev/null 2>&1
 if [ $? -eq 0 -a -f $SCHEDFILE ]; then
     diff -q /opt/ioi/misc/schedule2.txt $SCHEDFILE > /dev/null
     if [ $? -ne 0 ]; then

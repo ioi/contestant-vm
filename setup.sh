@@ -268,8 +268,7 @@ systemd-resolve --flush-cache
 
 # Register something on our HTTP server to log connection
 INSTANCEID=$(cat /opt/ioi/run/instanceid.txt)
-wget -qO- https://test.ioi2021.sg/ping/$NODE-$NAME-$INSTANCEID &> /dev/null
-wget -qO- https://pop.ioi2021.sg/ping/$NODE-$NAME-$INSTANCEID &> /dev/null
+wget -qO- https://$POP_SERVER/ping/$NODE-$NAME-$INSTANCEID &> /dev/null
 EOM
 chmod 755 /etc/tinc/vpn/host-up
 cp /etc/tinc/vpn/host-up /opt/ioi/misc/

@@ -18,4 +18,5 @@
 -A OUTPUT -p udp -m udp --dport 123 -j ACCEPT
 -A OUTPUT -p tcp -m tcp -m multiport -d {SUBNET} --dports 22,80,443,10051 -j ACCEPT
 -A OUTPUT -p tcp -m tcp -m multiport -d ioibackup1.ioi2021.sg --dports 22,80,443 -j ACCEPT
--A OUTPUT -p tcp -m tcp -m multiport -d pop.ioi2021.sg --dports 80,443 -j ACCEPT
+-A OUTPUT -p tcp -m tcp -m multiport -d {POP_SERVER} --dports 80,443 -j ACCEPT
+COMMIT
