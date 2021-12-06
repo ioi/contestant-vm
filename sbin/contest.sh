@@ -37,9 +37,6 @@ contestprep()
 
 	chfn -f "$FULLNAME" ioi
 
-	# Put flag to indicate to lock screen
-	touch /opt/ioi/run/lockscreen
-
 	/opt/ioi/sbin/firewall.sh start
 	USER=$(/opt/ioi/bin/ioicheckuser -q)
 	echo "$USER" > /opt/ioi/run/userid.txt
@@ -105,32 +102,35 @@ monitor()
 
 case "$1" in
 	lock)
-		touch /opt/ioi/run/lockscreen
-		systemctl start i3lock
+		passwd -l ioi
+		cat - <<EOM > /etc/gdm3/greeter.dconf-defaults
+[org/gnome/login-screen]
+banner-message-enable=true
+banner-message-text='The contest is about to start.\nYour computer is temporarily locked.\nYou are not allowed to log in yet.\nPlease wait for further instructions.'
+EOM
+		systemctl restart gdm3
 		;;
 	unlock)
-		rm /opt/ioi/run/lockscreen
-		systemctl stop i3lock
+		passwd -u ioi
+		cat - <<EOM > /etc/gdm3/greeter.dconf-defaults
+[org/gnome/login-screen]
+banner-message-enable=false
+EOM
+		systemctl restart gdm3
 		;;
 	prep)
 		contestprep $2
 		;;
 	start)
-		rm /opt/ioi/run/lockscreen
 		logkeys --start --keymap /opt/ioi/misc/en_US_ubuntu_1204.map
-		systemctl stop i3lock
 		echo "* * * * * root /opt/ioi/sbin/contest.sh monitor" > /etc/cron.d/contest
 		;;
 	stop)
-		#touch /opt/ioi/run/lockscreen
-		#systemctl start i3lock
 		logkeys --kill
 		rm /etc/cron.d/contest
 		;;
 	done)
-		systemctl stop i3lock
 		/opt/ioi/sbin/firewall.sh stop
-		rm /opt/ioi/run/lockscreen
 		rm /opt/ioi/run/lockdown
 		rm /opt/ioi/run/contestid.txt
 		rm /opt/ioi/run/userid.txt

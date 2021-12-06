@@ -43,7 +43,7 @@ tasksel install ubuntu-desktop-minimal ubuntu-desktop-minimal-default-languages
 
 # Install tools needed for management and monitoring
 
-apt -y install net-tools openssh-server ansible xvfb tinc i3lock oathtool imagemagick \
+apt -y install net-tools openssh-server ansible xvfb tinc oathtool imagemagick \
 	zabbix-agent aria2
 
 # Install local build tools
@@ -166,7 +166,7 @@ cp misc/id_ansible.pub ~ansible/.ssh/authorized_keys
 chown -R ansible.ansible ~ansible/.ssh
 
 sed -i '/%sudo/ s/ALL$/NOPASSWD:ALL/' /etc/sudoers
-echo "ioi ALL=NOPASSWD: /opt/ioi/bin/ioiconf.sh, /opt/ioi/bin/ioiexec.sh, /opt/ioi/bin/lockscreen.sh, /opt/ioi/bin/ioibackup.sh" >> /etc/sudoers.d/01-ioi
+echo "ioi ALL=NOPASSWD: /opt/ioi/bin/ioiconf.sh, /opt/ioi/bin/ioiexec.sh, /opt/ioi/bin/ioibackup.sh" >> /etc/sudoers.d/01-ioi
 echo "zabbix ALL=NOPASSWD: /opt/ioi/sbin/genkey.sh" >> /etc/sudoers.d/01-ioi
 chmod 440 /etc/sudoers.d/01-ioi
 
@@ -306,20 +306,6 @@ WantedBy=multi-user.target
 EOM
 
 chmod 644 /lib/systemd/system/atd.service
-
-# Configure systemd for i3lock
-cat - <<EOM > /etc/systemd/system/i3lock.service
-[Unit]
-Description=Lock screen
-
-[Service]
-User=ansible
-Type=simple
-Restart=always
-RestartSec=60
-Environment=DISPLAY=':0.0'
-ExecStart=/opt/ioi/sbin/i3lock.sh
-EOM
 
 # Disable virtual consoles
 
