@@ -71,6 +71,13 @@ do_setup()
 	sudo /opt/ioi/bin/ioiconf.sh vpnconfig /tmp/vpn.tar.bz2
 	sudo /opt/ioi/bin/ioiconf.sh vpnrestart
 
+	read -d '' -r MSG<<-EOM
+		IOI user successfully configured.
+		EOM
+	zenity "$ZENTITLE" $ZENARG \
+		--info \
+		--text "$MSG"
+
 	return 1
 
 }
