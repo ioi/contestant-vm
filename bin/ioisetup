@@ -38,8 +38,8 @@ do_setup()
 {
 
 	CRED=$(zenity "$ZENTITLE" $ZENARG \
-		--forms --text "Enter Contestant Credentials" \
-		--add-entry=UserID: \
+		--forms --text "Enter contestant credentials" \
+		--add-entry=Username: \
 		--add-password=Password:
 	)
 
