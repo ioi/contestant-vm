@@ -107,8 +107,6 @@ case "$1" in
 			rm /etc/tinc/vpn/tinc.conf 2> /dev/null
 			rm /opt/ioi/config/ssh/ioibackup* 2> /dev/null
 			chfn -f "" ioi
-			#hostnamectl set-hostname "ioi"
-			system stop zabbix-agent
 		fi
 		;;
 	vpnstart)
