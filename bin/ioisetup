@@ -47,6 +47,19 @@ do_setup()
 		return 1
 	fi
 
+	# download new ansible pubkey
+	sudo /opt/ioi/bin/ioiconf.sh getpubkey
+	if [ $? -ne 0 ]; then
+		read -d '' -r MSG<<-EOM
+			Failed to communicate with the IOI 2022 configuration server.\n
+			Please try again. If this persists, please contact the HTC.
+			EOM
+		zenity "$ZENTITLE" $ZENARG \
+			--error \
+			--text "$MSG"
+		return 2
+	fi
+
 	curl -m 5 -s -f -o /tmp/vpn.tar.bz2 "https://$POP_SERVER/pop-config/$CRED" > /dev/null 2>&1
 	RC=$?
 	if [ $RC -eq 22  ]; then

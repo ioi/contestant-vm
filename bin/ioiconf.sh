@@ -1,5 +1,8 @@
 #!/bin/bash
 
+source /opt/ioi/config.sh
+
+
 check_ip()
 {
 	local IP=$1
@@ -132,7 +135,7 @@ case "$1" in
 Invalid argument to setvpnproto. Specify "yes" to use TCP only, or "auto"
 to allow TCP/UDP with fallback to TCP only.
 EOM
-			exit 1	
+			exit 1
 		fi
 		;;
 	vpnconfig)
@@ -198,6 +201,20 @@ Invalid argument to setscreenlock. Specify "on" to enable screensaver lock,
 or "off" to disable screensaver lock.
 EOM
 		fi
+		;;
+	getpubkey)
+		curl -m 5 -s -f -o /opt/ioi/misc/id_ansible.pub "https://$POP_SERVER/ansible.pub" > /dev/null 2>&1
+		RC=$?
+		if [ ${RC} -ne 0 ]; then
+			exit ${RC}
+		fi
+		chmod 664 /opt/ioi/misc/id_ansible.pub
+		chown ansible:ansible /opt/ioi/misc/id_ansible.pub
+
+		cp /opt/ioi/misc/id_ansible.pub /home/ansible/.ssh/authorized_keys
+		chmod 600 /home/ansible/.ssh/authorized_keys
+		chown ansible:ansible /home/ansible/.ssh/authorized_keys
+		exit 0
 		;;
 	*)
 		echo Not allowed
