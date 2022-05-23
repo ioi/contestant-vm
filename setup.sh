@@ -159,10 +159,10 @@ EOM
 
 update-grub2
 
-# Setup SSH authorized keys and passwordless sudo for ansible
+# Setup empty SSH authorized keys and passwordless sudo for ansible
 
 mkdir -p ~ansible/.ssh
-cp misc/id_ansible.pub ~ansible/.ssh/authorized_keys
+touch ~ansible/.ssh/authorized_keys
 chown -R ansible.ansible ~ansible/.ssh
 
 sed -i '/%sudo/ s/ALL$/NOPASSWD:ALL/' /etc/sudoers
