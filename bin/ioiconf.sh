@@ -18,7 +18,8 @@ check_ip()
 do_config()
 {
 
-	CONF=$1
+	local CONF=$1  # vpn config filepath
+	local CRED=$2  # contestant credential
 
 	if ! test -f "$CONF"; then
 		echo "Can't read $CONF"
@@ -75,7 +76,11 @@ do_config()
 		openssl rand 10 | base32 > /opt/ioi/run/instanceid.txt
 	fi
 
-	return
+	# store credential
+	echo "${CRED%|*}" > /opt/ioi/run/username.txt
+	echo "${CRED##*|}" > /opt/ioi/run/password.txt
+
+	exit 0
 }
 
 
@@ -139,7 +144,7 @@ EOM
 		fi
 		;;
 	vpnconfig)
-		do_config $2
+		do_config $2 $3
 		;;
 	settz)
 		tz=$2

@@ -84,6 +84,15 @@ do_setup()
 			--text "$MSG"
 	fi
 
+	if [ ${retval} -eq 4 ]; then
+		read -d '' -r MSG<<-EOM
+			Internal error occured. Please contact the HTC.
+			EOM
+		zenity "$ZENTITLE" $ZENARG \
+			--error \
+			--text "$MSG"
+	fi
+
 	return ${retval}
 }
 
@@ -111,7 +120,12 @@ do_core_setup()
 
 	echo "50"
 
-	sudo /opt/ioi/bin/ioiconf.sh vpnconfig /tmp/vpn.tar.bz2
+	sudo /opt/ioi/bin/ioiconf.sh vpnconfig /tmp/vpn.tar.bz2 $CRED
+	local retval=$?
+	if [ $retval -ne 0 ]; then
+		echo "100"
+		return 4  # internal error
+	fi
 
 	echo "75"
 
