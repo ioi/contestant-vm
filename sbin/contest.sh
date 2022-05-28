@@ -99,27 +99,38 @@ monitor()
 	fi
 }
 
-
-case "$1" in
-	lock)
-		passwd -l ioi
-		cat - <<EOM > /etc/gdm3/greeter.dconf-defaults
+lock()
+{
+	passwd -l ioi
+	cat - <<EOM > /etc/gdm3/greeter.dconf-defaults
 [org/gnome/login-screen]
 banner-message-enable=true
 banner-message-text='The contest is about to start.\nYour computer is temporarily locked.\nYou are not allowed to log in yet.\nPlease wait for further instructions.'
 EOM
-		systemctl restart gdm3
-		;;
-	unlock)
-		passwd -u ioi
-		cat - <<EOM > /etc/gdm3/greeter.dconf-defaults
+	systemctl restart gdm3
+}
+
+unlock()
+{
+	passwd -u ioi
+	cat - <<EOM > /etc/gdm3/greeter.dconf-defaults
 [org/gnome/login-screen]
 banner-message-enable=false
 EOM
-		systemctl restart gdm3
+	systemctl restart gdm3
+}
+
+
+case "$1" in
+	lock)
+		lock
+		;;
+	unlock)
+		unlock
 		;;
 	prep)
 		contestprep $2
+		unlock
 		;;
 	start)
 		logkeys --start --keymap /opt/ioi/misc/en_US_ubuntu_1204.map
