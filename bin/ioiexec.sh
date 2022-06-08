@@ -31,7 +31,6 @@ case $1 in
 	vpnclear)
 		systemctl stop tinc@vpn
 		systemctl disable tinc@vpn 2> /dev/null
-		/opt/ioi/sbin/firewall.sh stop
 		rm /etc/tinc/vpn/ip.conf 2> /dev/null
 		rm /etc/tinc/vpn/mask.conf 2> /dev/null
 		rm /etc/tinc/vpn/dns.conf 2> /dev/null
