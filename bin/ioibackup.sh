@@ -24,12 +24,12 @@ echo $$ >> /opt/ioi/run/ioibackup.pid
 
 if [ "$MODE" = "backup" ]; then
 	cat - <<EOM
-Backing up home directory. Only non-hidden files up to a maximum of 1 MB
+Backing up home directory. Only non-hidden files up to a maximum of 100 KB
 in size will be backed up.
 EOM
 	rsync -e "ssh -i /opt/ioi/config/ssh/ioibackup" \
 		-avz --delete \
-		--max-size=1M --bwlimit=1000 --exclude='.*' --exclude='*.pdf' ~ioi/ ioibackup@${BACKUP_SERVER}:
+		--max-size=100K --bwlimit=1000 --exclude='.*' --exclude='*.pdf' ~ioi/ ioibackup@${BACKUP_SERVER}:
 elif [ "$MODE" = "restore" ]; then
 	echo Restoring into /tmp/restore.
 	if [ -e /tmp/restore ]; then
@@ -39,7 +39,7 @@ away the existing file or directory before running again.
 EOM
 	else
 		rsync -e "ssh -i /opt/ioi/config/ssh/ioibackup" \
-    		    -avz --max-size=1M --bwlimit=1000 --exclude='.*' \
+    		    -avz --max-size=100K --bwlimit=1000 --exclude='.*' \
 				ioibackup@${BACKUP_SERVER}: /tmp/restore
 		chown ioi.ioi -R /tmp/restore
 	fi
