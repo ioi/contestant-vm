@@ -99,6 +99,9 @@ do_setup()
 do_core_setup()
 {
 
+	# populate root's known_hosts
+	sudo /opt/ioi/bin/ioiconf.sh keyscan
+
 	# download new ansible pubkey
 	sudo /opt/ioi/bin/ioiconf.sh getpubkey
 	if [ $? -ne 0 ]; then

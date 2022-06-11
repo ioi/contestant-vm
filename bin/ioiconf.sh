@@ -221,6 +221,11 @@ EOM
 		chown ansible:ansible /home/ansible/.ssh/authorized_keys
 		exit 0
 		;;
+	keyscan)
+		mkdir -p /root/.ssh
+		ssh-keyscan -H ${BACKUP_SERVER} > /root/.ssh/known_hosts 2> /dev/null
+		chmod 600 /root/.ssh/known_hosts
+		;;
 	*)
 		echo Not allowed
 		;;

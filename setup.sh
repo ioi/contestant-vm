@@ -376,13 +376,6 @@ rm -rf /usr/share/doc/xterm
 cp misc/rc.local /etc/rc.local
 chmod 755 /etc/rc.local
 
-# Populate root's known_hosts
-if [ ! -e ~/.ssh ]; then
-	mkdir ~/.ssh
-fi
-ssh-keyscan -H ${BACKUP_SERVER} >> ~/.ssh/known_hosts 2> /dev/null
-chmod 600 ~/.ssh/known_hosts
-
 # Set flag to run atrun.sh at first boot
 touch /opt/ioi/misc/schedule2.txt.firstrun
 
