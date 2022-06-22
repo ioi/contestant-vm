@@ -170,6 +170,11 @@ echo "ioi ALL=NOPASSWD: /opt/ioi/bin/ioiconf.sh, /opt/ioi/bin/ioiexec.sh, /opt/i
 echo "zabbix ALL=NOPASSWD: /opt/ioi/sbin/genkey.sh" >> /etc/sudoers.d/01-ioi
 chmod 440 /etc/sudoers.d/01-ioi
 
+# setup bash aliases for ansible user
+cp /opt/ioi/misc/bash_aliases ~ansible/.bash_aliases
+chmod 644 ~ansible/.bash_aliases
+chown ansible.ansible ~ansible/.bash_aliases
+
 # Documentation
 
 apt -y install stl-manual python3-doc
