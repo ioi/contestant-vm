@@ -26,6 +26,9 @@ contestprep()
 	mkdir /opt/ioi/store/submissions
 	chown $UID.$UID /opt/ioi/store/submissions
 
+	# Remove screenshot data
+	rm /opt/ioi/store/screenshots/*
+
 	/opt/ioi/sbin/mkioiuser.sh
 
 	# Detect cases where the crypt password is invalid, and if so set default passwd
@@ -71,6 +74,7 @@ monitor()
 	DISPLAY=:0.0 sudo -u ioi xhost +local:root > /dev/null
 	echo "$DATE monitor run" >> /opt/ioi/store/contest.log
 
+	# capture screen every minute but with 50% chance
 	if [ $(seq 2 | shuf | head -1) -eq 2 ]; then
 		USER=$(cat /opt/ioi/run/userid.txt)
 		DISPLAY=:0.0 xwd -root -silent | convert xwd:- png:- | bzip2 -c - \
