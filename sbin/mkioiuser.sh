@@ -16,7 +16,9 @@ if [ -f /opt/ioi/config/screenlock ]; then
 else
 	sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.screensaver lock-enabled false
 fi
-chfn -f "$FULLNAME" ioi
+
+# set default fullname
+chfn -f "IOI Contestant" ioi
 
 # Update path
 echo 'PATH=/opt/ioi/bin:$PATH' >> ~ioi/.bashrc
