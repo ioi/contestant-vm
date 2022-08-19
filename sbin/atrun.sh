@@ -9,14 +9,14 @@ TIMENOW=$(date +"%Y-%m-%d %H:%M")
 schedule()
 {
 	JOBID=$1
-	
+
 	if [ $(wc -l $SCHEDULE | cut -d\  -f1) -lt "$JOBID" ]; then
 		logger -p local0.info "ATRUN: Scheduling job $JOBID does not exist"
 		return 1
 	fi
 
 	# Get details of job to schedule
-        JOB=$(cat $SCHEDULE | head -$JOBID | tail -1)
+	JOB=$(cat $SCHEDULE | head -$JOBID | tail -1)
 	ATTIME=$(echo "$JOB" | awk '{print($2, $1)}')
 	NEXTTIME=$(echo "$JOB" | awk '{print($1, $2)}')
 	CMD=$(echo "$JOB" | cut -d\  -f6-)
