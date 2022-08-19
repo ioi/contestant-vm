@@ -84,6 +84,8 @@ do_config()
 }
 
 
+logger -p local0.info "IOICONF: invoke $1"
+
 case "$1" in
 	fwstart)
 		if [ -e /opt/ioi/run/lockdown ]; then

@@ -4,6 +4,7 @@ source /opt/ioi/config.sh
 
 
 if [ -f /opt/ioi/misc/schedule2.txt.firstrun ]; then
+	logger -p local0.info "SCHEDULE: first run"
 	/opt/ioi/sbin/atrun.sh schedule
 	rm /opt/ioi/misc/schedule2.txt.firstrun
 fi

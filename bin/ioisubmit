@@ -43,6 +43,8 @@ tar jcf /opt/ioi/store/submissions/$USERID-$TASKNAME-$TS.tar.bz2 -C $TMPDIR $USE
 
 SUM=$(sha256sum /opt/ioi/store/submissions/$USERID-$TASKNAME-$TS.tar.bz2 | cut -d\  -f1)
 
+logger -p local0.info "IOISUBMIT: '$USERID-$TASKNAME-$TS.tar.bz2' submitted with checksum '$SUM'"
+
 echo ==========================================================================
 echo SUBMISSION STORED
 echo --------------------------------------------------------------------------

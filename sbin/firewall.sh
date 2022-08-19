@@ -9,11 +9,13 @@ case "$1" in
 			sed -e 's/{BACKUP_SERVER}/'${BACKUP_SERVER}'/g' | \
 			sed -e 's/{CMS_PUBLIC_DOMAIN}/'${CMS_PUBLIC_DOMAIN}'/g' | \
 			sed -e 's#{SUBNET}#'${SUBNET}'#g' | tee|iptables-restore
+		logger -p local0.info "FIREWALL: started"
 		;;
 	stop)
 		iptables -P INPUT ACCEPT
 		iptables -P OUTPUT ACCEPT
 		iptables -F
+		logger -p local0.info "FIREWALL: stopped"
 		;;
 	*)
 		echo Must specify start or stop

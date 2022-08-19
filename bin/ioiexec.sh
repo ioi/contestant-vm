@@ -15,9 +15,12 @@ CMDSTRING=$*
 
 FULLKEY=$(echo $PARTKEY $CMDSTRING | sha256sum | cut -d\  -f1)
 
+logger -p local0.info "IOIEXEC: invoke '$CMDSTRING'"
+
 # totp interval set to 30 minutes
 if ! oathtool -s 1800 --totp $FULLKEY -d 8 -w 1 -- "$TOTP" > /dev/null 2>&1; then
 	echo "TOTP failed" >&2
+	logger -p local0.info "IOIEXEC: totp failed"
 	exit;
 fi
 
@@ -27,6 +30,7 @@ case $1 in
 		iptables -P OUTPUT ACCEPT
 		iptables -P INPUT ACCEPT
 		iptables -F
+		logger -p local0.info "IOIEXEC: firewall stopped"
 		;;
 	vpnclear)
 		systemctl stop tinc@vpn
@@ -38,7 +42,8 @@ case $1 in
 		rm /etc/tinc/vpn/rsa_key.* 2> /dev/null
 		rm /etc/tinc/vpn/tinc.conf 2> /dev/null
 		rm /opt/ioi/config/ssh/ioibackup* 2> /dev/null
-		chfn -f "" ioi
+		logger -p local0.info "IOIEXEC: vpn stopped"
+		chfn -f "IOI Contestant" ioi
 		echo "Due to some issues, we have disabled VPN connection to CMS."
 		echo ""
 		echo "For now, open https://cms-public.ioi2022.id on Firefox,"

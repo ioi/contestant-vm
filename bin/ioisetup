@@ -25,6 +25,8 @@ main()
 				--text "$MSG"
 			exit 1
 		fi
+
+		logger -p local0.info "IOISETUP: previously configured for $USERID"
 	fi
 
 	while true; do
@@ -60,6 +62,7 @@ do_setup()
 		read -d '' -r MSG<<-EOM
 			IOI user successfully configured.
 			EOM
+		logger -p local0.info "IOISETUP: configured for ${CRED%|*}"
 		zenity "$ZENTITLE" $ZENARG \
 			--info \
 			--text "$MSG"
@@ -146,6 +149,7 @@ check_user()
 	return $?
 }
 
+logger -p local0.info "IOISETUP: invoked"
 main "$@"; exit
 
 # vim: ft=sh ts=4 sw=4 noet

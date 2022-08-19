@@ -1,5 +1,7 @@
 #!/bin/sh
 
+logger -p local0.info "MKIOIUSER: Create a new IOI user"
+
 # Create IOI account
 useradd -m ioi
 
@@ -46,3 +48,5 @@ cp /opt/ioi/misc/ioistart.desktop /usr/share/gnome/autostart/
 # Setup default Mozilla Firefox configuration
 cp -a /opt/ioi/misc/mozilla ~ioi/.mozilla
 chown -R ioi.ioi ~ioi/.mozilla
+
+logger -p local0.info "MKIOIUSER: IOI user created"

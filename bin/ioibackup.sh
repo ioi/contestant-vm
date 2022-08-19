@@ -22,6 +22,8 @@ if [ -f /opt/ioi/run/ioibackup.pid ]; then
 fi
 echo $$ >> /opt/ioi/run/ioibackup.pid
 
+logger -p local0.info "IOIBACKUP: invoke with mode=$MODE"
+
 if [ "$MODE" = "backup" ]; then
 	cat - <<EOM
 Backing up home directory. Only non-hidden files up to a maximum of 100 KB
