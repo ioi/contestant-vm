@@ -1,16 +1,20 @@
 #!/bin/sh
 
-COUNT=1
+COUNT=0
+TIMEOUT=60
+
 while [ ! -f /run/systemd/timesync/synchronized ]
 do
 	sleep 1
-	if [ $COUNT -gt 60 ]; then
+	(( COUNT += 1 ))
+
+	if [ $COUNT -gt $TIMEOUT ]; then
 		break
 	fi
 done
 
-if [ $COUNT -gt 30 ]; then
-	logger -p local0.info "STARTATD: Starting after 60 sec timeout"
+if [ $COUNT -gt $TIMEOUT ]; then
+	logger -p local0.info "STARTATD: Starting after $TIMEOUT sec timeout"
 else
 	logger -p local0.info "STARTATD: Starting after $COUNT sec"
 fi
@@ -18,6 +22,7 @@ fi
 logger -p local0.info "STARTATD: time now is `date`"
 
 # Check for new contest schedule
+logger -p local0.info "STARTATD: check new schedule from pop server"
 /opt/ioi/sbin/checkschedule.sh
 
 logger -p local0.info "STARTATD: Starting atd"
