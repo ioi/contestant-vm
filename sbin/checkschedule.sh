@@ -12,12 +12,12 @@ fi
 SCHEDFILE=$(mktemp)
 wget --timeout=3 --tries=3 -O $SCHEDFILE "https://${POP_SERVER}/config/schedule2.txt" > /dev/null 2>&1
 if [ $? -eq 0 -a -f $SCHEDFILE ]; then
-    diff -q /opt/ioi/misc/schedule2.txt $SCHEDFILE > /dev/null
-    if [ $? -ne 0 ]; then
-        logger -p local0.info "SCHEDULE: Setting up new contest schedule"
-        cp $SCHEDFILE /opt/ioi/misc/schedule2.txt
-        /opt/ioi/sbin/atrun.sh schedule
-    fi
+	diff -q /opt/ioi/misc/schedule2.txt $SCHEDFILE > /dev/null
+	if [ $? -ne 0 ]; then
+		logger -p local0.info "SCHEDULE: Setting up new contest schedule"
+		cp $SCHEDFILE /opt/ioi/misc/schedule2.txt
+		/opt/ioi/sbin/atrun.sh schedule
+	fi
 fi
 rm $SCHEDFILE
 
