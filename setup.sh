@@ -277,7 +277,7 @@ cp /etc/tinc/vpn/host-up /opt/ioi/misc/
 cat - <<'EOM' > /etc/tinc/vpn/host-down
 #!/bin/bash
 
-logger -p local0.info VPN connection to $NODE $REMOTEADDRESS:$REMOTEPORT is down
+logger -p local0.info TINC: VPN connection to $NODE $REMOTEADDRESS:$REMOTEPORT is down
 EOM
 chmod 755 /etc/tinc/vpn/host-down
 
