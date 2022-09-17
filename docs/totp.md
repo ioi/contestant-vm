@@ -1,13 +1,11 @@
-# Time-based OTP
+# When VPN/Firewall Goes Wrong
 
-There are 2 commands that could be used in a lockdown mode.
+During the contest, if for any reason we need to disable VPN and/or disable the firewall, we can tell the contestants to use the following commands:
 
-  * `ioiexec <TOTP> fwstop`
-  * `ioiexec <TOTP> vpnclear`
+* `ioiexec <TOTP> fwstop`
+* `ioiexec <TOTP> vpnclear`
 
-As we can see, both of them need TOTP in order to work. The TOTP itself using `sbin/genkey.sh` command as the first half (to ensure the VM integrity) and the command itself as the second half.
-
-In short we can generate 2 TOTPs using the following function (please run it as root user since it requires root access to read some files).
+Both commands need a TOTP code. To generate one, run the following snippet as root inside any contestant VM.
 
 ```bash
 function generateTOTP() {

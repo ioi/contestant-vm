@@ -83,3 +83,7 @@ tar -cvf "$OVA_FILEPATH" $NAME*.ovf $NAME*.mf $NAME*.vmdk
 cd "$old_pwd"
 rm -rf "$tempdir"
 ```
+
+## Docs
+
+For more information, see the [docs](docs/README.md).
