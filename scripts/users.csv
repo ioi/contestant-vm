@@ -1,0 +1,5 @@
+team_code,first_name,last_name,email,username,password,ip,vpn_servers,online
+IDN,Jane,Doe,jane@example.com,IDN1,password,10.16.1.5,pop1:pop2,0
+IDN,James,Doe,james@example.com,IDN2,password,10.16.1.6,pop1:pop2,0
+SGP,John,Doe,john@example.com,SGP1,password,10.16.2.5,pop2:pop3,1
+SGP,Jeremy,Doe,jeremy@example.com,SGP2,password,10.16.3.5,pop3:pop1,1
