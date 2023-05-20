@@ -52,7 +52,7 @@ apt -y install build-essential autoconf autotools-dev
 
 # Install packages needed by contestants
 
-apt -y install openjdk-11-jdk-headless codeblocks emacs \
+apt -y install openjdk-11-jdk-headless emacs \
 	geany gedit joe kate kdevelop nano vim vim-gtk3 \
 	ddd valgrind visualvm ruby python3-pip konsole
 
