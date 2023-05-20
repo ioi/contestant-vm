@@ -125,6 +125,7 @@ EOM
 
 # Don't list ansible user at login screen
 
+mkdir -p /var/lib/AccountsService/users
 cat - <<EOM > /var/lib/AccountsService/users/ansible
 [User]
 Language=
