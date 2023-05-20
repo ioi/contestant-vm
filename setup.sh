@@ -217,8 +217,8 @@ depmod -a
 
 cp -a html /opt/ioi/html
 mkdir -p /opt/ioi/html/fonts
-wget -O /tmp/fira-sans.zip "https://google-webfonts-helper.herokuapp.com/api/fonts/fira-sans?download=zip&subsets=latin&variants=regular"
-wget -O /tmp/share.zip "https://google-webfonts-helper.herokuapp.com/api/fonts/share?download=zip&subsets=latin&variants=regular"
+wget -O /tmp/fira-sans.zip "https://gwfh.mranftl.com/api/fonts/fira-sans?download=zip&subsets=latin&variants=regular"
+wget -O /tmp/share.zip "https://gwfh.mranftl.com/api/fonts/share?download=zip&subsets=latin&variants=regular"
 unzip -o /tmp/fira-sans.zip -d /opt/ioi/html/fonts
 unzip -o /tmp/share.zip -d /opt/ioi/html/fonts
 rm /tmp/fira-sans.zip
