@@ -276,6 +276,9 @@ systemctl disable multipathd
 # Disable cloud-init
 touch /etc/cloud/cloud-init.disabled
 
+# At was not installed by default somewhy
+apt install at
+
 # Don't stsart atd service
 systemctl disable atd
 
