@@ -82,9 +82,10 @@ mkdir -p /opt/ioi/store/screenshots
 mkdir -p /opt/ioi/store/submissions
 mkdir -p /opt/ioi/config/ssh
 
-aria2c -x 4 -d /tmp -o cpptools-linux.vsix "https://github.com/microsoft/vscode-cpptools/releases/download/v1.10.7/cpptools-linux.vsix"
-aria2c -x 4 -d /tmp -o cpp-compile-run.vsix "https://github.com/danielpinto8zz6/c-cpp-compile-run/releases/download/v1.0.15/c-cpp-compile-run-1.0.15.vsix"
-wget -O /tmp/vscodevim.vsix "https://github.com/VSCodeVim/Vim/releases/download/v1.23.0/vim-1.23.0.vsix"
+# Latest as of 2023-05-20
+aria2c -x 4 -d /tmp -o cpptools-linux.vsix "https://github.com/microsoft/vscode-cpptools/releases/download/v1.15.4/cpptools-linux.vsix"
+aria2c -x 4 -d /tmp -o cpp-compile-run.vsix "https://github.com/danielpinto8zz6/c-cpp-compile-run/releases/download/v1.0.45/c-cpp-compile-run-1.0.45.vsix"
+wget -O /tmp/vscodevim.vsix "https://github.com/VSCodeVim/Vim/releases/download/v1.25.2/vim-1.25.2.vsix"
 rm -rf /tmp/vscode
 mkdir /tmp/vscode
 mkdir /tmp/vscode-extensions
