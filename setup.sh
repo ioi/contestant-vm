@@ -216,7 +216,7 @@ apt -y remove gnome-power-manager brltty extra-cmake-modules
 apt -y remove llvm-13-dev zlib1g-dev libobjc-11-dev libx11-dev dpkg-dev manpages-dev
 apt -y remove linux-firmware memtest86+
 apt -y remove network-manager-openvpn network-manager-openvpn-gnome openvpn
-apt -y remove build-essential autoconf autotools-dev
+apt -y remove autoconf autotools-dev
 apt -y remove `dpkg-query -Wf '${Package}\n' | grep linux-header`
 
 # Remove most extra modules but preserve those for sound
