@@ -70,7 +70,7 @@ do_setup()
 
 	if [ ${retval} -eq 2 ]; then
 		read -d '' -r MSG<<-EOM
-			Failed to communicate with the IOI 2022 configuration server.\n
+			Failed to communicate with the IOI 2023 configuration server.\n
 			Please try again. If this persists, please contact the HTC.
 			EOM
 		zenity "$ZENTITLE" $ZENARG \

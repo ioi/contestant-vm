@@ -59,5 +59,6 @@ PARTKEY=$(/opt/ioi/sbin/genkey.sh)
 echo $PARTKEY
 
 echo REMEMBER TO REMOVE SETUP DIRECTORY
+echo REMEMBER TO FINALIZE VM IMAGE
 
 # vim: ts=4
