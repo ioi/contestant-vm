@@ -23,13 +23,13 @@ fi
 
 # Fix up date/time
 
-timedatectl set-timezone Asia/Jakarta
+timedatectl set-timezone Europe/Budapest
 vmware-toolbox-cmd timesync enable
 hwclock -w
 
 # Install zabbix repo
-wget -O /tmp/zabbix-release_5.0-1+focal_all.deb https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-1+focal_all.deb
-dpkg -i /tmp/zabbix-release_5.0-1+focal_all.deb
+wget -O /tmp/zabbix-release_5.0-2+ubuntu22.04_all.deb https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-2+ubuntu22.04_all.deb
+dpkg -i /tmp/zabbix-release_5.0-2+ubuntu22.04_all.deb
 
 # Update packages
 
@@ -52,7 +52,7 @@ apt -y install build-essential autoconf autotools-dev
 
 # Install packages needed by contestants
 
-apt -y install openjdk-11-jdk-headless codeblocks emacs \
+apt -y install emacs \
 	geany gedit joe kate kdevelop nano vim vim-gtk3 \
 	ddd valgrind visualvm ruby python3-pip konsole
 
@@ -63,7 +63,7 @@ snap install --classic code
 snap install --classic sublime-text
 
 # Install Eclipse
-aria2c -x4 -d /tmp -o eclipse.tar.gz "http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2021-09/R/eclipse-java-2021-09-R-linux-gtk-x86_64.tar.gz"
+aria2c -x4 -d /tmp -o eclipse.tar.gz "https://eclipse.mirror.liteserver.nl/technology/epp/downloads/release/2023-06/M2/eclipse-cpp-2023-06-M2-linux-gtk-x86_64.tar.gz"
 tar zxf /tmp/eclipse.tar.gz -C /opt
 rm /tmp/eclipse.tar.gz
 wget -O /usr/share/pixmaps/eclipse.png "https://icon-icons.com/downloadimage.php?id=94656&root=1381/PNG/64/&file=eclipse_94656.png"
@@ -95,9 +95,10 @@ mkdir -p /opt/ioi/store/screenshots
 mkdir -p /opt/ioi/store/submissions
 mkdir -p /opt/ioi/config/ssh
 
-aria2c -x 4 -d /tmp -o cpptools-linux.vsix "https://github.com/microsoft/vscode-cpptools/releases/download/v1.10.7/cpptools-linux.vsix"
-aria2c -x 4 -d /tmp -o cpp-compile-run.vsix "https://github.com/danielpinto8zz6/c-cpp-compile-run/releases/download/v1.0.15/c-cpp-compile-run-1.0.15.vsix"
-wget -O /tmp/vscodevim.vsix "https://github.com/VSCodeVim/Vim/releases/download/v1.23.0/vim-1.23.0.vsix"
+# Latest as of 2023-05-20
+aria2c -x 4 -d /tmp -o cpptools-linux.vsix "https://github.com/microsoft/vscode-cpptools/releases/download/v1.15.4/cpptools-linux.vsix"
+aria2c -x 4 -d /tmp -o cpp-compile-run.vsix "https://github.com/danielpinto8zz6/c-cpp-compile-run/releases/download/v1.0.45/c-cpp-compile-run-1.0.45.vsix"
+wget -O /tmp/vscodevim.vsix "https://github.com/VSCodeVim/Vim/releases/download/v1.25.2/vim-1.25.2.vsix"
 rm -rf /tmp/vscode
 mkdir /tmp/vscode
 mkdir /tmp/vscode-extensions
@@ -108,7 +109,7 @@ cp /tmp/vscodevim.vsix /opt/ioi/misc
 rm -rf /tmp/vscode-extensions
 
 # Add default timezone
-echo "Asia/Jakarta" > /opt/ioi/config/timezone
+echo "Europe/Budapest" > /opt/ioi/config/timezone
 
 # Default to enable screensaver lock
 touch /opt/ioi/config/screenlock
@@ -137,6 +138,7 @@ EOM
 
 # Don't list ansible user at login screen
 
+mkdir -p /var/lib/AccountsService/users
 cat - <<EOM > /var/lib/AccountsService/users/ansible
 [User]
 Language=
@@ -197,6 +199,8 @@ cd build
 ../configure
 make
 make install
+# These SUID management scripts are not needed
+rm /usr/local/bin/llk /usr/local/bin/llkk
 cp ../keymaps/en_US_ubuntu_1204.map /opt/ioi/misc/
 popd
 rm -rf $WORKDIR
@@ -209,12 +213,10 @@ apt -y install `dpkg-query -Wf '${Package}\n' | grep linux-modules-`
 # Remove unneeded packages
 
 apt -y remove gnome-power-manager brltty extra-cmake-modules
-apt -y remove llvm-9-dev zlib1g-dev libobjc-9-dev libx11-dev dpkg-dev manpages-dev
+apt -y remove llvm-13-dev zlib1g-dev libobjc-11-dev libx11-dev dpkg-dev manpages-dev
 apt -y remove linux-firmware memtest86+
 apt -y remove network-manager-openvpn network-manager-openvpn-gnome openvpn
-apt -y remove gnome-getting-started-docs-it gnome-getting-started-docs-ru \
-	gnome-getting-started-docs-es gnome-getting-started-docs-fr gnome-getting-started-docs-de
-apt -y remove build-essential autoconf autotools-dev
+apt -y remove autoconf autotools-dev
 apt -y remove `dpkg-query -Wf '${Package}\n' | grep linux-header`
 
 # Remove most extra modules but preserve those for sound
@@ -230,8 +232,8 @@ depmod -a
 
 cp -a html /opt/ioi/html
 mkdir -p /opt/ioi/html/fonts
-wget -O /tmp/fira-sans.zip "https://google-webfonts-helper.herokuapp.com/api/fonts/fira-sans?download=zip&subsets=latin&variants=regular"
-wget -O /tmp/share.zip "https://google-webfonts-helper.herokuapp.com/api/fonts/share?download=zip&subsets=latin&variants=regular"
+wget -O /tmp/fira-sans.zip "https://gwfh.mranftl.com/api/fonts/fira-sans?download=zip&subsets=latin&variants=regular"
+wget -O /tmp/share.zip "https://gwfh.mranftl.com/api/fonts/share?download=zip&subsets=latin&variants=regular"
 unzip -o /tmp/fira-sans.zip -d /opt/ioi/html/fonts
 unzip -o /tmp/share.zip -d /opt/ioi/html/fonts
 rm /tmp/fira-sans.zip
@@ -289,7 +291,10 @@ systemctl disable multipathd
 # Disable cloud-init
 touch /etc/cloud/cloud-init.disabled
 
-# Don't stsart atd service
+# At was not installed by default somewhy
+apt -y install at
+
+# Don't start atd service
 systemctl disable atd
 
 # Replace atd.service file
