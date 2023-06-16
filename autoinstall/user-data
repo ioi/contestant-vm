@@ -1,0 +1,45 @@
+#cloud-config
+autoinstall:
+  version: 1
+  #reporting:
+  #  hook:
+  #    type: webhook
+  #    endpoint: http://example.com/endpoint/path
+  locale: en_US
+  keyboard:
+    layout: us
+  network:
+    network:
+      version: 2
+      ethernets:
+        # Network did not work. ens33 seems to be the default interface for VMware
+        ens33:
+           dhcp4: yes
+  storage:
+    layout:
+      name: direct #lvm
+  identity:
+    hostname: ioi-test-0615
+    username: ansible
+    # ansible DO CHANGE!
+    password: $6$NH0tTrHw/4v3.Jbi$6NCVzJ45i3N4HFF1vJpPobpdkGhgBq0t56KAGzjm4/wg1saD8N7akmBMaLbSH.UmpIdmZV8TUaqN2/pDaSSS0.
+  ssh:
+    install-server: yes
+    #authorized-keys:
+    #  - $key
+    allow-pw: no
+  packages:
+    - vim # for basic editing
+    - git # for cloning the repo
+  user-data:
+    # Will be merged into Cloud-init config
+    users:
+      - default
+      - name: ioi
+        gecos: ioi
+        lock_passwd: false
+        # ioi
+        passwd: $6$ZMrIRti0JubrLV3t$mTkdv6Bmg0sGk3equaqqbwDFPL.t4ezClcVygHkxcKM/T7ovovNXncg1yLXDqWcXU/kXJY9sSfmHNb8P0Fu4R1
+  #error-commands:
+  #  - tar c /var/log/installer | nc 192.168.0.1 1000
+
