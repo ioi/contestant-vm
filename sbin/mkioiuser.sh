@@ -31,6 +31,7 @@ echo 'TZ=$(cat /opt/ioi/config/timezone)' >> ~ioi/.profile
 echo 'export TZ' >> ~ioi/.profile
 
 # Mark Gnome's initial setup as complete
+sudo -Hu ioi bash -c 'mkdir -p ~/.config'
 sudo -Hu ioi bash -c 'echo yes > ~/.config/gnome-initial-setup-done'
 
 sudo -Hu ioi bash -c 'mkdir -p ~ioi/.local/share/gnome-shell/extensions'

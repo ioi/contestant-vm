@@ -160,8 +160,8 @@ EOM
 		if [ -f "/usr/share/zoneinfo/$2" ]; then
 			cat - <<EOM
 Your timezone will be set to $2 at your next login.
-*** Please take note that all dates and times communicated by the IOI 2022 ***
-*** organisers will be in Asia/Jakarta timezone (GMT+07), unless it is     ***
+*** Please take note that all dates and times communicated by the IOI 2023 ***
+*** organisers will be in Europe/Budapest timezone (GMT+2), unless it is     ***
 *** otherwise specified.                                                   ***
 EOM
 			echo "$2" > /opt/ioi/config/timezone

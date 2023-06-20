@@ -46,7 +46,7 @@ case $1 in
 		chfn -f "IOI Contestant" ioi
 		echo "Due to some issues, we have disabled VPN connection to CMS."
 		echo ""
-		echo "For now, open https://cms-public.ioi2022.id on Firefox,"
+		echo "For now, open https://cms-public.nonexistent on Firefox,"
 		echo "and log in using the following credentials:"
 		echo ""
 		echo "- Username: $(cat /opt/ioi/run/username.txt)"
