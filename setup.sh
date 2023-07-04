@@ -343,6 +343,10 @@ done
 
 rm -rf /var/lib/snapd/cache/*
 
+# Mark g++ as explicitly needed
+
+apt -y install g++
+
 # Clean up apt
 
 apt -y autoremove
