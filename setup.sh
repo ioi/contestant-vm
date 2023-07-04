@@ -53,6 +53,10 @@ apt -y install emacs \
 	geany gedit joe kate kdevelop nano vim vim-gtk3 \
 	ddd valgrind visualvm ruby python3-pip konsole
 
+# Install browser
+
+apt -y install firefox
+
 # Install snap packages needed by contestants
 
 snap install --classic atom
