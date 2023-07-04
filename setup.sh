@@ -36,6 +36,9 @@ dpkg -i /tmp/zabbix-release_5.0-2+ubuntu22.04_all.deb
 apt -y update
 apt -y upgrade
 
+# Disable needrestart prompt
+export NEEDRESTART_MODE=a
+
 apt -y install ubuntu-desktop-minimal
 
 # Install tools needed for management and monitoring
