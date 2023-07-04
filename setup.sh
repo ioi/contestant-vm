@@ -38,6 +38,7 @@ apt -y upgrade
 
 # Disable needrestart prompt
 export NEEDRESTART_MODE=a
+export DEBIAN_FRONTEND=noninteractive
 
 apt -y install ubuntu-desktop-minimal
 
