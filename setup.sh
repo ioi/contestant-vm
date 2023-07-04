@@ -36,10 +36,7 @@ dpkg -i /tmp/zabbix-release_5.0-2+ubuntu22.04_all.deb
 apt -y update
 apt -y upgrade
 
-# Convert server install into a minimum desktop install
-
-apt -y install tasksel
-tasksel install ubuntu-desktop-minimal ubuntu-desktop-minimal-default-languages
+apt -y install ubuntu-minimal-desktop
 
 # Install tools needed for management and monitoring
 
