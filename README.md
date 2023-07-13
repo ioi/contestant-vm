@@ -4,7 +4,7 @@
 
 Create a VM: 2 VCPU, 4 GB RAM, 25 GB disk.
 
-Install Ubuntu 20.04 server. Defaults work fine (but please uncheck the "Set up this disk as an LVM group" option). Create a user account called `ansible`.
+Install Ubuntu 22.04 server. Defaults work fine (but please uncheck the "Set up this disk as an LVM group" option). Create a user account called `ansible`.
 
 When Ubuntu install completes, clone or copy this repo into a local directory. E.g.:
 
