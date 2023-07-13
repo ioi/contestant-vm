@@ -19,8 +19,9 @@ else
 	sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.screensaver lock-enabled false
 fi
 
-# set default fullname
+# set default fullname and shell
 chfn -f "IOI Contestant" ioi
+chsh -s /bin/bash ioi
 
 # Update path
 echo 'PATH=/opt/ioi/bin:$PATH' >> ~ioi/.bashrc

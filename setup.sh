@@ -84,9 +84,6 @@ EOM
 
 pip3 install matplotlib
 
-# Change default shell for useradd
-sed -i '/^SHELL/ s/\/sh$/\/bash/' /etc/default/useradd
-
 # Copy IOI stuffs into /opt
 
 mkdir -p /opt/ioi
