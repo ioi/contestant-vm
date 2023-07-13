@@ -9,7 +9,7 @@ useradd -m ioi
 sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.background picture-options 'centered'
 sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.background picture-uri \
 	'file:///opt/ioi/misc/ioi-wallpaper.png'
-sudo -Hu ioi xvfb-run gsettings set org.gnome.shell enabled-extensions "['add-username-ext']"
+sudo -Hu ioi xvfb-run gsettings set org.gnome.shell enabled-extensions "['add-username-ext', 'stealmyfocus-ext']"
 sudo -Hu ioi xvfb-run gsettings set org.gnome.shell disable-user-extensions false
 sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.session idle-delay 900
 sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.screensaver lock-delay 30
@@ -37,7 +37,9 @@ sudo -Hu ioi bash -c 'echo yes > ~/.config/gnome-initial-setup-done'
 
 sudo -Hu ioi bash -c 'mkdir -p ~ioi/.local/share/gnome-shell/extensions'
 cp -a /opt/ioi/misc/add-username-ext ~ioi/.local/share/gnome-shell/extensions/
+cp -a /opt/ioi/misc/stealmyfocus-ext ~ioi/.local/share/gnome-shell/extensions/
 chown -R ioi.ioi ~ioi/.local/share/gnome-shell/extensions/add-username-ext
+chown -R ioi.ioi ~ioi/.local/share/gnome-shell/extensions/stealmyfocus-ext
 
 # Copy VSCode extensions
 mkdir -p ~ioi/.vscode/extensions
