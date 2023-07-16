@@ -186,8 +186,8 @@ apt -y install stl-manual python3-doc
 # CPP Reference
 
 wget -O /tmp/html_book_20190607.zip http://upload.cppreference.com/mwiki/images/b/b2/html_book_20190607.zip
-mkdir -p /opt/cppref
-unzip -o /tmp/html_book_20190607.zip -d /opt/cppref
+mkdir -p /usr/share/doc/cppreference
+unzip -o /tmp/html_book_20190607.zip -d /usr/share/doc/cppreference
 rm -f /tmp/html_book_20190607.zip
 
 # Build logkeys
@@ -232,12 +232,12 @@ depmod -a
 
 # Create local HTML
 
-cp -a html /opt/ioi/html
-mkdir -p /opt/ioi/html/fonts
+cp -a html /usr/share/doc/ioi
+mkdir -p /usr/share/doc/ioi/fonts
 wget -O /tmp/fira-sans.zip "https://gwfh.mranftl.com/api/fonts/fira-sans?download=zip&subsets=latin&variants=regular"
 wget -O /tmp/share.zip "https://gwfh.mranftl.com/api/fonts/share?download=zip&subsets=latin&variants=regular"
-unzip -o /tmp/fira-sans.zip -d /opt/ioi/html/fonts
-unzip -o /tmp/share.zip -d /opt/ioi/html/fonts
+unzip -o /tmp/fira-sans.zip -d /usr/share/doc/ioi/fonts
+unzip -o /tmp/share.zip -d /usr/share/doc/ioi/fonts
 rm /tmp/fira-sans.zip
 rm /tmp/share.zip
 
