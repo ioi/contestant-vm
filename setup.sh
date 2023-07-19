@@ -42,6 +42,17 @@ apt -y upgrade
 
 apt -y install ubuntu-desktop-minimal
 
+# Networking: tell netplan to use NetworkManager
+
+cat >/etc/netplan/01-netcfg.yaml <<EOF
+network:
+  version: 2
+  renderer: NetworkManager
+EOF
+
+netplan generate
+netplan apply
+
 # Install tools needed for management and monitoring
 
 apt -y install net-tools openssh-server ansible xvfb tinc oathtool imagemagick \
