@@ -233,16 +233,16 @@ apt-mark -y auto llvm-13-dev zlib1g-dev libobjc-11-dev libx11-dev dpkg-dev manpa
 apt-mark -y auto linux-firmware memtest86+
 apt-mark -y auto network-manager-openvpn network-manager-openvpn-gnome openvpn
 apt-mark -y auto autoconf autotools-dev
-apt-mark -y auto `dpkg-query -Wf '${Package}\n' | grep linux-header`
+#apt-mark -y auto `dpkg-query -Wf '${Package}\n' | grep linux-header`
 
 # Remove most extra modules but preserve those for sound
-kernelver=$(uname -a | cut -d\  -f 3)
-tar jcf /tmp/sound-modules.tar.bz2 -C / \
-	lib/modules/$kernelver/kernel/sound/{ac97_bus.ko,pci} \
-	lib/modules/$kernelver/kernel/drivers/gpu/drm/vmwgfx
-apt -y remove `dpkg-query -Wf '${Package}\n' | grep linux-modules-extra-`
-tar jxf /tmp/sound-modules.tar.bz2 -C /
-depmod -a
+#kernelver=$(uname -a | cut -d\  -f 3)
+#tar jcf /tmp/sound-modules.tar.bz2 -C / \
+#	lib/modules/$kernelver/kernel/sound/{ac97_bus.ko,pci} \
+#	lib/modules/$kernelver/kernel/drivers/gpu/drm/vmwgfx
+#apt -y remove `dpkg-query -Wf '${Package}\n' | grep linux-modules-extra-`
+#tar jxf /tmp/sound-modules.tar.bz2 -C /
+#depmod -a
 
 # Create local HTML
 
