@@ -233,7 +233,7 @@ apt-mark auto llvm-13-dev zlib1g-dev libobjc-11-dev libx11-dev dpkg-dev manpages
 apt-mark auto linux-firmware memtest86+
 apt-mark auto network-manager-openvpn network-manager-openvpn-gnome openvpn
 apt-mark auto autoconf autotools-dev
-#apt-mark -y auto `dpkg-query -Wf '${Package}\n' | grep linux-header`
+#apt-mark auto `dpkg-query -Wf '${Package}\n' | grep linux-header`
 
 # Remove most extra modules but preserve those for sound
 #kernelver=$(uname -a | cut -d\  -f 3)
