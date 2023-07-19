@@ -61,9 +61,14 @@ apt -y install emacs \
 
 apt -y install firefox
 
+# Install atom's latest stable version
+sudo apt install git libasound2 libcurl4 libgbm1 libgcrypt20 libgtk-3-0 libnotify4 libnss3 libglib2.0-bin xdg-utils libx11-xcb1 libxcb-dri3-0 libxss1 libxtst6 libxkbfile1
+wget https://github.com/atom/atom/releases/download/v1.60.0/atom-amd64.deb
+sudo dpkg -i atom-amd64.deb
+sed 's/^Exec=.*$/& --no-sandbox/' -i /usr/share/applications/atom.desktop
+
 # Install snap packages needed by contestants
 
-snap install --classic atom
 snap install --classic code
 snap install --classic sublime-text
 
