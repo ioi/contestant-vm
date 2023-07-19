@@ -179,7 +179,7 @@ chown ansible.ansible ~ansible/.bash_aliases
 
 # Documentation
 
-apt -y install stl-manual python3-doc
+apt -y install python3-doc
 
 # CPP Reference
 
