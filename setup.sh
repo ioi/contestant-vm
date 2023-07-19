@@ -217,12 +217,12 @@ apt -y install `dpkg-query -Wf '${Package}\n' | grep linux-modules-`
 
 # Remove unneeded packages
 
-apt -y remove gnome-power-manager brltty extra-cmake-modules
-apt -y remove llvm-13-dev zlib1g-dev libobjc-11-dev libx11-dev dpkg-dev manpages-dev
-apt -y remove linux-firmware memtest86+
-apt -y remove network-manager-openvpn network-manager-openvpn-gnome openvpn
-apt -y remove autoconf autotools-dev
-apt -y remove `dpkg-query -Wf '${Package}\n' | grep linux-header`
+apt-mark -y auto gnome-power-manager brltty extra-cmake-modules
+apt-mark -y auto llvm-13-dev zlib1g-dev libobjc-11-dev libx11-dev dpkg-dev manpages-dev
+apt-mark -y auto linux-firmware memtest86+
+apt-mark -y auto network-manager-openvpn network-manager-openvpn-gnome openvpn
+apt-mark -y auto autoconf autotools-dev
+apt-mark -y auto `dpkg-query -Wf '${Package}\n' | grep linux-header`
 
 # Remove most extra modules but preserve those for sound
 kernelver=$(uname -a | cut -d\  -f 3)
