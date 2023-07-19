@@ -183,10 +183,10 @@ apt -y install stl-manual python3-doc
 
 # CPP Reference
 
-wget -O /tmp/html_book_20190607.zip http://upload.cppreference.com/mwiki/images/b/b2/html_book_20190607.zip
+wget -O /tmp/html_book.zip https://github.com/PeterFeicht/cppreference-doc/releases/download/v20220730/html-book-20220730.zip
 mkdir -p /usr/share/doc/cppreference
-unzip -o /tmp/html_book_20190607.zip -d /usr/share/doc/cppreference
-rm -f /tmp/html_book_20190607.zip
+unzip -o /tmp/html_book.zip -d /usr/share/doc/cppreference
+rm -f /tmp/html_book.zip
 
 # Build logkeys
 
