@@ -27,6 +27,10 @@ timedatectl set-timezone Europe/Budapest
 #vmware-toolbox-cmd timesync enable
 hwclock -w
 
+# Disable needrestart prompt
+export NEEDRESTART_MODE=a
+export DEBIAN_FRONTEND=noninteractive
+
 # Install zabbix repo
 wget -O /tmp/zabbix-release_5.0-2+ubuntu22.04_all.deb https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-2+ubuntu22.04_all.deb
 dpkg -i /tmp/zabbix-release_5.0-2+ubuntu22.04_all.deb
@@ -35,10 +39,6 @@ dpkg -i /tmp/zabbix-release_5.0-2+ubuntu22.04_all.deb
 
 apt -y update
 apt -y upgrade
-
-# Disable needrestart prompt
-export NEEDRESTART_MODE=a
-export DEBIAN_FRONTEND=noninteractive
 
 apt -y install ubuntu-desktop-minimal
 
