@@ -96,6 +96,8 @@ Type=Application
 Icon=eclipse
 EOM
 
+sed -i '/^-vmargs/a \-Dorg.eclipse.oomph.setup.donate=false' /opt/eclipse/eclipse.ini # According to https://www.eclipse.org/forums/index.php/t/1104324/ ; see: https://github.com/ioi-2023/contestant-vm/issues/21
+
 # Install python3 libraries
 
 pip3 install matplotlib
