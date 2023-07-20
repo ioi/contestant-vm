@@ -60,7 +60,7 @@ apt -y install net-tools openssh-server ansible xvfb tinc oathtool imagemagick \
 
 # Install local build tools
 
-apt -y install build-essential autoconf autotools-dev python-is-python3
+apt -y install build-essential autoconf autotools-dev python-is-python3 clangd
 
 # Install packages needed by contestants
 
