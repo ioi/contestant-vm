@@ -37,23 +37,23 @@ code{font-size:16px;background-color:#eee;}
 </style>
 </head>
 <body>
-<h1>Contestant VM Manual</h1>
+<h1>Contestant Machine Manual</h1>
 
 <h2>Local User Account</h2>
 
-<p>There is only one normal local (Ubuntu) user account in the contestant VM for the
+<p>There is only one normal local (Ubuntu) user account in the contestant machine for the
 contestant to use. The username is <code>ioi</code> with default password
 <code>ioi</code>.</p>
 
-<p>To avoid confusion during the contest days, you should <strong>NOT</strong> change
-the <code>ioi</code> local user account password in the contestant VM.</p>
+<p>To avoid confusion, you should <strong>NOT</strong> change
+the <code>ioi</code> local user account password in the contestant machine.</p>
 
 <h2>Contestant Account</h2>
 
-<p>At your first login to the contestant VM, and every subsequent login as long
+<p>At your first login to the contestant machine, and every subsequent login as long
 as you do not complete this step, you will be prompted to run the <strong>IOI Setup</strong>.
 
-<p>Enter your contestant account, and wait until you see a success message.</p>
+<p>Enter your contestant account (for now both username and password is <code>ioi</code>), and wait until you see a success message.</p>
 
 <p>You can also re-run IOI Setup by running <code>ioisetup</code> from the
 terminal.</p>
@@ -63,15 +63,15 @@ and install a VPN configuration. The UNIX "gecos real name" is also updated
 with your contestant username, e.g. XXX1, which will be displayed in the top right
 corner on subsequent logins.</p>
 
-<p>The VPN connection identifies this VM instance to the IOI 2023 grading system
+<p>The VPN connection identifies this computer to the IOI 2023 grading system
 as being associated to the configured contestant. If
-another contestant takes over the use of this VM instance, they must re-run IOI
+another contestant takes over the use of this computer, they must re-run IOI
 Setup with their credentials.</p>
 
-<p><strong>IMPORTANT</strong>: There must be only <strong>one</strong> VM instance running and
+<p><strong>IMPORTANT</strong>: There must be only <strong>one</strong> machine running and
 connected to the IOI 2023 grading system per contestant credentials. If the
 same contestant is logged in more than once, the VPN connection will flap
-between the two instances and will <strong>NOT</strong> be usable.</p>
+between the two instances and will <strong>NOT</strong> be usable. <strong>During the contest days, the IOI Setup will be completely handled by the organizers, so the contestants will not need to perform any authentication on the machine.</strong></p>
 
 <h2>Applications</h2>
 
@@ -86,18 +86,12 @@ shows all installed applications. You can use the search bar to quickly find an 
 by name. For example, you can easily find <code>gnome-terminal</code> by starting to type the
 letters of <code>terminal</code>.</p>
 
-<p>Teams should ensure that they are familiar with finding and using the terminal shell.
-In case of unexpected problems, we may send direction to proctors to execute commands in a shell.</p>
 
 <h2>Advanced Features</h2>
-<ul>
-	<li><span style="color: #ff0000;">On-site contestants should <strong>NOT</strong> use these features, unless otherwise instructed by the technical committee.</span></li>
-	<li><span style="color: #ff0000;">Online contestants should consult with their leaders/proctors before using these features.</span></li>
-</ul>
 
-<h3>Home Directory Backup</h3>
+<h3>Home Directory Backup (not available yet)</h3>
 
-<p>The contestant VM provides a backup/replication mechanism that uses rsync to
+<p>The contestant machine provides a backup/replication mechanism that uses rsync to
 replicate the home directory to IOI 2023
 backup server. This is not enabled by default. Contestants can
 either:</p>
@@ -129,9 +123,9 @@ re-enable automatic screen lock.</p>
 
 <h3>Timezone</h3>
 
-<p>The contestant VM is configured to show time in the <strong>Budapest/Europe</strong> timezone.
-All dates and times communicated by the IOI 2023 organisers will be in
-Budpaest/Europe timezone unless otherwise specified.</p>
+<p>The contestant machine is configured to show time in the <strong>Europe/Budapest</strong> timezone.
+All dates and times communicated by the IOI 2023 organizers will be in
+Europe/Budapest timezone unless otherwise specified.</p>
 
 <p>If you strongly prefer to see the time in your local timezone, you can run
 <code>ioiconf settz &lt;timezone&gt;</code>, where
@@ -148,12 +142,12 @@ software, <strong>tinc</strong>, can also use UDP on port 655 for data packets, 
 using TCP on port 655 for metadata. This may improve performance, provided your
 network permits UDP port 655 traffic outbound and inbound. This mode can be
 enabled by running <code>ioiconf setvpnproto auto</code>, then <code>ioiconf
-vpnrestart</code> (or restart the contestant VM).</p>
+vpnrestart</code> (or restart the contestant machine).</p>
 
 <p>In auto mode, both TCP/UDP will be used, with automatic fallback to
 TCP-only. To revert to the default TCP-only setting, run <code>ioiconf
 setvpnproto tcp</code>, then <code>ioiconf vpnrestart</code> (or restart the
-contestant VM).</p>
+contestant machine).</p>
 
 <p>Note that the VPN protocol mode will return to default if the VPN is re-setup
 (i.e. by re-running <code>ioisetup</code>).</p>
