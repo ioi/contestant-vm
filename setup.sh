@@ -417,7 +417,11 @@ fi
 # Disable webcam
 echo "blacklist uvcvideo" >> /etc/modprobe.d/blacklist.conf
 # Disable bluetooth
-echo "blacklist bluetooth" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist btusb" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist btrtl" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist btbcm" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist btintel" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist bluetooth" >> /etc/modprobe.d/blacklist.conf 	
 systemctl disable bluetooth.service
 
 # Deny ioi user from SSH login
