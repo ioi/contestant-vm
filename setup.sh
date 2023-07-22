@@ -423,6 +423,12 @@ echo "blacklist btbcm" >> /etc/modprobe.d/blacklist.conf
 echo "blacklist btintel" >> /etc/modprobe.d/blacklist.conf
 echo "blacklist bluetooth" >> /etc/modprobe.d/blacklist.conf 	
 systemctl disable bluetooth.service
+# Disable wifi
+echo "blacklist iwlwifi" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist iwlmvm" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist cfg80211" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist mac80211" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist libarc4" >> /etc/modprobe.d/blacklist.conf
 
 # Deny ioi user from SSH login
 echo "DenyUsers ioi" >> /etc/ssh/sshd_config
