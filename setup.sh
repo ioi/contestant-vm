@@ -413,6 +413,13 @@ if [ -n "$VERSION" ] ; then
 	echo "$VERSION" > /opt/ioi/misc/VERSION
 fi
 
+# Disable some of the hardware's capabilities
+# Disable webcam
+echo "blacklist uvcvideo" >> /etc/modprobe.d/blacklist.conf
+# Disable bluetooth
+echo "blacklist bluetooth" >> /etc/modprobe.d/blacklist.conf
+systemctl disable bluetooth.service
+
 # Deny ioi user from SSH login
 echo "DenyUsers ioi" >> /etc/ssh/sshd_config
 
