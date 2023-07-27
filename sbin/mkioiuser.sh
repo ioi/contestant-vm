@@ -58,6 +58,11 @@ mkdir -p ~ioi/.vscode/extensions
 tar jxf /opt/ioi/misc/vscode-extensions.tar.bz2 -C ~ioi/.vscode/extensions
 chown -R ioi.ioi ~ioi/.vscode
 
+# Add extra VSCode extension dir to bookmarks
+mkdir -p ~ioi/.config/gtk-3.0
+echo "file:///opt/ioi/misc/extra-vsc-exts" >> ~ioi/.config/gtk-3.0/bookmarks
+chown -R ioi.ioi ~ioi/.config/gtk-3.0
+
 # IOI startup
 cp /opt/ioi/misc/ioistart.desktop /usr/share/gnome/autostart/
 
