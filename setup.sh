@@ -68,7 +68,7 @@ apt -y install build-essential autoconf autotools-dev python-is-python3 clangd
 
 # Install packages needed by contestants
 
-apt -y install emacs neovim \
+apt -y install emacs \
 	geany gedit joe kate kdevelop nano vim vim-gtk3 \
 	ddd valgrind ruby python3-pip konsole \
 	cmake
@@ -87,6 +87,7 @@ sed 's/^Exec=.*$/& --no-sandbox/' -i /usr/share/applications/atom.desktop
 
 snap install --classic code
 snap install --classic sublime-text
+snap install --classic nvim
 
 # Install Eclipse
 $wget "https://eclipse.mirror.liteserver.nl/technology/epp/downloads/release/2023-06/R/eclipse-cpp-2023-06-R-linux-gtk-x86_64.tar.gz"
