@@ -70,7 +70,7 @@ apt -y install build-essential autoconf autotools-dev python-is-python3 clangd
 
 apt -y install emacs neovim \
 	geany gedit joe kate kdevelop nano vim vim-gtk3 \
-	ddd valgrind visualvm ruby python3-pip konsole \
+	ddd valgrind ruby python3-pip konsole \
 	cmake
 
 # Install browser
