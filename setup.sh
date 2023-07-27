@@ -91,7 +91,7 @@ snap install --classic sublime-text
 # Install Eclipse
 $wget "https://eclipse.mirror.liteserver.nl/technology/epp/downloads/release/2023-06/R/eclipse-cpp-2023-06-R-linux-gtk-x86_64.tar.gz"
 tar zxf $cache/eclipse-cpp-2023-06-R-linux-gtk-x86_64.tar.gz -C /opt
-wget -O /usr/share/pixmaps/eclipse.png "https://icon-icons.com/downloadimage.php?id=94656&root=1381/PNG/64/&file=eclipse_94656.png"
+cp /opt/eclipse/plugins/org.eclipse.epp.package.cpp_4.28.0.20230608-1200/eclipse256.png /usr/share/pixmaps/eclipse.png
 cat - <<EOM > /usr/share/applications/eclipse.desktop
 [Desktop Entry]
 Name=Eclipse
