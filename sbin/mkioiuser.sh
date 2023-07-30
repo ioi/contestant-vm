@@ -11,6 +11,9 @@ sudo -Hu ioi dbus-run-session gsettings set org.gnome.desktop.background picture
 	'file:///opt/ioi/misc/ioi-wallpaper.png'
 sudo -Hu ioi dbus-run-session gsettings set org.gnome.shell enabled-extensions "['add-username-ext', 'stealmyfocus-ext']"
 sudo -Hu ioi dbus-run-session gsettings set org.gnome.shell disable-user-extensions false
+# Favorites (apps in sidebar): Removed yelp (help function),
+# added terminal from UI, and queried resulting setting.
+sudo -Hu ioi dbus-run-session gsettings set org.gnome.shell favourite-apps "['firefox_firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop']"
 sudo -Hu ioi dbus-run-session gsettings set org.gnome.desktop.session idle-delay 900
 sudo -Hu ioi dbus-run-session gsettings set org.gnome.desktop.screensaver lock-delay 30
 
