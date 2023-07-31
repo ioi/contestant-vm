@@ -68,7 +68,7 @@ apt -y install build-essential autoconf autotools-dev python-is-python3 clangd
 
 # Install packages needed by contestants
 
-apt -y install emacs neovim \
+apt -y install emacs \
 	geany gedit joe kate kdevelop nano vim vim-gtk3 \
 	ddd valgrind ruby python3-pip konsole \
 	cmake
@@ -87,6 +87,7 @@ sed 's/^Exec=.*$/& --no-sandbox/' -i /usr/share/applications/atom.desktop
 
 snap install --classic code
 snap install --classic sublime-text
+snap install --classic nvim
 
 # Install Eclipse
 $wget "https://eclipse.mirror.liteserver.nl/technology/epp/downloads/release/2023-06/R/eclipse-cpp-2023-06-R-linux-gtk-x86_64.tar.gz"
@@ -128,8 +129,8 @@ mkdir /tmp/vscode
 mkdir /tmp/vscode-extensions
 code --install-extension $cache/cpptools-1.16.3.vsix --extensions-dir /tmp/vscode-extensions --user-data-dir /tmp/vscode
 tar jcf /opt/ioi/misc/vscode-extensions.tar.bz2 -C /tmp/vscode-extensions .
-cp $cache/vim-1.25.2.vsix /opt/ioi/misc/vscodevim.vsix
-cp $cache/intellij-idea-keybindings-1.5.9.vsix /opt/ioi/misc/intellij-idea-keybindings.vsix
+cp $cache/vim-1.25.2.vsix /opt/ioi/misc/extra-vsc-exts/vscodevim.vsix
+cp $cache/intellij-idea-keybindings-1.5.9.vsix /opt/ioi/misc/extra-vsc-exts/intellij-idea-keybindings.vsix
 rm -rf /tmp/vscode-extensions
 
 # Add default timezone
