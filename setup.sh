@@ -1,18 +1,9 @@
 #!/bin/bash
-source ./config.sh
 
-error() {
-	local lineno="$1"
-	local message="$2"
-	local code="${3:-1}"
-	if [[ -n "$message" ]] ; then
-		echo "Error at or near line ${lineno}: ${message}; exiting with status ${code}"
-	else
-		echo "Error at or near line ${lineno}; exiting with status ${code}"
-	fi
-	exit "${code}"
-}
-trap 'error ${LINENO}' ERR
+set -x
+set -e
+
+source ./config.sh
 
 VERSION="test$(date +%m%d)"
 ANSIBLE_PASSWD="ansible"
