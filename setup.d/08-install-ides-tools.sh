@@ -53,4 +53,3 @@ tar jcf /opt/ioi/misc/vscode-extensions.tar.bz2 -C /tmp/vscode-extensions .
 cp $cache/vim-1.25.2.vsix /opt/ioi/misc/extra-vsc-exts/vscodevim.vsix
 cp $cache/intellij-idea-keybindings-1.5.9.vsix /opt/ioi/misc/extra-vsc-exts/intellij-idea-keybindings.vsix
 rm -rf /tmp/vscode-extensions
-
