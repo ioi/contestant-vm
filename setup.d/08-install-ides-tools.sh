@@ -22,7 +22,7 @@ snap install --classic sublime-text
 snap install --classic nvim
 
 # Install Eclipse
-$wget "https://eclipse.mirror.liteserver.nl/technology/epp/downloads/release/2023-06/R/eclipse-cpp-2023-06-R-linux-gtk-x86_64.tar.gz"
+$wget "https://mirror.dkm.cz/eclipse/technology/epp/downloads/release/2023-06/R/eclipse-cpp-2023-06-R-linux-gtk-x86_64.tar.gz"
 tar zxf $cache/eclipse-cpp-2023-06-R-linux-gtk-x86_64.tar.gz -C /opt
 cp /opt/eclipse/plugins/org.eclipse.epp.package.cpp_4.28.0.20230608-1200/eclipse256.png /usr/share/pixmaps/eclipse.png
 cat - <<EOM > /usr/share/applications/eclipse.desktop
