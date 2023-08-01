@@ -7,3 +7,6 @@ set -e
 
 apt -y install net-tools openssh-server ansible xvfb tinc oathtool imagemagick \
 	zabbix-agent
+
+# Use a different config for Zabbix
+sed -i '/^Environment=/ s/zabbix_agentd.conf/zabbix_agentd_ioi.conf/' /lib/systemd/system/zabbix-agent.service
