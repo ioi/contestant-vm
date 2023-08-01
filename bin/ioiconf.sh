@@ -187,7 +187,7 @@ EOM
 Invalid argument to setautobackup. Specify "on" to enable automatic backup
 of home directory, or "off" to disable automatic backup. You can always run
 "ioibackup" manually to backup at any time. Backups will only include
-non-hidden files less than 1MB in size.
+non-hidden files less than 100KB in size.
 EOM
 		fi
 		;;
