@@ -3,8 +3,10 @@
 set -x
 set -e
 
+apt -y install geany geany-plugin-automark geany-plugin-lineoperations geany-plugin-overview
+
 apt -y install emacs \
-	geany gedit joe kate kdevelop nano vim vim-gtk3 \
+	gedit joe kate kdevelop nano vim vim-gtk3 \
 	ddd valgrind ruby python3-pip konsole \
 	cmake
 
