@@ -1,12 +1,15 @@
-# Installing Ubuntu through autoinstall/cloud-init
+# Installing Ubuntu through autoinstall/cloud-init with Qemu
 
-One has to provide a disk with a user-data and a meta-data file, the former containing the installation information.
+Run `start-autoinstall.sh` for setting up the disc. (This will call into setup.sh)
 
-```
-genisoimage  -output seed.iso -volid cidata -joliet -rock user-data meta-data
-```
+After running setup.sh -- done automatically, call `sudo cleanup.sh` in `/home/ansible/contestant-vm` with ansible user, `rm -rf /home/ansible/contestant-vm` and call into `sudo shutdown now`.
 
-For installing Ubuntu within VMWare, add a new CD device along the one with the Ubuntu server iso, and load the generated `seed.iso` CD image.
+For `zerofree` step, you will have to boot into live-disk (`boot-live-disk.sh`), and initiate `zerofree /dev/sda2` from there.
 
-When booting, no TUI should appear, but it will prompt for verifying that installation is intended.
+DO NOT boot the disc afterwards: the boot after `cleanup.sh` is special, and needs to be done from the created image.
 
+## Creating an image
+
+`qemu-img convert -f qcow2 -O vmdk disk.img contestant-vm.vmdk`
+
+Copy the `contestant-vm.vmdk` file to a freshly created (correctly set up) VM from VMWare.
