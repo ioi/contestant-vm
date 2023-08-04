@@ -20,7 +20,7 @@ autoinstall:
     layout:
       name: direct #lvm
   identity:
-    hostname: ioi-test-0713
+    hostname: ioi-0804
     username: ansible
     # ansible DO CHANGE!
     password: $6$NH0tTrHw/4v3.Jbi$6NCVzJ45i3N4HFF1vJpPobpdkGhgBq0t56KAGzjm4/wg1saD8N7akmBMaLbSH.UmpIdmZV8TUaqN2/pDaSSS0.
