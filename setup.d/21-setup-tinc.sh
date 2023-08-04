@@ -19,11 +19,6 @@ logger -p local0.info TINC: VPN connection to $NODE $REMOTEADDRESS:$REMOTEPORT i
 # Force time resync as soon as VPN starts
 systemctl restart systemd-timesyncd
 
-# Fix up DNS resolution
-resolvectl dns $INTERFACE $(cat /etc/tinc/vpn/dns.conf)
-resolvectl domain $INTERFACE $DNS_DOMAIN
-resolvectl flush-caches
-
 # Register something on our HTTP server to log connection
 INSTANCEID=$(cat /opt/ioi/run/instanceid.txt)
 wget -qO- https://$POP_SERVER/ping/$NODE-$NAME-$INSTANCEID &> /dev/null
