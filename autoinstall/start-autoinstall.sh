@@ -9,6 +9,8 @@ wget -c -O ubuntu.iso https://www.releases.ubuntu.com/22.04/ubuntu-22.04.2-live-
 
 # Open http server for port 8000
 python3 -m http.server &
+HTTP_SRV_PID=$!
+trap 'kill $HTTP_SRV_PID' EXIT
 
 # Make contestant-vm available
 tar czvf contestant-vm.tar.gz --exclude autoinstall --exclude .git --exclude .github -C ../.. contestant-vm
