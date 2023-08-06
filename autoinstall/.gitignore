@@ -1,1 +1,4 @@
-seed.iso
+disk.img
+contestant-vm.tar.gz
+contestant-vm.vmdk
+ubuntu.iso

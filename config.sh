@@ -1,0 +1,5 @@
+export POP_SERVER="pop.cmsioi2023.hu"
+export BACKUP_SERVER="backup.cmsioi2023.hu"
+export CMS_PUBLIC_DOMAIN="cmsioi2023.hu"
+export DNS_DOMAIN="ioi2023.loc"
+export SUBNET="172.16.0.0/16"

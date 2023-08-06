@@ -3,8 +3,10 @@
 set -x
 set -e
 
+apt -y install geany geany-plugin-automark geany-plugin-lineoperations geany-plugin-overview
+
 apt -y install emacs \
-	geany gedit joe kate kdevelop nano vim vim-gtk3 \
+	gedit joe kate kdevelop nano vim vim-gtk3 \
 	ddd valgrind ruby python3-pip konsole \
 	cmake
 
@@ -45,6 +47,7 @@ pip3 install matplotlib
 $wget -O $cache/cpptools-1.16.3.vsix "https://github.com/microsoft/vscode-cpptools/releases/download/v1.16.3/cpptools-linux.vsix"
 $wget "https://github.com/VSCodeVim/Vim/releases/download/v1.25.2/vim-1.25.2.vsix"
 $wget "https://github.com/kasecato/vscode-intellij-idea-keybindings/releases/download/v1.5.9/intellij-idea-keybindings-1.5.9.vsix"
+$wget "https://github.com/clangd/vscode-clangd/releases/download/0.1.24/vscode-clangd-0.1.24.vsix"
 rm -rf /tmp/vscode
 mkdir /tmp/vscode
 mkdir /tmp/vscode-extensions
@@ -52,4 +55,5 @@ code --install-extension $cache/cpptools-1.16.3.vsix --extensions-dir /tmp/vscod
 tar jcf /opt/ioi/misc/vscode-extensions.tar.bz2 -C /tmp/vscode-extensions .
 cp $cache/vim-1.25.2.vsix /opt/ioi/misc/extra-vsc-exts/vscodevim.vsix
 cp $cache/intellij-idea-keybindings-1.5.9.vsix /opt/ioi/misc/extra-vsc-exts/intellij-idea-keybindings.vsix
+cp $cache/vscode-clangd-0.1.24.vsix /opt/ioi/misc/extra-vsc-exts/vscode-clangd.vsix
 rm -rf /tmp/vscode-extensions

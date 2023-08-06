@@ -14,7 +14,7 @@ fi
 
 export cache=/tmp/cache
 mkdir -p $cache
-export wget="wget -nc -qP $cache --show-progress"
+export wget="wget -c -qP $cache --show-progress"
 
 # Disable needrestart prompt
 export NEEDRESTART_MODE=a

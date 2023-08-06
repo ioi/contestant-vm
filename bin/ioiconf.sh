@@ -35,23 +35,11 @@ do_config()
 		exit 1
 	fi
 
-	IP=$(cat $WORKDIR/vpn/ip.conf)
-	MASK=$(cat $WORKDIR/vpn/mask.conf)
-	DNS=$(cat $WORKDIR/vpn/dns.conf)
-
-	if ! check_ip "$IP" || ! check_ip "$MASK"; then
-		echo Bad IP numbers
-		rm -r $WORKDIR
-		exit 1
-	fi
-
-	echo "$IP" > /etc/tinc/vpn/ip.conf
-	echo "$MASK" > /etc/tinc/vpn/mask.conf
-	echo "$DNS" > /etc/tinc/vpn/dns.conf
 	rm /etc/tinc/vpn/hosts/* 2> /dev/null
 	cp $WORKDIR/vpn/hosts/* /etc/tinc/vpn/hosts/
 	cp $WORKDIR/vpn/rsa_key.* /etc/tinc/vpn/
-	cp $WORKDIR/vpn/tinc.conf /etc/tinc/vpn
+	cp $WORKDIR/vpn/tinc.conf /etc/tinc/vpn/
+	cp $WORKDIR/vpn/tinc-up /etc/tinc/vpn/
 	cp $WORKDIR/vpn/ioibackup* /opt/ioi/config/ssh/
 
 	rm -r $WORKDIR
