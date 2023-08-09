@@ -125,7 +125,7 @@ if lvm lvs --noheadings -o lv_name "${VG}" 2>/dev/null | grep -qs "${SNAPSHOT_LV
 
 else
   # No snapshot
-  banner "First boot after setting up! Will shrink disk and create snapshot!"
+  banner "First boot after setting up! Will zerofree disk and create snapshot!"
 
   # Perform snapshot creation
   if [ ! -x "/sbin/zerofree" ]; then
