@@ -22,7 +22,8 @@ autoinstall:
   identity:
     hostname: ioi-0809
     username: ansible
-    # ansible DO CHANGE!
+    # Note: the real password will be ANSIBLE_PASSWORD
+    # ansible
     password: $6$NH0tTrHw/4v3.Jbi$6NCVzJ45i3N4HFF1vJpPobpdkGhgBq0t56KAGzjm4/wg1saD8N7akmBMaLbSH.UmpIdmZV8TUaqN2/pDaSSS0.
   ssh:
     install-server: yes
