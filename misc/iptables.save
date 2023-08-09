@@ -20,4 +20,5 @@
 -A OUTPUT -p tcp -m tcp -m multiport -d {BACKUP_SERVER} --dports 22,80,443 -j ACCEPT
 -A OUTPUT -p tcp -m tcp -m multiport -d {POP_SERVER} --dports 80,443 -j ACCEPT
 -A OUTPUT -p tcp -m tcp -m multiport -d {CMS_PUBLIC_DOMAIN} --dports 80,443 -j ACCEPT
+-A OUTPUT -j REJECT --reject-with icmp-admin-prohibited
 COMMIT
