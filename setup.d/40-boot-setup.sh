@@ -6,12 +6,6 @@ set -e
 sed -i '/GRUB_CMDLINE_LINUX_DEFAULT/ s/splash//' /etc/default/grub
 update-grub2
 
-echo "boot-setup: works, but disabled due to inconveniences"
-echo "- snapshot can be found by Ubuntu's sidebar, which is annoying"
-echo "- Rethink logic:"
-echo "  - is 15 sec enough?"
-exit 0
-
 VG="ubuntu-vg"
 ORIGIN_LV="ubuntu-lv"
 SNAPSHOT_LV="ubuntu-snapshot"
