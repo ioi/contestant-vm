@@ -11,7 +11,6 @@ echo "- snapshot can be found by Ubuntu's sidebar, which is annoying"
 echo "- Rethink logic:"
 echo "  - is 15 sec enough?"
 echo "  - Do not try booting after zerofree + snapshot"
-echo "  - Maybe snapshot on first boot (so it won't available in the laptop image)"
 exit 0
 
 VG="ubuntu-vg"
@@ -106,12 +105,12 @@ if lvm lvs --noheadings -o lv_name "${VG}" 2>/dev/null | grep -qs "${SNAPSHOT_LV
 
   echo ""
   echo "  ==================================================="
-  echo "       Rollback will be attempted in 15 seconds!"
-  echo "                Press any key to abort!"
+  echo "           Press any key to attempt rollback!"
+  echo "                Booting up in 15 seconds"
   echo "  ==================================================="
   echo ""
 
-  if read -t 15 -n 1; then
+  if ! read -t 15 -n 1; then
 
     banner "Rollback aborted! The filesystem contents will be preserved!"
     exit 0
