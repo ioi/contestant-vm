@@ -10,7 +10,6 @@ echo "boot-setup: works, but disabled due to inconveniences"
 echo "- snapshot can be found by Ubuntu's sidebar, which is annoying"
 echo "- Rethink logic:"
 echo "  - is 15 sec enough?"
-echo "  - Do not try booting after zerofree + snapshot"
 exit 0
 
 VG="ubuntu-vg"
@@ -119,10 +118,10 @@ if lvm lvs --noheadings -o lv_name "${VG}" 2>/dev/null | grep -qs "${SNAPSHOT_LV
 
   # Perform rollback
   rollback_snapshot
-  banner "Rebooting to restored OS..."
-  reboot -f # force needed because there are not init system running
-  # After that a new snapshot will be created
+  banner "Restoring OS and booting up"
 
+  create_snapshot
+  banner "Snapshot created!"
 else
   # No snapshot
   banner "First boot after setting up! Will zerofree disk and create snapshot!"
@@ -134,8 +133,9 @@ else
 
   zerofree /dev/${VG}/${ORIGIN_LV}
   create_snapshot
-  banner "Snapshot created!"
+  banner "Snapshot created! Will shut down now."
 
+  poweroff -f
 fi
 EOM
 chmod 755 /etc/initramfs-tools/scripts/local-premount/prompt
