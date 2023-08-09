@@ -3,8 +3,10 @@
 set -x
 set -e
 
+sed -i '/GRUB_CMDLINE_LINUX_DEFAULT/ s/splash//' /etc/default/grub
+update-grub2
+
 echo "boot-setup: works, but disabled due to inconveniences"
-echo "- Needs nosplash for prompting"
 echo "- snapshot can be found by Ubuntu's sidebar, which is annoying"
 echo "- Rethink logic:"
 echo "  - is 15 sec enough?"
