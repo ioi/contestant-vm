@@ -115,7 +115,8 @@ if lvm lvs --noheadings -o lv_name "${VG}" 2>/dev/null | grep -qs "${SNAPSHOT_LV
   banner "Restoring OS and booting up"
 
   create_snapshot
-  banner "Snapshot created!"
+  banner "Snapshot created! Will reboot now..."
+  reboot -f
 else
   # No snapshot
   banner "First boot after setting up! Will zerofree disk and create snapshot!"
