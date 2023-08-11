@@ -10,32 +10,6 @@ VG="ubuntu-vg"
 ORIGIN_LV="ubuntu-lv"
 SNAPSHOT_LV="ubuntu-snapshot"
 
-cat <<EOM >/etc/initramfs-tools/hooks/zerofree
-#!/bin/sh
-PREREQ=""
-prereqs()
-{
-   echo "\$PREREQ"
-}
-
-case \$1 in
-prereqs)
-   prereqs
-   exit 0
-   ;;
-esac
-
-. /usr/share/initramfs-tools/hook-functions
-
-if [ ! -x "/sbin/zerofree" ]; then
-  exit 1
-fi
-
-copy_exec /sbin/zerofree /sbin
-exit 0
-EOM
-chmod 755 /etc/initramfs-tools/hooks/zerofree
-
 cat <<EOM >/etc/initramfs-tools/scripts/local-premount/prompt
 #!/bin/sh
 PREREQ="lvm"
@@ -113,24 +87,14 @@ if lvm lvs --noheadings -o lv_name "${VG}" 2>/dev/null | grep -qs "${SNAPSHOT_LV
   # Perform rollback
   rollback_snapshot
   banner "Restoring OS and booting up"
-
-  create_snapshot
-  banner "Snapshot created! Will reboot now..."
   reboot -f
 else
   # No snapshot
-  banner "First boot after setting up! Will zerofree disk and create snapshot!"
+  banner "First boot after setting up! Will create snapshot!"
 
-  # Perform snapshot creation
-  if [ ! -x "/sbin/zerofree" ]; then
-    panic "zerofree executable not found"
-  fi
-
-  zerofree /dev/${VG}/${ORIGIN_LV}
   create_snapshot
   banner "Snapshot created! Will shut down now."
-
-  poweroff -f
+  reboot -f
 fi
 EOM
 chmod 755 /etc/initramfs-tools/scripts/local-premount/prompt
