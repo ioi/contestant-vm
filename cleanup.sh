@@ -3,6 +3,7 @@
 set -e
 
 apt clean
+rm -rf /var/lib/snapd/cache/*
 
 rm -rf /var/lib/apt/lists/*
 
@@ -59,5 +60,6 @@ PARTKEY=$(/opt/ioi/sbin/genkey.sh)
 echo $PARTKEY
 
 echo REMEMBER TO REMOVE SETUP DIRECTORY
+echo REMEMBER TO FINALIZE VM IMAGE
 
 # vim: ts=4

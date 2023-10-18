@@ -44,7 +44,7 @@ user_pref("browser.safebrowsing.provider.mozilla.nextupdatetime", "1594042348580
 user_pref("browser.shell.mostRecentDateSetAsDefault", "1594038747");
 user_pref("browser.slowStartup.averageTime", 3870);
 user_pref("browser.slowStartup.samples", 1);
-user_pref("browser.startup.homepage", "file:///opt/ioi/html/index.html");
+user_pref("browser.startup.homepage", "file:///usr/share/doc/ioi/index.html");
 user_pref("browser.startup.homepage_override.buildID", "20210527174632");
 user_pref("browser.startup.homepage_override.mstone", "89.0");
 user_pref("browser.startup.lastColdStartupCheck", 1622703426);

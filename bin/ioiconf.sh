@@ -35,23 +35,11 @@ do_config()
 		exit 1
 	fi
 
-	IP=$(cat $WORKDIR/vpn/ip.conf)
-	MASK=$(cat $WORKDIR/vpn/mask.conf)
-	DNS=$(cat $WORKDIR/vpn/dns.conf)
-
-	if ! check_ip "$IP" || ! check_ip "$MASK"; then
-		echo Bad IP numbers
-		rm -r $WORKDIR
-		exit 1
-	fi
-
-	echo "$IP" > /etc/tinc/vpn/ip.conf
-	echo "$MASK" > /etc/tinc/vpn/mask.conf
-	echo "$DNS" > /etc/tinc/vpn/dns.conf
 	rm /etc/tinc/vpn/hosts/* 2> /dev/null
 	cp $WORKDIR/vpn/hosts/* /etc/tinc/vpn/hosts/
 	cp $WORKDIR/vpn/rsa_key.* /etc/tinc/vpn/
-	cp $WORKDIR/vpn/tinc.conf /etc/tinc/vpn
+	cp $WORKDIR/vpn/tinc.conf /etc/tinc/vpn/
+	cp $WORKDIR/vpn/tinc-up /etc/tinc/vpn/
 	cp $WORKDIR/vpn/ioibackup* /opt/ioi/config/ssh/
 
 	rm -r $WORKDIR
@@ -160,8 +148,8 @@ EOM
 		if [ -f "/usr/share/zoneinfo/$2" ]; then
 			cat - <<EOM
 Your timezone will be set to $2 at your next login.
-*** Please take note that all dates and times communicated by the IOI 2022 ***
-*** organisers will be in Asia/Jakarta timezone (GMT+07), unless it is     ***
+*** Please take note that all dates and times communicated by the IOI 2023 ***
+*** organisers will be in Europe/Budapest timezone (GMT+2), unless it is     ***
 *** otherwise specified.                                                   ***
 EOM
 			echo "$2" > /opt/ioi/config/timezone
@@ -187,20 +175,20 @@ EOM
 Invalid argument to setautobackup. Specify "on" to enable automatic backup
 of home directory, or "off" to disable automatic backup. You can always run
 "ioibackup" manually to backup at any time. Backups will only include
-non-hidden files less than 1MB in size.
+non-hidden files less than 100KB in size.
 EOM
 		fi
 		;;
 	setscreenlock)
 		if [ "$2" = "on" ]; then
 			touch /opt/ioi/config/screenlock
-			sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.screensaver lock-enabled true
+			sudo -Hu ioi dbus-run-session gsettings set org.gnome.desktop.screensaver lock-enabled true
 			echo Screensaver lock enabled
 		elif [ "$2" = "off" ]; then
 			if [ -f /opt/ioi/config/screenlock ]; then
 				rm /opt/ioi/config/screenlock
 			fi
-			sudo -Hu ioi xvfb-run gsettings set org.gnome.desktop.screensaver lock-enabled false
+			sudo -Hu ioi dbus-run-session gsettings set org.gnome.desktop.screensaver lock-enabled false
 			echo Screensaver lock disabled
 		else
 			cat - <<EOM

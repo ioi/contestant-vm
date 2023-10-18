@@ -1,0 +1,21 @@
+{
+  "description": "Removes window is ready message and focuses the window instead",
+  "name": "Steal my focus",
+  "shell-version": [
+    "3.10",
+    "3.12",
+    "3.14",
+    "3.16",
+    "3.18",
+    "3.20",
+    "3.20.2",
+    "3.21",
+    "3.22",
+    "3.22.2",
+    "41",
+    "42",
+    "43"
+  ],
+  "uuid": "stealmyfocus-ext",
+  "version": 5
+}
